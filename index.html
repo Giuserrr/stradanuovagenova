@@ -404,6 +404,198 @@ footer a:hover { color: var(--text); }
   .chisiamo-hero { padding: 0 20px 60px; }
 }
 
+/* APPUNTAMENTO PAGE */
+.appuntamento-page {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.appt-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 48px;
+}
+
+.appt-form label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.appt-form label:first-child { margin-top: 0; }
+
+.appt-form input,
+.appt-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.appt-form input:focus,
+.appt-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.appt-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.appt-form input::placeholder,
+.appt-form textarea::placeholder {
+  color: #555;
+}
+
+/* CALENDAR PICKER */
+.cal-container { margin-top: 0; }
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cal-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cal-header button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.cal-header button:hover { border-color: var(--accent); }
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.cal-weekdays span {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  padding: 8px 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  background: var(--bg-card);
+  cursor: default;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.cal-day.empty { background: transparent; }
+.cal-day.disabled { color: #444; }
+.cal-day.available { cursor: pointer; color: var(--text); }
+.cal-day.available:hover { border-color: var(--accent); }
+.cal-day.selected { background: var(--accent); color: #fff; }
+
+/* TIME SLOTS */
+.time-slots {
+  margin-top: 16px;
+  display: none;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.time-slots.visible { display: flex; }
+
+.time-slot {
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.time-slot:hover { border-color: var(--accent); }
+.time-slot.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.appt-selected-datetime {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--accent);
+  min-height: 20px;
+}
+
+.appt-submit {
+  margin-top: 32px;
+  padding: 14px 0;
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.appt-submit:hover { background: var(--accent-hover); }
+.appt-submit:disabled { background: #444; cursor: default; }
+
+.appt-msg {
+  margin-top: 16px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.appt-msg.success { color: #4caf50; }
+.appt-msg.error { color: #e8531e; }
+
+@media (max-width: 768px) {
+  .appt-form-grid { grid-template-columns: 1fr; gap: 40px; }
+  .appuntamento-page { padding-left: 20px; padding-right: 20px; }
+}
+
 /* GRAZIE PAGE */
 .grazie-page {
   min-height: 100vh;
@@ -513,6 +705,7 @@ footer a:hover { color: var(--text); }
   <ul class="nav-links" id="navLinks">
     <li><a href="/chi-siamo" onclick="closeMenu()">Chi siamo</a></li>
     <li><a href="#drop" onclick="closeMenu()">Drop</a></li>
+    <li><a href="/appuntamento" onclick="closeMenu()">Appuntamento</a></li>
     <li><a href="#contatti" onclick="closeMenu()">Contatti</a></li>
     <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
   </ul>
@@ -641,6 +834,48 @@ footer a:hover { color: var(--text); }
     </div>
   </div>
 
+  <!-- APPUNTAMENTO PAGE -->
+  <div id="page-appuntamento" style="display:none;">
+    <div class="appuntamento-page">
+      <span class="section-label">Appuntamento</span>
+      <h2 class="section-title">Prenota una visita</h2>
+      <p class="section-text">Scegli data e orario. Ti confermeremo via email.</p>
+
+      <div class="appt-form-grid">
+        <div class="appt-form">
+          <label for="apptName">Nome e cognome</label>
+          <input type="text" id="apptName" placeholder="Mario Rossi">
+
+          <label for="apptEmail">Email</label>
+          <input type="email" id="apptEmail" placeholder="mario@esempio.com">
+
+          <label for="apptPhone">Telefono</label>
+          <input type="tel" id="apptPhone" placeholder="+39 333 1234567">
+
+          <label for="apptMsg">Messaggio (facoltativo)</label>
+          <textarea id="apptMsg" placeholder="Di cosa hai bisogno?"></textarea>
+
+          <button class="appt-submit" id="apptSubmit" onclick="submitAppointment()" disabled>Seleziona data e orario</button>
+          <div class="appt-msg" id="apptFeedback"></div>
+        </div>
+
+        <div class="cal-container">
+          <div class="cal-header">
+            <button onclick="calPrev()">&larr;</button>
+            <h3 id="calTitle"></h3>
+            <button onclick="calNext()">&rarr;</button>
+          </div>
+          <div class="cal-weekdays">
+            <span>Lun</span><span>Mar</span><span>Mer</span><span>Gio</span><span>Ven</span><span>Sab</span><span>Dom</span>
+          </div>
+          <div class="cal-days" id="calDays"></div>
+          <div class="time-slots" id="timeSlots"></div>
+          <div class="appt-selected-datetime" id="apptDateTime"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- THANK YOU PAGE -->
   <div id="page-grazie" style="display:none;">
     <section class="grazie-page">
@@ -733,6 +968,7 @@ function route() {
   const pages = {
     home: document.getElementById('page-home'),
     chisiamo: document.getElementById('page-chisiamo'),
+    appuntamento: document.getElementById('page-appuntamento'),
     grazie: document.getElementById('page-grazie'),
   };
 
@@ -742,6 +978,10 @@ function route() {
   if (path === '/chi-siamo') {
     pages.chisiamo.style.display = 'block';
     window.scrollTo(0, 0);
+  } else if (path === '/appuntamento') {
+    pages.appuntamento.style.display = 'block';
+    window.scrollTo(0, 0);
+    renderCalendar();
   } else if (path === '/grazie') {
     pages.grazie.style.display = 'block';
     window.scrollTo(0, 0);
@@ -755,6 +995,206 @@ function route() {
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
+  }
+}
+
+// === CALENDAR / APPOINTMENT ===
+const ORARI = {
+  // 0=Dom, 1=Lun, 2=Mar, 3=Mer, 4=Gio, 5=Ven, 6=Sab
+  0: null, // Domenica chiuso
+  1: null, // Lunedì chiuso
+  2: [[9,13],[16,19]],  // Martedì
+  3: [[9,13],[16,19]],  // Mercoledì
+  4: [[9,13],[16,19]],  // Giovedì
+  5: [[9,13],[16,19]],  // Venerdì
+  6: [[9,13],[16,19]],  // Sabato
+};
+
+const MESI = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+let calYear, calMonth, selectedDate = null, selectedTime = null;
+
+function initCalendar() {
+  const now = new Date();
+  calYear = now.getFullYear();
+  calMonth = now.getMonth();
+}
+
+function calPrev() {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  selectedDate = null; selectedTime = null;
+  updateApptButton();
+  renderCalendar();
+}
+
+function calNext() {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  selectedDate = null; selectedTime = null;
+  updateApptButton();
+  renderCalendar();
+}
+
+function renderCalendar() {
+  if (calYear === undefined) initCalendar();
+
+  document.getElementById('calTitle').textContent = `${MESI[calMonth]} ${calYear}`;
+  const grid = document.getElementById('calDays');
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  const firstDay = new Date(calYear, calMonth, 1);
+  let startDay = firstDay.getDay(); // 0=Dom
+  startDay = startDay === 0 ? 6 : startDay - 1; // Convert to Mon=0
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  let html = '';
+
+  // Empty cells
+  for (let i = 0; i < startDay; i++) {
+    html += '<div class="cal-day empty"></div>';
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(calYear, calMonth, d);
+    date.setHours(0,0,0,0);
+    const dow = date.getDay();
+    const hasSlots = ORARI[dow] !== null;
+    const isPast = date < today;
+    const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
+
+    if (!hasSlots || isPast) {
+      html += `<div class="cal-day disabled">${d}</div>`;
+    } else {
+      html += `<div class="cal-day available${isSelected ? ' selected' : ''}" onclick="selectDate(${calYear},${calMonth},${d})">${d}</div>`;
+    }
+  }
+
+  grid.innerHTML = html;
+
+  // Show time slots if date selected
+  const slotsDiv = document.getElementById('timeSlots');
+  if (selectedDate) {
+    const dow = selectedDate.getDay();
+    const ranges = ORARI[dow];
+    let slotsHtml = '';
+    ranges.forEach(([start, end]) => {
+      for (let h = start; h < end; h++) {
+        const time = `${String(h).padStart(2,'0')}:00`;
+        const isSel = selectedTime === time;
+        slotsHtml += `<button class="time-slot${isSel ? ' selected' : ''}" onclick="selectTime('${time}')">${time}</button>`;
+        // Also add :30
+        const time30 = `${String(h).padStart(2,'0')}:30`;
+        const isSel30 = selectedTime === time30;
+        slotsHtml += `<button class="time-slot${isSel30 ? ' selected' : ''}" onclick="selectTime('${time30}')">${time30}</button>`;
+      }
+    });
+    slotsDiv.innerHTML = slotsHtml;
+    slotsDiv.classList.add('visible');
+  } else {
+    slotsDiv.innerHTML = '';
+    slotsDiv.classList.remove('visible');
+  }
+
+  updateApptDateTime();
+}
+
+function selectDate(y, m, d) {
+  selectedDate = new Date(y, m, d);
+  selectedTime = null;
+  updateApptButton();
+  renderCalendar();
+}
+
+function selectTime(t) {
+  selectedTime = t;
+  updateApptButton();
+  renderCalendar();
+}
+
+function updateApptDateTime() {
+  const el = document.getElementById('apptDateTime');
+  if (selectedDate && selectedTime) {
+    const giorni = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+    const g = giorni[selectedDate.getDay()];
+    const d = selectedDate.getDate();
+    const m = MESI[selectedDate.getMonth()];
+    el.textContent = `${g} ${d} ${m} ${selectedDate.getFullYear()} alle ${selectedTime}`;
+  } else if (selectedDate) {
+    el.textContent = 'Seleziona un orario';
+  } else {
+    el.textContent = '';
+  }
+}
+
+function updateApptButton() {
+  const btn = document.getElementById('apptSubmit');
+  if (selectedDate && selectedTime) {
+    btn.disabled = false;
+    btn.textContent = 'RICHIEDI APPUNTAMENTO';
+  } else {
+    btn.disabled = true;
+    btn.textContent = 'SELEZIONA DATA E ORARIO';
+  }
+}
+
+async function submitAppointment() {
+  const name = document.getElementById('apptName').value.trim();
+  const email = document.getElementById('apptEmail').value.trim();
+  const phone = document.getElementById('apptPhone').value.trim();
+  const msg = document.getElementById('apptMsg').value.trim();
+  const feedback = document.getElementById('apptFeedback');
+  const btn = document.getElementById('apptSubmit');
+
+  if (!name || !email || !phone) {
+    feedback.textContent = 'Compila nome, email e telefono.';
+    feedback.className = 'appt-msg error';
+    return;
+  }
+
+  if (!selectedDate || !selectedTime) {
+    feedback.textContent = 'Seleziona data e orario.';
+    feedback.className = 'appt-msg error';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'UN MOMENTO...';
+  feedback.textContent = '';
+
+  const giorni = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+  const dateStr = `${giorni[selectedDate.getDay()]} ${selectedDate.getDate()} ${MESI[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
+
+  try {
+    const res = await fetch('/.netlify/functions/request-appointment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone, message: msg, date: dateStr, time: selectedTime })
+    });
+
+    const data = await res.json();
+
+    if (data.ok) {
+      feedback.textContent = 'Richiesta inviata. Riceverai una conferma via email.';
+      feedback.className = 'appt-msg success';
+      btn.textContent = 'INVIATO';
+      // Reset form
+      document.getElementById('apptName').value = '';
+      document.getElementById('apptEmail').value = '';
+      document.getElementById('apptPhone').value = '';
+      document.getElementById('apptMsg').value = '';
+      selectedDate = null; selectedTime = null;
+      renderCalendar();
+    } else {
+      feedback.textContent = data.error || 'Errore. Riprova.';
+      feedback.className = 'appt-msg error';
+      btn.disabled = false;
+      btn.textContent = 'RICHIEDI APPUNTAMENTO';
+    }
+  } catch (err) {
+    feedback.textContent = 'Errore di connessione. Riprova.';
+    feedback.className = 'appt-msg error';
+    btn.disabled = false;
+    btn.textContent = 'RICHIEDI APPUNTAMENTO';
   }
 }
 
@@ -796,7 +1236,7 @@ document.addEventListener('click', (e) => {
   if (!a) return;
   const href = a.getAttribute('href');
 
-  if (href === '/' || href === '/chi-siamo') {
+  if (href === '/' || href === '/chi-siamo' || href === '/appuntamento') {
     e.preventDefault();
     history.pushState({}, '', href);
     route();
