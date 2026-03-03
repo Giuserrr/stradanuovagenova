@@ -699,6 +699,7 @@ footer a:hover { color: var(--text); }
 </style>
 </head>
 <body>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <!-- NAV -->
 <nav>
@@ -1269,6 +1270,17 @@ document.addEventListener('click', (e) => {
 // === INIT ===
 window.addEventListener('popstate', route);
 window.addEventListener('scroll', updateActiveNav);
+
+// === NETLIFY IDENTITY REDIRECT ===
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', user => {
+    if (!user) {
+      window.netlifyIdentity.on('login', () => {
+        document.location.href = '/admin/';
+      });
+    }
+  });
+}
 
 loadProducts();
 route();
