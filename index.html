@@ -1238,10 +1238,22 @@ document.addEventListener('click', (e) => {
   if (!a) return;
   const href = a.getAttribute('href');
 
+  // Internal pages
   if (href === '/' || href === '/chi-siamo' || href === '/appuntamento') {
     e.preventDefault();
     history.pushState({}, '', href);
     route();
+    return;
+  }
+
+  // Hash links (#drop, #contatti) — if not on home, go home first then scroll
+  if (href && href.startsWith('#')) {
+    const currentPath = window.location.pathname;
+    if (currentPath !== '/') {
+      e.preventDefault();
+      history.pushState({}, '', '/' + href);
+      route();
+    }
   }
 });
 
