@@ -320,6 +320,90 @@ footer a:hover { color: var(--text); }
   gap: 20px;
 }
 
+/* CHI SIAMO PAGE */
+.chisiamo-page {
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+
+.chisiamo-hero {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.chisiamo-hero .section-label { margin-bottom: 24px; }
+
+.chisiamo-hero h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.chisiamo-hero h1 span { color: var(--accent); }
+
+.chisiamo-intro {
+  font-size: 18px;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+.chisiamo-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+
+.chisiamo-block.reverse .chisiamo-block-img { order: 2; }
+.chisiamo-block.reverse .chisiamo-block-text { order: 1; }
+
+.chisiamo-block-img {
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.chisiamo-block-img .placeholder-label {
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chisiamo-block-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.chisiamo-block-text h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.chisiamo-block-text p {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+@media (max-width: 768px) {
+  .chisiamo-block { grid-template-columns: 1fr; }
+  .chisiamo-block.reverse .chisiamo-block-img { order: 1; }
+  .chisiamo-block.reverse .chisiamo-block-text { order: 2; }
+  .chisiamo-block-text { padding: 40px 20px; }
+  .chisiamo-hero { padding: 0 20px 60px; }
+}
+
 /* GRAZIE PAGE */
 .grazie-page {
   min-height: 100vh;
@@ -414,6 +498,7 @@ footer a:hover { color: var(--text); }
   <a href="/" class="nav-logo">Strada Nuova</a>
   <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
   <ul class="nav-links" id="navLinks">
+    <li><a href="/chi-siamo" onclick="closeMenu()">Chi siamo</a></li>
     <li><a href="#drop" onclick="closeMenu()">Drop</a></li>
     <li><a href="#contatti" onclick="closeMenu()">Contatti</a></li>
     <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
@@ -489,6 +574,59 @@ footer a:hover { color: var(--text); }
     </section>
 
   </div><!-- /page-home -->
+
+  <!-- CHI SIAMO PAGE -->
+  <div id="page-chisiamo" style="display:none;">
+    <div class="chisiamo-page">
+
+      <div class="chisiamo-hero">
+        <span class="section-label">Chi siamo</span>
+        <h1>Tre generazioni<br>in <span>Strada Nuova</span></h1>
+        <p class="chisiamo-intro">Un negozio di tessuti dentro un palazzo UNESCO. Famiglia, materia, progetto.</p>
+      </div>
+
+      <div class="chisiamo-block">
+        <div class="chisiamo-block-img">
+          <span class="placeholder-label">foto 01 — il palazzo</span>
+        </div>
+        <div class="chisiamo-block-text">
+          <h2>Palazzo Lomellino</h2>
+          <p>Via Garibaldi 7/a non è un indirizzo qualunque. È un palazzo dei Rolli, patrimonio UNESCO dal 2006. Ci siamo dentro dal primo giorno e non abbiamo intenzione di spostarci. I soffitti affrescati e i tessuti contemporanei convivono senza problemi — anzi, è il punto.</p>
+        </div>
+      </div>
+
+      <div class="chisiamo-block reverse">
+        <div class="chisiamo-block-img">
+          <span class="placeholder-label">foto 02 — la famiglia</span>
+        </div>
+        <div class="chisiamo-block-text">
+          <h2>La famiglia</h2>
+          <p>L'attività nasce con il padre di Bruno, passa per Nervi e Piccapietra, e nel 2017 arriva qui con Giulia — terza generazione. Brunella e Debora completano il quadro. Non siamo un brand costruito a tavolino. Siamo un negozio di famiglia che ha scelto di stare in un posto importante.</p>
+        </div>
+      </div>
+
+      <div class="chisiamo-block">
+        <div class="chisiamo-block-img">
+          <span class="placeholder-label">foto 03 — i tessuti</span>
+        </div>
+        <div class="chisiamo-block-text">
+          <h2>La materia</h2>
+          <p>Dedar, Pierre Frey, Designers Guild, Etro. Lavoriamo con chi fa tessuti seri. Tendaggi, rivestimenti, progetti su misura. Puoi venire con il tuo architetto o usare i nostri. Puoi anche solo passare a prendere un caffè — il negozio funziona così.</p>
+        </div>
+      </div>
+
+      <div class="chisiamo-block reverse">
+        <div class="chisiamo-block-img">
+          <span class="placeholder-label">foto 04 — il drop</span>
+        </div>
+        <div class="chisiamo-block-text">
+          <h2>I drop</h2>
+          <p>Edizioni limitate di oggetti d'arredo realizzati con i nostri tessuti. Pochi pezzi, numerati, quando finiscono finiscono. Il primo progetto sono i pouf. Non è e-commerce — è un modo diverso di far uscire le cose dal negozio.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- THANK YOU PAGE -->
   <div id="page-grazie" style="display:none;">
@@ -579,16 +717,23 @@ async function buyProduct(productId) {
 // === SPA ROUTER ===
 function route() {
   const path = window.location.pathname;
-  const pageHome = document.getElementById('page-home');
-  const pageGrazie = document.getElementById('page-grazie');
+  const pages = {
+    home: document.getElementById('page-home'),
+    chisiamo: document.getElementById('page-chisiamo'),
+    grazie: document.getElementById('page-grazie'),
+  };
 
-  if (path === '/grazie') {
-    pageHome.style.display = 'none';
-    pageGrazie.style.display = 'block';
+  // Hide all
+  Object.values(pages).forEach(p => p.style.display = 'none');
+
+  if (path === '/chi-siamo') {
+    pages.chisiamo.style.display = 'block';
+    window.scrollTo(0, 0);
+  } else if (path === '/grazie') {
+    pages.grazie.style.display = 'block';
     window.scrollTo(0, 0);
   } else {
-    pageHome.style.display = 'block';
-    pageGrazie.style.display = 'none';
+    pages.home.style.display = 'block';
 
     // Handle hash scroll
     if (window.location.hash) {
@@ -632,9 +777,9 @@ document.addEventListener('click', (e) => {
   if (!a) return;
   const href = a.getAttribute('href');
 
-  if (href === '/') {
+  if (href === '/' || href === '/chi-siamo') {
     e.preventDefault();
-    history.pushState({}, '', '/');
+    history.pushState({}, '', href);
     route();
   }
 });
