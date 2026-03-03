@@ -6,24 +6,27 @@ media_folder: "img"
 public_folder: "/img"
 
 collections:
-  - name: "products"
-    label: "Prodotti Drop"
-    folder: "_products"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "ID Prodotto", name: "id", widget: "string", hint: "Es: pouf-01" }
-      - { label: "Nome", name: "name", widget: "string" }
-      - { label: "Dettaglio", name: "detail", widget: "string", hint: "Es: Tessuto Dedar / Edizione di 12" }
-      - { label: "Prezzo (EUR)", name: "price", widget: "number", value_type: "int" }
-      - { label: "Stock", name: "stock", widget: "number", value_type: "int" }
-      - { label: "Disponibile", name: "available", widget: "boolean", default: true }
-      - { label: "Immagine", name: "image", widget: "image", required: false }
-      - { label: "Stripe Price ID", name: "stripePrice", widget: "string", required: false, hint: "Lascia vuoto per ora" }
-
   - name: "settings"
-    label: "Impostazioni"
+    label: "Gestione"
     files:
+      - label: "Prodotti Drop"
+        name: "products"
+        file: "_data/products.json"
+        fields:
+          - label: "Prodotti"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}} — €{{fields.price}}"
+            fields:
+              - { label: "ID Prodotto", name: "id", widget: "string", hint: "Es: pouf-01 (non cambiare dopo la creazione)" }
+              - { label: "Nome", name: "name", widget: "string" }
+              - { label: "Dettaglio", name: "detail", widget: "string", hint: "Es: Tessuto Dedar / Edizione di 12" }
+              - { label: "Prezzo (EUR)", name: "price", widget: "number", value_type: "int" }
+              - { label: "Pezzi disponibili", name: "stock", widget: "number", value_type: "int" }
+              - { label: "Disponibile", name: "available", widget: "boolean", default: true }
+              - { label: "Immagine", name: "image", widget: "image", required: false }
+              - { label: "Stripe Price ID", name: "stripePrice", widget: "string", required: false, hint: "Lascia vuoto se non usi Stripe Price ID fisso" }
+
       - label: "Info Negozio"
         name: "info"
         file: "_data/info.json"

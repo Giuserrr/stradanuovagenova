@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": "pouf-01",
+      "name": "Pouf N.01",
+      "detail": "Tessuto Dedar / Edizione di 12",
+      "price": 380,
+      "stock": 12,
+      "available": true,
+      "image": "",
+      "stripePrice": ""
+    },
+    {
+      "id": "pouf-02",
+      "name": "Pouf N.02",
+      "detail": "Tessuto Pierre Frey / Edizione di 8",
+      "price": 420,
+      "stock": 8,
+      "available": true,
+      "image": "",
+      "stripePrice": ""
+    },
+    {
+      "id": "pouf-03",
+      "name": "Pouf N.03",
+      "detail": "Velluto Designers Guild / Edizione di 6",
+      "price": 450,
+      "stock": 6,
+      "available": true,
+      "image": "",
+      "stripePrice": ""
+    },
+    {
+      "id": "pouf-04",
+      "name": "Pouf N.04",
+      "detail": "Lino naturale / Edizione di 10",
+      "price": 350,
+      "stock": 10,
+      "available": false,
+      "image": "",
+      "stripePrice": ""
+    },
+    {
+      "id": "pouf-05",
+      "name": "Pouf N.05",
+      "detail": "Jacquard Etro / Edizione di 4",
+      "price": 520,
+      "stock": 0,
+      "available": false,
+      "image": "",
+      "stripePrice": ""
+    },
+    {
+      "id": "pouf-06",
+      "name": "Pouf N.06",
+      "detail": "Bouclé / Edizione di 8",
+      "price": 400,
+      "stock": 8,
+      "available": false,
+      "image": "",
+      "stripePrice": ""
+    }
+  ]
+}

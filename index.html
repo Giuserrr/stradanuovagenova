@@ -900,23 +900,32 @@ footer a:hover { color: var(--text); }
 </footer>
 
 <script>
-// === PRODUCTS DATA ===
-const PRODUCTS = [
-  { id: "pouf-01", name: "Pouf N.01", detail: "Tessuto Dedar / Edizione di 12", price: 380, stock: 12, available: true, stripePrice: "" },
-  { id: "pouf-02", name: "Pouf N.02", detail: "Tessuto Pierre Frey / Edizione di 8", price: 420, stock: 8, available: true, stripePrice: "" },
-  { id: "pouf-03", name: "Pouf N.03", detail: "Velluto Designers Guild / Edizione di 6", price: 450, stock: 6, available: true, stripePrice: "" },
-  { id: "pouf-04", name: "Pouf N.04", detail: "Lino naturale / Edizione di 10", price: 350, stock: 10, available: false, stripePrice: "" },
-  { id: "pouf-05", name: "Pouf N.05", detail: "Jacquard Etro / Edizione di 4", price: 520, stock: 0, available: false, stripePrice: "" },
-  { id: "pouf-06", name: "Pouf N.06", detail: "Bouclé / Edizione di 8", price: 400, stock: 8, available: false, stripePrice: "" },
-];
+// === PRODUCTS DATA (loaded from CMS-managed JSON) ===
+let PRODUCTS = [];
+
+async function loadProducts() {
+  try {
+    const res = await fetch('/_data/products.json?t=' + Date.now());
+    const data = await res.json();
+    PRODUCTS = data.products || [];
+  } catch (e) {
+    console.error('Errore caricamento prodotti:', e);
+    PRODUCTS = [];
+  }
+  renderProducts();
+}
 
 // === RENDER DROP PRODUCTS ===
 function renderProducts() {
   const grid = document.getElementById('dropGrid');
+  if (!PRODUCTS.length) {
+    grid.innerHTML = '<p style="color:var(--text-dim);grid-column:1/-1;">Nessun prodotto disponibile al momento.</p>';
+    return;
+  }
   grid.innerHTML = PRODUCTS.map((p, i) => `
     <div class="drop-card">
-      <div class="drop-card-img">
-        <span class="placeholder-label">${String(i + 1).padStart(2, '0')}</span>
+      <div class="drop-card-img" ${p.image ? `style="background-image:url('${p.image}');background-size:cover;background-position:center;"` : ''}>
+        ${p.image ? '' : `<span class="placeholder-label">${String(i + 1).padStart(2, '0')}</span>`}
       </div>
       <div class="drop-card-info">
         <div>
@@ -1261,7 +1270,7 @@ document.addEventListener('click', (e) => {
 window.addEventListener('popstate', route);
 window.addEventListener('scroll', updateActiveNav);
 
-renderProducts();
+loadProducts();
 route();
 </script>
 

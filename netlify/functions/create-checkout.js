@@ -1,15 +1,21 @@
 // Stripe Checkout Session — Netlify Function
 // ENV: STRIPE_SECRET_KEY
+// Reads product data from _data/products.json (CMS-managed)
 
-// Product catalog (mirror of frontend — source of truth for prices)
-const PRODUCT_CATALOG = {
-  "pouf-01": { name: "Pouf N.01", price: 38000, description: "Tessuto Dedar / Edizione di 12" },
-  "pouf-02": { name: "Pouf N.02", price: 42000, description: "Tessuto Pierre Frey / Edizione di 8" },
-  "pouf-03": { name: "Pouf N.03", price: 45000, description: "Velluto Designers Guild / Edizione di 6" },
-  "pouf-04": { name: "Pouf N.04", price: 35000, description: "Lino naturale / Edizione di 10" },
-  "pouf-05": { name: "Pouf N.05", price: 52000, description: "Jacquard Etro / Edizione di 4" },
-  "pouf-06": { name: "Pouf N.06", price: 40000, description: "Bouclé / Edizione di 8" },
-};
+const fs = require('fs');
+const path = require('path');
+
+function loadProducts() {
+  try {
+    const filePath = path.join(__dirname, '..', '..', '_data', 'products.json');
+    const raw = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(raw);
+    return data.products || [];
+  } catch (e) {
+    console.error('Errore lettura products.json:', e);
+    return [];
+  }
+}
 
 exports.handler = async function(event) {
   try {
@@ -19,11 +25,16 @@ exports.handler = async function(event) {
 
     const { productId } = JSON.parse(event.body || '{}');
 
-    if (!productId || !PRODUCT_CATALOG[productId]) {
+    const products = loadProducts();
+    const product = products.find(p => p.id === productId);
+
+    if (!productId || !product) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Prodotto non valido' }) };
     }
 
-    const product = PRODUCT_CATALOG[productId];
+    if (!product.available || product.stock <= 0) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Prodotto non disponibile' }) };
+    }
 
     let stripe;
     try {
@@ -42,9 +53,9 @@ exports.handler = async function(event) {
           currency: 'eur',
           product_data: {
             name: product.name,
-            description: product.description,
+            description: product.detail,
           },
-          unit_amount: product.price,
+          unit_amount: product.price * 100, // prezzo in centesimi
         },
         quantity: 1,
       }],
