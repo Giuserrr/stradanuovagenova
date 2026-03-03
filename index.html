@@ -453,20 +453,33 @@ footer a:hover { color: var(--text); }
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
 
-  .nav-links { display: none; }
-  .nav-links.open {
-    display: flex;
+  .nav-links {
+    display: none;
     flex-direction: column;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: var(--bg);
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 36px;
     z-index: 200;
+    padding: 0;
+    margin: 0;
   }
-  .nav-links.open a { font-size: 18px; color: var(--text); }
-  .nav-toggle { display: block; z-index: 300; }
+  .nav-links.open { display: flex; }
+  .nav-links.open a {
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: 0.15em;
+  }
+  .nav-toggle {
+    display: block;
+    z-index: 300;
+    font-size: 28px;
+  }
 
   .hero { padding: 20px; padding-top: 80px; }
   .section { padding: 80px 20px; }
@@ -747,10 +760,16 @@ function route() {
 
 // === NAV MOBILE ===
 function toggleMenu() {
-  document.getElementById('navLinks').classList.toggle('open');
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.nav-toggle');
+  nav.classList.toggle('open');
+  btn.innerHTML = nav.classList.contains('open') ? '&#10005;' : '&#9776;';
 }
 function closeMenu() {
-  document.getElementById('navLinks').classList.remove('open');
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.nav-toggle');
+  nav.classList.remove('open');
+  btn.innerHTML = '&#9776;';
 }
 
 // === NAV SCROLL HIGHLIGHT ===
