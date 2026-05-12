@@ -11,7 +11,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 **Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`) + 9 commit di rifinitura post-push la sera del 2026-05-12 (`8a43a78..77a7448`).**
 
-**Stato Fasi 0-13 + 13.5 + 13.6 + 13.7 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). 6 drop card con foto reali scontornate via rembg. Maps embed in `/contatti/` + `geo` + `hasMap` JSON-LD su Store/Place. GSC verificato + sitemap submittata + 10 URL forzate via "Richiedi indicizzazione". Smoke 40/40 verde. Next: Fase 14 step 2 (Bing Webmaster Tools + IndexNow + Lighthouse audit live).**
+**Stato Fasi 0-13 + 13.5 + 13.6 + 13.7 + 13.8 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file. 6 drop card con foto reali scontornate via rembg. Maps embed in `/contatti/` + `geo` + `hasMap` JSON-LD su Store/Place. **Blocco "Recensioni Google" in home+contatti** via Places API (New) + [tools/build-reviews.js](tools/build-reviews.js) — 5★ · 14 recensioni renderizzate al build. GSC verificato + sitemap submittata + 10 URL forzate. Smoke 40/40 verde. Next: Fase 14 step 2 (Bing WMT + IndexNow + Lighthouse).**
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler

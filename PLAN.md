@@ -40,6 +40,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | **13.7 — Drop foto reali** | ✅ chiusa (6 pouf scontornati, `bed2a01`, `77a7448`) | rembg+u2net + magick -trim, picture AVIF+WebP, object-fit contain |
 | **Audit Kimi integrato** | ✅ chiusa (`e030b7d`) | disambig. brand (og:site_name + alternateName), author Person magazine, correzione cognome Orlandini→Organo. Scartati FAQPage schema e PWA |
 | **13.5 — Maps embed** | ✅ chiusa | GPS + Place ID + API key (restrizioni referrer) + iframe Maps Embed in /contatti/, `geo`+`hasMap` su Store JSON-LD home+contatti+palazzo |
+| **13.8 — Recensioni Google** | ✅ chiusa | Places API (New) + 2a chiave server-side + build:reviews.js, blocco trust signal in home+contatti (5★ · 14 recensioni live) |
 | 14 — GSC + Bing + IndexNow | 🟡 in parte | ✅ meta verification live (`c9ab104`), ✅ proprietà GSC verificata via Prefisso URL+tag, ✅ sitemap submittata, ✅ 10 URL forzate via "Richiedi indicizzazione". Bing WMT + IndexNow + Lighthouse audit live ancora da fare |
 | 15 — GBP aggiornamenti | ⬜ lato Giuseppe | |
 | 16 — 301 sntessuti.it | ⬜ blocked | accesso provider |
@@ -555,6 +556,35 @@ Quando una voce entra, un'altra esce (max 8 voci): candidato uscita = "Carta da 
 - [x] 13.7.7 — Smoke test 40/40 verde post-rebuild
 
 **DoD raggiunto:** drop card con foto reali pouf, indicizzabili come `<img>` con alt, dimensione uniforme su tutte e 6 le card, scontorno pulito senza fondo showroom.
+
+---
+
+# ✅ Fase 13.8 — Recensioni Google in home+contatti (chiusa 2026-05-13)
+
+**Trigger:** post audit Kimi + decisione di aggiungere social proof in home prima della sezione contatti. Pattern già verificato su sister project saramoreyoga (vedi `~/Desktop/saramore2026/build-reviews.js`).
+
+### Decisioni
+
+- **API:** Places API (New) v1 con `X-Goog-FieldMask` (`displayName,rating,userRatingCount,reviews,googleMapsUri`)
+- **Chiavi:** 2 chiavi distinte sul progetto `stradanuova-genova` — una client-side referrer-restricted per Maps Embed (Fase 13.5), una server-side senza restrizione applicazione ma con restrizione API solo a `Places API (New)` per Places Details fetch al build (Fase 13.8). Spending cap 0€ via carta virtuale
+- **Env vars Netlify:** `GOOGLE_PLACES_API_KEY` + `GOOGLE_PLACE_ID`. Senza, lo script fa skip silenzioso e build prosegue
+- **NO JSON-LD `aggregateRating`/`Review`:** dal 2019 Google ha rimosso il rich result LocalBusiness self-serving review snippet. Pattern verificato 2026 (Whitespark, BrightLocal, Schema App). Il blocco è puro trust signal in pagina, no SEO direct benefit (lo schema valido sarebbe ignorato)
+- **CSS:** palette Strada Nuova (`--bg-card` per container, `--bg` per card, accent arancio per underline CTA), stelle gialle Google preservate per familiarità visiva
+- **Cadenza aggiornamento:** ogni Netlify deploy ri-chiama Places API → 5 review più rilevanti + rating + count rifrescati. Costo per chiamata ~$0.017 (Essentials SKU) → trascurabile
+
+### Task — tutti chiusi
+
+- [x] 13.8.1 — Attivata Places API (New) su Google Cloud project `stradanuova-genova`
+- [x] 13.8.2 — Creata 2a chiave server-side (no restrizione referrer, API restriction: Places API (New))
+- [x] 13.8.3 — Env vars salvate su Netlify: `GOOGLE_PLACES_API_KEY` + `GOOGLE_PLACE_ID` (scope: All)
+- [x] 13.8.4 — [tools/build-reviews.js](tools/build-reviews.js): fetch Place Details, escape HTML, render `<section class="google-reviews">` con header rating + grid 5 card + CTA. Skip silenzioso senza env. Idempotente sul fronte content (relative time strings cambiano ad ogni build)
+- [x] 13.8.5 — CSS `.google-reviews` + sotto-classi in [assets/css/base.css](assets/css/base.css), palette SN adattata
+- [x] 13.8.6 — Marker `<!-- BUILD:REVIEWS:START/END -->` in home (tra drop e contatti) e contatti (sotto mappa, prima CTA)
+- [x] 13.8.7 — `package.json` scripts: aggiunto `build:reviews` nel pipeline `build`
+- [x] 13.8.8 — Cache-bust `base.css?v=20260513` su 29 file
+- [x] 13.8.9 — Deploy verificato in produzione: 5 review × 5★, count 14, smoke 40/40
+
+**DoD raggiunto:** blocco recensioni live su https://stradanuovagenova.com/ e /contatti/, aggiornato automaticamente ad ogni deploy. Trust signal pre-conversione attivo.
 
 ---
 
