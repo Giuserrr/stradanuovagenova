@@ -31,7 +31,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 9.4 — Sanderson/Morris + Zoffany | ✅ commit locale (`31d6d0e`) | 1050 + 944 parole |
 | 9.5 — Houlès + Etro Tessuti | ✅ commit locale | 999 + 883 parole |
 | 10 — servizi consulenza | ✅ locale | hub `/servizi/` + consulenza-arredo-tessile |
-| 11 — verticali geo-luxe (3) | ⬜ | |
+| 11 — verticali geo-luxe (3) | ✅ locale | palazzi storici (1529) + casa al mare (1438) + Tigullio (583) |
 | 12 — magazine setup + 1° articolo | ⬜ | |
 | 13 — performance pass | ⬜ | AVIF, headers, CWV |
 | 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
@@ -414,11 +414,11 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 11.1 — `tessuti-palazzi-storici-genova/index.html` (1500-2000 parole) — angolo unico Strada Nuova: tessuti per dimore d'epoca, vincoli soprintendenza, tessuti per Rolli, case study Palazzo Lomellino come sede
-- [ ] 11.2 — `tessuti-casa-al-mare-liguria/index.html` (1500-2000 parole) — tessuti per salsedine/umidità, lino, outdoor, applicazioni Liguria, sezioni "tessuti per ville Tigullio" senza enfasi forte
-- [ ] 11.3 — `tessuti-tende-portofino-tigullio/index.html` **versione minimal** (500-700 parole) — Tigullio è canale ma non focus, pagina presente per intercettare query ma non investita
+- [x] 11.1 — `tessuti-palazzi-storici-genova/index.html` (1529 parole) — Rolli + ottocenteschi + villini, vincoli soprintendenza demistificati, sete operate/damaschi/lampassi, boiserie tessili, Palazzo Lomellino case study. CollectionPage + about:[Place, TouristAttraction]
+- [x] 11.2 — `tessuti-casa-al-mare-liguria/index.html` (1438 parole) — sole/salsedine/umidità (gerarchia problemi), lini lavati, outdoor solution-dyed, jacquard misti, carta da parati no/quando sì, distinzione Ponente/Centro/Levante. CollectionPage + about:AdministrativeArea Liguria
+- [x] 11.3 — `tessuti-tende-portofino-tigullio/index.html` minimal (583 parole) — canale non investito, brand frequenti, logistica sopralluoghi, cross-link a casa al mare. WebPage + about:Place Tigullio
 
-**DoD:** 3 pagine online, internal link a pillar + brand correlati.
+**DoD:** 3 pagine online, internal link a pillar + brand correlati. ✅ commit locale, smoke test 35/35 verde.
 
 ---
 
