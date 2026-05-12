@@ -1,11 +1,14 @@
 [build]
-  command = "npm install"
+  command = "npm install && npm run build"
   publish = "."
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "nft"
 
+# Catch-all SPA temporaneo: rimuovere quando /chi-siamo, /appuntamento, /grazie
+# saranno migrate a file fisici (Fase 6 PLAN.md). Netlify serve i file fisici
+# prima del catch-all, quindi le nuove pagine create prevarranno automaticamente.
 [[redirects]]
   from = "/*"
   to = "/index.html"
