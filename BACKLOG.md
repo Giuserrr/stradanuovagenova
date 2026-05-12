@@ -75,7 +75,10 @@ Push avvenuto il 2026-05-12: 18 commit `eb48fa9..c9ab104` ora live su stradanuov
 - [x] **Fase 13** performance pass parziale: AVIF + picture wrap + _headers (pushato `7f8bfcd`). **Lighthouse/PSI da fare ORA che è live**
 - [x] **GSC meta verification** inserito in home (pushato `c9ab104`)
 - [x] **Fase 13.6** Nav+Footer sync — 29 file aggiornati via [tools/sync-nav-footer.js](tools/sync-nav-footer.js), smoke 40/40, idempotenza verificata
-- [ ] Fase 14 GSC submit sitemap + Bing + IndexNow + gsc.js — **NEXT**
+- [x] **Fase 13.7** Drop foto reali — 6 pouf scontornati via rembg+u2net + magick -trim, render `<picture>` AVIF+WebP, object-fit contain (`bed2a01`, `77a7448`)
+- [x] **Audit Kimi integrato (2026-05-12 sera)** — disambiguazione brand "Strada Nuova"→"Strada Nuova Genova" su 27 file (og:site_name) + Organization JSON-LD `alternateName`/`legalName`; author Person nel magazine article (Giulia Organo); correzione cognome storico Orlandini→Organo (`e030b7d`). Scartati FAQPage schema (Google rimosso mag 2026) e PWA (over-engineering)
+- [x] **Fase 14 step 1** GSC verificato + sitemap submittata + 10 URL forzate via "Richiedi indicizzazione"
+- [ ] **Fase 14 step 2** Bing Webmaster Tools (import da GSC) + IndexNow + Lighthouse audit live + `tools/gsc.js` — **NEXT**
 - [ ] Fase 17 a11y full pass
 - [ ] Fase 18 magazine build pipeline MD + cadenza mensile
 

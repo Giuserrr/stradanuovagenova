@@ -7,11 +7,11 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 - Netlify Site ID: 3119e79e-ed19-4cbd-ac5f-f4fac7233c8e (team digitalwow)
 - Email negozio: stradanuova.7@gmail.com
 
-## Stack (aggiornato 2026-05-12 — post push live)
+## Stack (aggiornato 2026-05-12 — post push live + serata di rifiniture)
 
-**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`).**
+**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`) + 9 commit di rifinitura post-push la sera del 2026-05-12 (`8a43a78..77a7448`).**
 
-**Stato Fasi 0-13 + 13.6 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). Smoke 40/40 verde. Next: Fase 14 (GSC submit sitemap + Bing + IndexNow + Lighthouse audit live).**
+**Stato Fasi 0-13 + 13.6 + 13.7 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). 6 drop card con foto reali scontornate via rembg. GSC verificato + sitemap submittata + 10 URL forzate via "Richiedi indicizzazione". Smoke 40/40 verde. Next: Fase 14 step 2 (Bing Webmaster Tools + IndexNow + Lighthouse audit live).**
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -22,6 +22,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 - Font Inter 400+600 **self-host woff2** in [assets/fonts/](assets/fonts/) (109KB + 112KB da rsms.me). Zero richieste a Google Fonts CDN
 - JS condiviso: [assets/js/nav-toggle.js](assets/js/nav-toggle.js), [assets/js/buy-product.js](assets/js/buy-product.js). Event listener no `onclick` inline
 - Script Node in [tools/](tools/): `store.js`, `build-sitemap.js`, `build-drop-grid.js`, `build-magazine.js` (stub Fase 12), `sync-nav-footer.js`, `smoke-test.js`
+- Pipeline foto prodotto: **rembg** (CLI Python via pipx, modello u2net ~170MB scaricato in `~/.u2net/u2net.onnx`) + **ImageMagick 7** (`-trim` + `-resize 1100x1100` + `-extent 1200x1200` + alpha trasparente). Output WebP + AVIF in `img/drop/` con alpha per comporre su `background: #2e2e2e` della card
 - Decap CMS v3.3.3 + Netlify Identity **invariati** su `/admin`
 - Netlify Functions `create-checkout` + `request-appointment` **invariate** (`node_bundler = "nft"`)
 - Build command: `npm install && npm run build` su Netlify
@@ -78,6 +79,7 @@ stradanuovagenova/
 │   └── smoke-test.js
 ├── magazine/{content,articles}/        ← cartelle placeholder Decap/MD pipeline (rimandata Fase 18)
 ├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp + avif, 1920x1080 / 1200x800)
+│   └── drop/                           ← 6 foto pouf scontornate via rembg (01..06.{webp,avif}, 1200x1200 con alpha trasparente)
 ├── _headers                            ← Netlify cache + security headers
 └── netlify/functions/
     ├── create-checkout.js
@@ -183,6 +185,7 @@ stradanuovagenova/
 
 - Prodotti in [_data/products.json](_data/products.json): 6 pouf (N.01–N.06), schema `{id, name, detail, price, stock, available, image, stripePrice}`
 - **Pre-rendering server-side**: [tools/build-drop-grid.js](tools/build-drop-grid.js) inietta le card tra `<!-- BUILD:DROP_GRID:START/END -->` di index.html. Idempotente. Vantaggio: AI bot no-JS vedono i prodotti
+- **Foto pouf scontornate (2026-05-12 sera):** sostituiti i placeholder `<div role="img">` con `<picture><source AVIF><img WebP></picture>` con `alt` indicizzabile + `loading="lazy"`. Pipeline: `rembg i in.jpg out.png` (u2net) → `magick out.png -trim +repage -resize 1100x1100 -background none -gravity center -extent 1200x1200`. CSS `.drop-card-img` con `object-fit: contain` + `background: #2e2e2e` (fa da fondo neutro al pouf scontornato). Mapping sorgenti: 01=IMG_7902 (Dedar), 02=IMG_7904 (Pierre Frey), 03=IMG_7898 (Designers Guild), 04=IMG_7905 (Lino), 05=IMG_7901 (Etro), 06=IMG_7892 (Bouclé)
 - Bottone "Acquista" usa `data-product-id`, [assets/js/buy-product.js](assets/js/buy-product.js) fa event delegation → fetch `/.netlify/functions/create-checkout`
 - Function legge `products.json` da filesystem, valida `available && stock > 0`, crea sessione one-shot Stripe con `price_data` dinamico, shipping IT-only
 - Success URL → `/grazie/?session_id=…`, cancel URL → `/#drop`
@@ -251,7 +254,13 @@ stradanuovagenova/
 
 ✅ **Fase 13.6 chiusa:** nav 8 voci (Tessuti / Tendaggi / Carta da parati / Marchi / Magazine / Chi siamo / Contatti / Appuntamento-CTA) + footer 4 colonne (Catalogo / Specializzazioni / Negozio / NAP) propagati su 29 file. Pagine non più orfane: rivestimenti-murali, servizi, 3 verticali geo-luxe, palazzo-lomellino sono tutte raggiungibili in 1 click via footer da qualunque pagina.
 
-🟡 **Next: Fasi 14 → 18** (GSC submit sitemap + Bing + IndexNow, Lighthouse audit live, a11y, magazine cadenza mensile)
+✅ **Audit Kimi integrato (2026-05-12 sera):** review esterna ricevuta, accettati 3 fix dei 5 punti proposti — disambiguazione brand "Strada Nuova" vs "Musei di Strada Nuova" (og:site_name → "Strada Nuova Genova" su 27 file + Organization JSON-LD `alternateName`+`legalName`), author Person nel magazine article (Giulia Organo + jobTitle + worksFor), correzione cognome storico Orlandini→Organo in chi-siamo/CLAUDE.md/memoria. Scartati 2 punti: FAQPage schema (Google ha rimosso rich result mag 2026), Service Worker/PWA (over-engineering). Verificato che `loading="lazy"` era già a posto (Kimi aveva allucinato su quello).
+
+✅ **Fase 13.7 chiusa (sera 2026-05-12):** 6 drop card con foto reali pouf showroom scontornate via rembg+u2net e ricomposte con magick. Sostituito il render `<div role="img" style="background-image">` con `<picture>` `<source>` AVIF + `<img>` WebP indicizzabile (alt = nome + detail), `loading=lazy` (sono below-fold), `object-fit: contain` su card background #2e2e2e. Cancellate dal repo le 4 immagini AI Gemini iniziali e i loro PNG sorgenti in `~/Downloads/`.
+
+✅ **Fase 14 step 1 chiuso (sera 2026-05-12):** GSC verificato via Prefisso URL+meta tag, sitemap.xml submittata (27 URL), 10 URL forzate via "Richiedi indicizzazione" (home + 4 pillar + hub marchi + palazzo-lomellino + tessuti-palazzi-storici + magazine articolo + chi-siamo). Bing Webmaster Tools + IndexNow ancora da fare.
+
+🟡 **Next: Fase 14 step 2** (Bing WMT + IndexNow + Lighthouse audit live), poi Fasi 15-18 (GBP, 301, a11y, magazine mensile)
 
 ⚠️ **Workflow attuale:** dopo il push del 2026-05-12 si torna a "commit + push frequenti" — migrazione chiusa, le piccole modifiche vanno live subito. La memoria `feedback_push_locale` resta valida per future migrazioni grosse
 
@@ -280,6 +289,8 @@ stradanuovagenova/
 12. **Service.offers senza `price`** o **Service.aggregateRating** → schema invalido. Service non parent eligible rich snippet
 13. **`fade-in` su elemento LCP candidate** → Lighthouse aspetta la transizione, LCP crash
 14. **`Cache-Control: immutable` su asset con nome non versionato** → browser non rivalida mai, vedi sempre vecchio CSS/JS anche dopo push. Soluzione: aggiungere `?v=<data>` ai `<link>`/`<script>` quando cambi `base.css`, `nav-toggle.js`, `buy-product.js`. Pattern: bump del query string ad ogni modifica asset
+15. **Background removal foto prodotto:** rembg+u2net via `pip install` su Python 3.14 fallisce (PEP 668 external-managed). Soluzione: `pipx install 'rembg[cli]'` + `pipx inject rembg onnxruntime`. Per pouf con frange morbide il modello u2net è ok ma può lasciare bordi sfilacciati — il rimedio è `-trim` (riduce al bounding box reale) + `-resize 1100x1100 -extent 1200x1200` (padding alpha al 92%) per dimensione uniforme tra card diverse. Sfondo PNG/WebP/AVIF trasparente + CSS `.drop-card-img background: #2e2e2e` = look edge-to-edge senza dover replicare gradient
+16. **`object-fit: cover` su card prodotto con foto verticale** → il soggetto viene tagliato. `object-fit: contain` + background neutro card è il pattern showroom (Hay, Vitra). Allineato meglio con foto product-on-white o scontornate
 
 ## File da ignorare
 

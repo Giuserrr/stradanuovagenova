@@ -10,9 +10,9 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 
 ---
 
-## Stato avanzamento (aggiornato 2026-05-12, post push live)
+## Stato avanzamento (aggiornato 2026-05-12 sera, post push live + serata di rifiniture)
 
-**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12** (18 commit `eb48fa9..c9ab104`). Sito multi-pagina ora live su stradanuovagenova.com. SPA legacy completamente sparita. Smoke test 40/40 verde contro produzione.
+**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12** (18 commit `eb48fa9..c9ab104`). Sito multi-pagina ora live su stradanuovagenova.com. SPA legacy completamente sparita. Smoke test 40/40 verde contro produzione. **+9 commit di rifinitura post-push la sera del 2026-05-12** (`8a43a78..77a7448`): audit fix descrizioni, audit Kimi (disambiguazione brand + author Person), drop card con foto reali scontornate (Fase 13.7).
 
 | Fase | Status | Note |
 |---|---|---|
@@ -37,8 +37,10 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 12 — magazine setup + 1° articolo | ✅ pushato (`0d61b72`) | hub `/magazine/` + articolo ritappezzeria 1567 parole. Build script Markdown rimandato a Fase 18 |
 | 13 — performance pass | ✅ pushato (`7f8bfcd`, parziale) | AVIF + picture wrap + _headers attivi in produzione. Lighthouse/PSI da fare ORA che è live |
 | **13.6 — Nav+Footer sync** | ✅ chiusa (29 file aggiornati, smoke 40/40) | nav 8 voci + CTA differenziata, footer 4 colonne grid, script idempotente |
+| **13.7 — Drop foto reali** | ✅ chiusa (6 pouf scontornati, `bed2a01`, `77a7448`) | rembg+u2net + magick -trim, picture AVIF+WebP, object-fit contain |
+| **Audit Kimi integrato** | ✅ chiusa (`e030b7d`) | disambig. brand (og:site_name + alternateName), author Person magazine, correzione cognome Orlandini→Organo. Scartati FAQPage schema e PWA |
 | 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
-| 14 — GSC + Bing + IndexNow | 🟡 in parte | Meta GSC verification inserito (`c9ab104`). Submit sitemap + Bing + IndexNow da fare |
+| 14 — GSC + Bing + IndexNow | 🟡 in parte | ✅ meta verification live (`c9ab104`), ✅ proprietà GSC verificata via Prefisso URL+tag, ✅ sitemap submittata, ✅ 10 URL forzate via "Richiedi indicizzazione". Bing WMT + IndexNow + Lighthouse audit live ancora da fare |
 | 15 — GBP aggiornamenti | ⬜ lato Giuseppe | |
 | 16 — 301 sntessuti.it | ⬜ blocked | accesso provider |
 | 17 — A11y full pass | ⬜ | |
@@ -519,6 +521,43 @@ Quando una voce entra, un'altra esce (max 8 voci): candidato uscita = "Carta da 
 
 ---
 
+# ✅ Fase 13.7 — Drop foto reali scontornate (chiusa 2026-05-12 sera)
+
+**Trigger:** post push live, accordo Giuseppe di sostituire i placeholder testuali "01/02/03" del drop con foto vere dei pouf. Audit Kimi (review esterna) aveva anche segnalato che i `<div role="img" aria-label="…">` con `background-image` CSS non sono indicizzabili da Google come immagini vere.
+
+### Decisioni
+
+- **Sorgente:** foto reali dello showroom scattate via iPhone (`~/Downloads/iloveimg-converted/IMG_7889..7905.jpg`, 16 scatti, 4284×5712). NO immagini AI Gemini generate (un primo tentativo del 2026-05-12 sera è stato scartato perché aveva watermark Gemini ✦ e fondo gradient non coerente con showroom)
+- **Background removal:** rembg+u2net via pipx (modello scaricato offline in `~/.u2net/u2net.onnx`, 170MB)
+- **Pipeline post-rembg:** `magick -trim +repage -strip -resize 1100x1100 -background none -gravity center -extent 1200x1200`. `-trim` riduce al bounding box reale del pouf, `-resize 1100x1100 -extent 1200x1200` dà padding alpha al 92% → dimensione uniforme su tutte le card
+- **Output:** WebP (alpha) + AVIF (alpha) ~50-230 KB ciascuno, 1200×1200
+- **CSS:** `.drop-card-img` con `aspect-ratio: 1/1` + `background: #2e2e2e` + `overflow: hidden`. `.drop-card-img img` con `object-fit: contain` (non `cover`, che tagliava la base del pouf) → il pouf appare integro con sfondo neutro che fa da padding laterale
+
+### Mapping definitivo sorgente → output
+
+| Card | Foto sorgente | Pouf description | Note |
+|---|---|---|---|
+| 01.webp | IMG_7902.jpg | Tessuto Dedar / Edizione di 12 | nero pois oro |
+| 02.webp | IMG_7904.jpg | Tessuto Pierre Frey / Edizione di 8 | giallo frange verdi |
+| 03.webp | IMG_7898.jpg | Velluto Designers Guild / Edizione di 6 | verde malachite + maniglia |
+| 04.webp | IMG_7905.jpg | Lino naturale / Edizione di 10 | rosso frange verdi basso |
+| 05.webp | IMG_7901.jpg | Jacquard Etro / Edizione di 4 | rosso floreale alto verticale |
+| 06.webp | IMG_7892.jpg | Bouclé / Edizione di 8 | rosso frange verdi alto |
+
+### Task — tutti chiusi
+
+- [x] 13.7.1 — Install `rembg[cli]` + `onnxruntime` via pipx (Python 3.14 di Homebrew è PEP 668 external-managed → `pip install --user` fallisce; pipx è la strada giusta)
+- [x] 13.7.2 — Modifica [tools/build-drop-grid.js](tools/build-drop-grid.js): nuovo `renderImgBlock(p, num)` che genera `<picture><source srcset=AVIF type=image/avif><img src=WebP alt="Nome — detail" width=1200 height=1200 loading=lazy decoding=async></picture>`. Fallback al placeholder numerico se `p.image` vuoto
+- [x] 13.7.3 — Modifica CSS `.drop-card-img` in [index.html](index.html) `<style>`: rimosso `background-size/position`, aggiunto `overflow:hidden` + picture/img full-size + `object-fit: contain`
+- [x] 13.7.4 — Aggiornato [_data/products.json](_data/products.json): `image` popolato per pouf 01-06 con `/img/drop/{01..06}.webp`. AVIF derivato automaticamente da build-drop-grid via sostituzione estensione
+- [x] 13.7.5 — Batch processing 6 immagini con rembg + magick -trim, output in [img/drop/](img/drop/) (12 file: 6 webp + 6 avif, totale ~1.1 MB)
+- [x] 13.7.6 — Cleanup: rimossi PNG Gemini intermedi da `~/Downloads/` (1.png, 2.png, 3.png, 4.png, Gemini_Generated_Image_*.png)
+- [x] 13.7.7 — Smoke test 40/40 verde post-rebuild
+
+**DoD raggiunto:** drop card con foto reali pouf, indicizzabili come `<img>` con alt, dimensione uniforme su tutte e 6 le card, scontorno pulito senza fondo showroom.
+
+---
+
 # 🟦 Fase 13.5 — Maps embed in /contatti (30 min, dopo attivazione API Giuseppe)
 
 ### Task
@@ -537,13 +576,15 @@ Quando una voce entra, un'altra esce (max 8 voci): candidato uscita = "Carta da 
 
 ### Task
 
-- [ ] 14.1 — Verifica proprietà Google Search Console (DNS o meta tag)
-- [ ] 14.2 — Submit sitemap su GSC
-- [ ] 14.3 — Verifica proprietà Bing Webmaster Tools, submit sitemap
+- [x] 14.1 — Verifica proprietà Google Search Console via Prefisso URL `https://stradanuovagenova.com/` + tag HTML (meta `google-site-verification=scnsJjaFbiL0tt1tOwIuGKWbw4iKpPGD4KwO07uFNFE` in home, commit `c9ab104`)
+- [x] 14.2 — Submit sitemap.xml su GSC (27 URL discovered)
+- [x] 14.2b — **EXTRA:** 10 URL forzate via "Richiedi indicizzazione" (home + 4 pillar + hub marchi + palazzo-lomellino + tessuti-palazzi-storici + magazine articolo + chi-siamo)
+- [ ] 14.3 — Verifica proprietà Bing Webmaster Tools, import da GSC, submit sitemap. Anche Bing Places (gemello GBP, lato Microsoft) **NEXT**
 - [ ] 14.4 — IndexNow: generare chiave UUID, file `<uuid>.txt` in root, endpoint ping ai principali (Bing, Yandex, Naver) via Netlify build hook
 - [ ] 14.5 — `tools/gsc.js`: CLI Node con OAuth refresh token (workaround bug "service account email not found" mag 2026). Subcomandi: `sites`, `sitemaps`, `query --days 28`, `pages --days 28`, `inspect <url>`. One-shot `gsc-auth.js` apre browser, callback localhost, salva refresh_token in `~/.config/strada-nuova/gsc-oauth.json`
+- [ ] 14.6 — Lighthouse audit live su 5 pagine campione (home + 4 pillar). PSI + verifica LCP/CLS/INP reali su produzione
 
-**DoD:** entrambe le console ricevono dati, sitemap discovered, GSC API funziona localmente.
+**DoD:** entrambe le console ricevono dati, sitemap discovered, GSC API funziona localmente, Lighthouse SEO+Best Practices ≥95.
 
 ---
 
