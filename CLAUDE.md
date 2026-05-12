@@ -11,7 +11,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 **Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`) + 9 commit di rifinitura post-push la sera del 2026-05-12 (`8a43a78..77a7448`).**
 
-**Stato Fasi 0-13 + 13.6 + 13.7 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). 6 drop card con foto reali scontornate via rembg. GSC verificato + sitemap submittata + 10 URL forzate via "Richiedi indicizzazione". Smoke 40/40 verde. Next: Fase 14 step 2 (Bing Webmaster Tools + IndexNow + Lighthouse audit live).**
+**Stato Fasi 0-13 + 13.5 + 13.6 + 13.7 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). 6 drop card con foto reali scontornate via rembg. Maps embed in `/contatti/` + `geo` + `hasMap` JSON-LD su Store/Place. GSC verificato + sitemap submittata + 10 URL forzate via "Richiedi indicizzazione". Smoke 40/40 verde. Next: Fase 14 step 2 (Bing Webmaster Tools + IndexNow + Lighthouse audit live).**
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -270,7 +270,7 @@ stradanuovagenova/
 - Test end-to-end form appuntamento Fase 5 (rimandato a push live)
 - Stock pouf NON decrementato dopo acquisto (no webhook Stripe)
 - `_data/info.json` non esiste ancora — il CMS lo creerà al primo save
-- Coordinate GPS esatte negozio + Place ID GBP per `hasMap` (Fase 13.5)
+- ~~Coordinate GPS esatte negozio + Place ID GBP per `hasMap` (Fase 13.5)~~ ✅ chiusa: GPS `44.41133147877727, 8.933433457224718` + Place ID `ChIJR-TtRF1D0xIReS_hRVSpVhI` + Maps API key client-side con restrizioni referrer `*.stradanuovagenova.com/*`
 - 301 da sntessuti.it (richiede accesso provider vecchio sito)
 
 ## Lezioni imparate (NON ripetere)

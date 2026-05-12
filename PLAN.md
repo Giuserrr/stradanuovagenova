@@ -39,7 +39,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | **13.6 — Nav+Footer sync** | ✅ chiusa (29 file aggiornati, smoke 40/40) | nav 8 voci + CTA differenziata, footer 4 colonne grid, script idempotente |
 | **13.7 — Drop foto reali** | ✅ chiusa (6 pouf scontornati, `bed2a01`, `77a7448`) | rembg+u2net + magick -trim, picture AVIF+WebP, object-fit contain |
 | **Audit Kimi integrato** | ✅ chiusa (`e030b7d`) | disambig. brand (og:site_name + alternateName), author Person magazine, correzione cognome Orlandini→Organo. Scartati FAQPage schema e PWA |
-| 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
+| **13.5 — Maps embed** | ✅ chiusa | GPS + Place ID + API key (restrizioni referrer) + iframe Maps Embed in /contatti/, `geo`+`hasMap` su Store JSON-LD home+contatti+palazzo |
 | 14 — GSC + Bing + IndexNow | 🟡 in parte | ✅ meta verification live (`c9ab104`), ✅ proprietà GSC verificata via Prefisso URL+tag, ✅ sitemap submittata, ✅ 10 URL forzate via "Richiedi indicizzazione". Bing WMT + IndexNow + Lighthouse audit live ancora da fare |
 | 15 — GBP aggiornamenti | ⬜ lato Giuseppe | |
 | 16 — 301 sntessuti.it | ⬜ blocked | accesso provider |
@@ -558,17 +558,17 @@ Quando una voce entra, un'altra esce (max 8 voci): candidato uscita = "Carta da 
 
 ---
 
-# 🟦 Fase 13.5 — Maps embed in /contatti (30 min, dopo attivazione API Giuseppe)
+# ✅ Fase 13.5 — Maps embed in /contatti (chiusa 2026-05-12 sera)
 
 ### Task
 
-- [ ] 13.5.1 — Attivare Maps JavaScript API + Places API su Google Cloud Console
-- [ ] 13.5.2 — Restringere chiave a referrer `stradanuovagenova.com`
-- [ ] 13.5.3 — Aggiungere chiave come env var Netlify (`PUBLIC_MAPS_KEY`)
-- [ ] 13.5.4 — Embed mappa lazy in `/contatti/` con coordinate GPS esatte + Place ID GBP
-- [ ] 13.5.5 — Aggiornare JSON-LD Store con `hasMap` URL `maps.app.goo.gl/<id>`
+- [x] 13.5.1 — Maps JavaScript API + Places API + Maps Embed API attivate su Google Cloud (progetto dedicato `stradanuova-genova`)
+- [x] 13.5.2 — Chiave API ristretta a referrer HTTP `*.stradanuovagenova.com/*` + API limit a Maps JS/Places/Embed
+- [x] 13.5.3 — ⚠️ La chiave è **client-side per natura** (iframe `src` deve contenerla) → committata direttamente in `/contatti/index.html`. Le restrizioni referrer + carta virtuale a 0€ limite sono la safety net. NO env var Netlify (non aiuterebbe: la chiave finirebbe comunque nell'HTML pubblico)
+- [x] 13.5.4 — Iframe Maps Embed con `loading=lazy` + `referrerpolicy=no-referrer-when-downgrade` in `/contatti/`, query `q=place_id:ChIJR-TtRF1D0xIReS_hRVSpVhI&language=it`, aspect-ratio 16/9 desktop / 4/3 mobile
+- [x] 13.5.5 — JSON-LD: aggiunti `geo` (lat 44.41133147877727 / lon 8.933433457224718) + `hasMap` (URL `https://www.google.com/maps/place/?q=place_id:...`) su Store schema in `index.html` + `contatti/index.html` + Place schema in `palazzo-lomellino/index.html`
 
-**DoD:** mappa visibile lazy in /contatti, chiave non leakata in repo, LCP non penalizzato.
+**DoD raggiunto:** mappa visibile lazy in /contatti (richiesta solo se l'utente scrolla fino alla sezione), JSON-LD valido su 3 file, smoke 40/40 verde. Chiave protetta da referrer restriction + spending cap a 0€ (carta virtuale).
 
 ---
 

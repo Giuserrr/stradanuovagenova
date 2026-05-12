@@ -28,9 +28,9 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
   - Verticali geo-luxe → nav se diventano top-5 per impressions GSC
   - Voce candidata all'uscita quando un nuovo entrante sale: "Carta da parati" se si rivela inferiore in volume
 - [ ] 301 sntessuti.it → stradanuovagenova.com — serve accesso al provider del vecchio sito
-- [ ] Coordinate GPS esatte del negozio (Giuseppe le manderà → Fase 1.3 store.js + Fase 7 + Fase 13.5)
-- [ ] Attivazione Google Maps API per embed `/contatti` (Fase 13.5)
-- [ ] URL GBP `maps.app.goo.gl/<id>` per `hasMap` nello Store JSON-LD (Fase 1.3)
+- [x] Coordinate GPS esatte del negozio (44.41133147877727, 8.933433457224718) — fornite 2026-05-12 sera
+- [x] Attivazione Google Maps API per embed `/contatti` — fatto 2026-05-12 sera (Maps JS + Places + Embed API, chiave referrer-restricted, carta virtuale 0€ cap)
+- [x] URL GBP per `hasMap` JSON-LD — usato `https://www.google.com/maps/place/?q=place_id:ChIJR-TtRF1D0xIReS_hRVSpVhI`
 - [ ] **Brand realmente trattati** (servono per scrivere le brand-page e la descrizione GBP corretta). Conferma sì/no per:
   - Dedar — sì/no
   - Pierre Frey — sì/no
