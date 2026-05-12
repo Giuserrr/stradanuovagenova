@@ -20,6 +20,13 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] Tigullio/Portofino — sì ma non focus
 - [x] Mail pubblica — `stradanuova.7@gmail.com`
 - [x] Servizi non erogati direttamente — solo "Consulenza d'arredo tessile"
+- [x] **Nav top globale a 8 voci (deciso 2026-05-12 post-verifica competitor):** Tessuti / Tendaggi / Carta da parati / Marchi / Magazine / Chi siamo / Contatti / Appuntamento. Razionale: i competitor genovesi (Pittaluga, Taddei, Tende SRL) nascondono le keyword pillar sotto dropdown "Prodotti" → esponendole top-level otteniamo anchor exact-match site-wide come vantaggio competitivo SEO interno.
+- [x] **Footer 4 colonne (Catalogo / Specializzazioni / Negozio / Strada Nuova-NAP)** — linka tutte le pagine non in nav top (Rivestimenti murali, Servizi, 3 verticali geo-luxe, Palazzo Lomellino, Drop).
+- [x] **Trigger di promozione nav futuri (criteri oggettivi):**
+  - Rivestimenti murali → nav se GSC CTR>1% e impressions>200/mese per 2 mesi consecutivi
+  - Servizi → nav quando aggiungiamo secondo servizio reale
+  - Verticali geo-luxe → nav se diventano top-5 per impressions GSC
+  - Voce candidata all'uscita quando un nuovo entrante sale: "Carta da parati" se si rivela inferiore in volume
 - [ ] 301 sntessuti.it → stradanuovagenova.com — serve accesso al provider del vecchio sito
 - [ ] Coordinate GPS esatte del negozio (Giuseppe le manderà → Fase 1.3 store.js + Fase 7 + Fase 13.5)
 - [ ] Attivazione Google Maps API per embed `/contatti` (Fase 13.5)
@@ -48,29 +55,29 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 
 ## 🟡 In corso
 
-### Migrazione sito SEO (lavoro locale, no push)
+### Migrazione sito SEO — TUTTI I COMMIT PUSHATI IN PRODUZIONE (2026-05-12)
+Push avvenuto il 2026-05-12: 18 commit `eb48fa9..c9ab104` ora live su stradanuovagenova.com. Smoke test 40/40 verde contro produzione. La SPA legacy è ufficialmente sparita.
+
 - [x] **Fase 0** setup repo vanilla (pushato `dc6da8c`)
 - [x] **Fase 1** asset condivisi base.css/font/templates/store.js (pushato `ae4be0b`)
 - [x] **Fase 2** robots.txt + llms.txt + sitemap.xml + 404.html (pushato `76452ac`)
-- [x] **Fase 3** home statica (locale `506d96a`)
-- [x] **Fase 4** chi-siamo (locale `630f1ea`)
-- [x] **Fase 5** appuntamento + form Resend (locale `7b2fb85`, test end-to-end rimandato)
-- [x] **Fase 6** grazie + contatti + rimosso catch-all SPA (locale `21291bc`)
-- [x] **Fase 7** palazzo-lomellino asset autorità (locale `bd9fade`)
-- [x] **Fase 8.1** pillar tessuti-genova (1523 parole) + tendaggi-genova (1557 parole) (locale `be17e6d`)
-- [x] **Fase 8.2** pillar carta-da-parati-genova (1929 parole) + rivestimenti-murali-genova (1672 parole) (locale)
-- [x] **Fase 9.0** hub /marchi/ (locale)
-- [x] **Fase 9.1** Élitis (832 parole) + Cole & Son (988 parole) (locale)
-- [x] **Fase 9.2** Dedar (902 parole) + Pierre Frey (966 parole) (locale)
-- [x] **Fase 9.3** Designers Guild (914 parole) + Rubelli (1010 parole) (locale)
-- [x] **Fase 9.4** Sanderson/Morris &amp; Co (1050 parole) + Zoffany (944 parole) (locale)
-- [x] **Fase 9.5** Houlès (999 parole) + Etro Tessuti (883 parole) (locale) — Fase 9 chiusa
-- [x] **Fase 10** servizi consulenza: hub `/servizi/` + `/servizi/consulenza-arredo-tessile/` (locale)
-- [x] **Fase 11** verticali geo-luxe: palazzi-storici-genova (1529) + casa-al-mare-liguria (1438) + tende-portofino-tigullio minimal (583) (locale)
-- [x] **Fase 12** magazine setup minimal + 1° articolo "quanto costa ritappezzare un divano a Genova" (1567 parole). Build script Markdown→HTML rimandato a Fase 18 (cadenza mensile)
-- [x] **Fase 13** performance pass (parziale lavorabile in locale): AVIF generati per tutte le immagini (-18%/-48% vs WebP), `<picture>` wrapping su 13 img, preload AVIF su 8 hero LCP, `_headers` Netlify con cache immutable + security headers. PageSpeed Insights / Lighthouse rimandati a post-push live (richiedono URL pubblico)
-- [ ] Fase 14 GSC + Bing + IndexNow + gsc.js
+- [x] **Fase 3** home statica (pushato `506d96a`)
+- [x] **Fase 4** chi-siamo (pushato `630f1ea`)
+- [x] **Fase 5** appuntamento + form Resend (pushato `7b2fb85`, **test end-to-end con form vivo ora possibile**)
+- [x] **Fase 6** grazie + contatti + rimosso catch-all SPA (pushato `21291bc`)
+- [x] **Fase 7** palazzo-lomellino asset autorità (pushato `bd9fade`)
+- [x] **Fase 8.1** pillar tessuti-genova (1523 parole) + tendaggi-genova (1557 parole) (pushato `be17e6d`)
+- [x] **Fase 8.2** pillar carta-da-parati-genova (1929 parole) + rivestimenti-murali-genova (1672 parole) (pushato `82acfaf`)
+- [x] **Fase 9.0 – 9.5** hub /marchi/ + 10 brand pages (pushato `1a24c73`, `ac115c8`, `ac1eac4`, `31d6d0e`, `cab751f`)
+- [x] **Fase 10** servizi consulenza: hub `/servizi/` + `/servizi/consulenza-arredo-tessile/` (pushato `d8d0181`)
+- [x] **Fase 11** verticali geo-luxe: palazzi-storici (1529) + casa-al-mare (1438) + Tigullio (583) (pushato `6ffab92`)
+- [x] **Fase 12** magazine + 1° articolo ritappezzeria (1567 parole) (pushato `0d61b72`)
+- [x] **Fase 13** performance pass parziale: AVIF + picture wrap + _headers (pushato `7f8bfcd`). **Lighthouse/PSI da fare ORA che è live**
+- [x] **GSC meta verification** inserito in home (pushato `c9ab104`)
+- [x] **Fase 13.6** Nav+Footer sync — 29 file aggiornati via [tools/sync-nav-footer.js](tools/sync-nav-footer.js), smoke 40/40, idempotenza verificata
+- [ ] Fase 14 GSC submit sitemap + Bing + IndexNow + gsc.js — **NEXT**
 - [ ] Fase 17 a11y full pass
+- [ ] Fase 18 magazine build pipeline MD + cadenza mensile
 
 ### GBP (lato Giuseppe)
 - [x] GBP — sito web aggiornato a stradanuovagenova.com

@@ -1,7 +1,8 @@
-<!-- nav.html — duplicato per ogni pagina (~20 righe).
-     Pattern: ZERO partial system, ZERO bundler. Quando aggiorni
-     questa nav, fai trova/sostituisci su tutte le pagine HTML.
-     Sostituire l'attributo aria-current="page" sulla voce attiva. -->
+<!-- nav.html — source of truth per la nav top.
+     Propagata su tutte le pagine HTML via tools/sync-nav-footer.js.
+     NON modificare la nav direttamente nei file pagina: passa da qui
+     e rilancia lo script (--dry-run prima, poi --write).
+     L'attributo aria-current="page" viene calcolato dallo script in base al path. -->
 <a class="skip-link" href="#main">Vai al contenuto</a>
 <nav class="site-nav" aria-label="Navigazione principale">
   <a href="/" class="nav-logo">Strada Nuova</a>
@@ -9,11 +10,13 @@
     <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
   </button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="/chi-siamo/">Chi siamo</a></li>
     <li><a href="/tessuti-genova/">Tessuti</a></li>
+    <li><a href="/tendaggi-genova/">Tendaggi</a></li>
+    <li><a href="/carta-da-parati-genova/">Carta da parati</a></li>
     <li><a href="/marchi/">Marchi</a></li>
     <li><a href="/magazine/">Magazine</a></li>
-    <li><a href="/appuntamento/">Appuntamento</a></li>
-    <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="/chi-siamo/">Chi siamo</a></li>
+    <li><a href="/contatti/">Contatti</a></li>
+    <li><a class="nav-cta" href="/appuntamento/">Appuntamento</a></li>
   </ul>
 </nav>

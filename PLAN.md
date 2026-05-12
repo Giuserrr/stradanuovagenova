@@ -10,39 +10,43 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 
 ---
 
-## Stato avanzamento (2026-05-12)
+## Stato avanzamento (aggiornato 2026-05-12, post push live)
+
+**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12** (18 commit `eb48fa9..c9ab104`). Sito multi-pagina ora live su stradanuovagenova.com. SPA legacy completamente sparita. Smoke test 40/40 verde contro produzione.
 
 | Fase | Status | Note |
 |---|---|---|
 | 0 — Setup repo vanilla | ✅ pushato (`dc6da8c`, `04cbe3e`) | |
 | 1 — Asset condivisi | ✅ pushato (`ae4be0b`) | base.css, font Inter, templates, store.js |
 | 2 — File tecnici SEO | ✅ pushato (`76452ac`, `ec90d97`) | robots/llms/sitemap/404/smoke |
-| 3 — Home | ✅ commit locale (`506d96a`) | |
-| 4 — chi-siamo | ✅ commit locale (`630f1ea`) | |
-| 5 — appuntamento | ✅ commit locale (`7b2fb85`) | Test Resend end-to-end rimandato a push live |
-| 6 — grazie + contatti + RM catch-all | ✅ commit locale (`21291bc`) | SPA legacy ufficialmente sparita |
-| 7 — palazzo-lomellino | ✅ commit locale (`bd9fade`) | GPS TBD |
-| 8.1 — tessuti + tendaggi pillar | ✅ commit locale (`be17e6d`) | 1523 + 1557 parole |
-| 8.2 — carta da parati + rivestimenti | ✅ commit locale (`82acfaf`) | 1929 + 1672 parole |
-| 9.0 — hub /marchi/ | ✅ commit locale | 10 brand listati |
-| 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale (`1a24c73`) | 832 + 988 parole |
-| 9.2 — Dedar + Pierre Frey | ✅ commit locale (`ac115c8`) | 902 + 966 parole |
-| 9.3 — Designers Guild + Rubelli | ✅ commit locale (`ac1eac4`) | 914 + 1010 parole |
-| 9.4 — Sanderson/Morris + Zoffany | ✅ commit locale (`31d6d0e`) | 1050 + 944 parole |
-| 9.5 — Houlès + Etro Tessuti | ✅ commit locale | 999 + 883 parole |
-| 10 — servizi consulenza | ✅ locale | hub `/servizi/` + consulenza-arredo-tessile |
-| 11 — verticali geo-luxe (3) | ✅ locale | palazzi storici (1529) + casa al mare (1438) + Tigullio (583) |
-| 12 — magazine setup + 1° articolo | ✅ locale | hub `/magazine/` + articolo ritappezzeria 1567 parole. Build script Markdown rimandato |
-| 13 — performance pass | ✅ locale (parziale) | AVIF + picture wrap + _headers fatti. Lighthouse/PSI a post-push |
+| 3 — Home | ✅ pushato (`506d96a`) | |
+| 4 — chi-siamo | ✅ pushato (`630f1ea`) | |
+| 5 — appuntamento | ✅ pushato (`7b2fb85`) | Test Resend end-to-end ancora da fare con form vivo |
+| 6 — grazie + contatti + RM catch-all | ✅ pushato (`21291bc`) | SPA legacy ufficialmente sparita |
+| 7 — palazzo-lomellino | ✅ pushato (`bd9fade`) | GPS TBD |
+| 8.1 — tessuti + tendaggi pillar | ✅ pushato (`be17e6d`) | 1523 + 1557 parole |
+| 8.2 — carta da parati + rivestimenti | ✅ pushato (`82acfaf`) | 1929 + 1672 parole |
+| 9.0 — hub /marchi/ | ✅ pushato | 10 brand listati |
+| 9.1 — Élitis + Cole & Son ⭐ | ✅ pushato (`1a24c73`) | 832 + 988 parole |
+| 9.2 — Dedar + Pierre Frey | ✅ pushato (`ac115c8`) | 902 + 966 parole |
+| 9.3 — Designers Guild + Rubelli | ✅ pushato (`ac1eac4`) | 914 + 1010 parole |
+| 9.4 — Sanderson/Morris + Zoffany | ✅ pushato (`31d6d0e`) | 1050 + 944 parole |
+| 9.5 — Houlès + Etro Tessuti | ✅ pushato (`cab751f`) | 999 + 883 parole |
+| 10 — servizi consulenza | ✅ pushato (`d8d0181`) | hub `/servizi/` + consulenza-arredo-tessile |
+| 11 — verticali geo-luxe (3) | ✅ pushato (`6ffab92`) | palazzi storici (1529) + casa al mare (1438) + Tigullio (583) |
+| 12 — magazine setup + 1° articolo | ✅ pushato (`0d61b72`) | hub `/magazine/` + articolo ritappezzeria 1567 parole. Build script Markdown rimandato a Fase 18 |
+| 13 — performance pass | ✅ pushato (`7f8bfcd`, parziale) | AVIF + picture wrap + _headers attivi in produzione. Lighthouse/PSI da fare ORA che è live |
+| **13.6 — Nav+Footer sync** | ✅ chiusa (29 file aggiornati, smoke 40/40) | nav 8 voci + CTA differenziata, footer 4 colonne grid, script idempotente |
 | 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
-| 14 — GSC + Bing + IndexNow | ⬜ | |
+| 14 — GSC + Bing + IndexNow | 🟡 in parte | Meta GSC verification inserito (`c9ab104`). Submit sitemap + Bing + IndexNow da fare |
 | 15 — GBP aggiornamenti | ⬜ lato Giuseppe | |
 | 16 — 301 sntessuti.it | ⬜ blocked | accesso provider |
 | 17 — A11y full pass | ⬜ | |
-| 18 — magazine cadenza mensile | ⬜ continuativo | |
+| 18 — magazine cadenza mensile + build pipeline MD | ⬜ continuativo | |
 
-**Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 30/30 verde. **Sitemap:** 20 URL indicizzabili (esclude grazie noindex).
+**Workflow corrente:** dopo il push del 2026-05-12 il workflow torna a "commit + push frequenti" — la migrazione è chiusa, ogni piccola modifica può andare live.
+**Smoke test (contro https://stradanuovagenova.com):** 40/40 verde. **Sitemap:** 27 URL indicizzabili (esclude grazie noindex).
+**GSC:** meta `google-site-verification=scnsJjaFbiL0tt1tOwIuGKWbw4iKpPGD4KwO07uFNFE` live su home, in attesa che Giuseppe completi verifica via "Prefisso URL → Tag HTML" oppure Domain property via TXT DNS su Netlify.
 
 ---
 
@@ -451,6 +455,67 @@ stradanuovagenova/
 - [⏭] 13.5 — Lighthouse SEO + Best Practices ≥ 95 — **rimandata a post-push live** (richiede URL pubblico)
 
 **DoD parziale raggiunto:** AVIF live, _headers configurati, picture pattern uniforme. **Da fare a push live:** PSI + Lighthouse audit + eventuale fix LCP se hero non scende sotto soglia.
+
+---
+
+# ✅ Fase 13.6 — Nav+Footer sync (chiusa 2026-05-12)
+
+**Trigger:** post-push live ci si è accorti che il nav delle 28 pagine fisiche è ancora quello della SPA legacy (5 voci: Chi siamo / Drop / Appuntamento / Contatti / Instagram) — tutte le pagine SEO create (pillar, marchi, servizi, verticali, magazine) sono **orfane dal nav globale**. Link juice e link discoverability sub-ottimali.
+
+**Verifica competitor (2026-05-12):** Pittaluga, Taddei, Tende SRL, Bonanni — nessuno espone le keyword pillar (Tessuti/Tendaggi/Carta) come voci top-level del nav: tutte sotto dropdown "Prodotti". Esponendole come voci primarie su Strada Nuova otteniamo vantaggio competitivo SEO interno (anchor exact-match site-wide).
+
+**Sources verifica:**
+- [pitcasa.com](https://www.pitcasa.com/) — 6 voci: Home/Prodotti/Servizi/Chi siamo/Blog/Contatti
+- [tessutigenovataddei.com](https://www.tessutigenovataddei.com/) — 5 voci: Negozio/Prodotti/Contract/Consigli/Realizzazioni
+- [tendesrl.it](https://www.tendesrl.it/) — 7 voci: Home/Azienda/Interni/Esterni/Tende tecniche/Promozioni/Contatti
+
+### Decisione nav (8 voci, ordine confermato)
+
+| # | Voce | Link | Razionale |
+|---|------|------|-----------|
+| 1 | Tessuti | `/tessuti-genova/` | Keyword pillar #1, opportunità competitor |
+| 2 | Tendaggi | `/tendaggi-genova/` | Keyword pillar #2, opportunità competitor |
+| 3 | Carta da parati | `/carta-da-parati-genova/` | Keyword pillar in crescita, opportunità competitor |
+| 4 | Marchi | `/marchi/` | Hub 10 brand → link juice ai brand singoli |
+| 5 | Magazine | `/magazine/` | Editorial signal a Google, freshness |
+| 6 | Chi siamo | `/chi-siamo/` | Standard settore, brand asset |
+| 7 | Contatti | `/contatti/` | NAP, local SEO + UX standard |
+| 8 | Appuntamento | `/appuntamento/` | CTA primaria (style differenziato) |
+
+**Fuori dal nav top:** Drop, Rivestimenti murali, Servizi, 3 verticali geo-luxe, Palazzo Lomellino, Instagram, Facebook → tutti in footer.
+
+### Decisione footer (4 colonne, mobile 2-col)
+
+**Colonna A — Catalogo:** Tessuti · Tendaggi · Carta da parati · **Rivestimenti murali** · Marchi
+**Colonna B — Specializzazioni:** Tessuti palazzi storici · Casa al mare Liguria · Portofino e Tigullio · Servizi consulenza · Palazzo Lomellino
+**Colonna C — Negozio:** Chi siamo · Magazine · Drop · Appuntamento · Contatti
+**Colonna D — Strada Nuova:** NAP completa (indirizzo, telefono, email) · orari sintetici · Instagram · Facebook · © 2026
+
+### Trigger di promozione futura nav (criteri oggettivi)
+
+- **Rivestimenti murali → entra nel nav** se Search Console mostra CTR>1% e impressions>200/mese su queries di sua competenza per 2 mesi consecutivi
+- **Servizi consulenza → entra nel nav** quando aggiungiamo un secondo servizio reale (oggi 1 solo, troppo magro)
+- **Verticali geo-luxe → entrano nel nav** se diventano top-5 per impressions GSC
+
+Quando una voce entra, un'altra esce (max 8 voci): candidato uscita = "Carta da parati" se search volume si rivela inferiore al nuovo entrante.
+
+### Task — tutti chiusi
+
+- [x] 13.6.1 — [templates/nav.html](templates/nav.html) 8 voci nuove. Anchor orfani `#drop` e `#contatti` rimossi
+- [x] 13.6.2 — [templates/footer.html](templates/footer.html) struttura 4 colonne grid + NAP completa
+- [x] 13.6.3 — [assets/css/base.css](assets/css/base.css) esteso: `.nav-cta` (CTA differenziata), `.footer-grid` 4 col desktop / 2 col @900px / 1 col @480px. Mobile nav padding aumentato per 8 voci, overflow auto
+- [x] 13.6.4 — [tools/sync-nav-footer.js](tools/sync-nav-footer.js) script idempotente: walker manuale, regex lazy su skip-link→`</nav>` e `<footer class="site-footer">…</footer>`, aria-current calcolato dal path file (descendant match per `/marchi/*` e `/magazine/*`). Modalità `--dry-run` (default) + `--write` + `--verbose`
+- [x] 13.6.5 — Dry-run su 29 file → 0 warning, diff coerente. Write applicato
+- [x] 13.6.6 — Smoke test locale 40/40 verde post-sync
+- [x] 13.6.7 — Idempotenza verificata: re-run dry-run → 0 modifiche
+- [x] 13.6.8 — Push + curl verify produzione
+
+**DoD raggiunto:** nav+footer omogenei su 29 file (admin/_test-pilot esclusi correttamente). Smoke 40/40 verde. Aria-current applicato su voce nav attiva (descendant compreso: `/marchi/elitis/` → aria-current su Marchi). Zero anchor orfani residui (`/#contatti` e `/#drop` come voci nav rimosse; `/#drop` resta solo nel footer come ancora intra-home).
+
+**Note implementative:**
+- Script esclude: `node_modules`, `.cache`, `.git`, `_test-pilot`, `admin`, `magazine/content`, `magazine/articles`
+- Strip preventivo di `aria-current="page"` dal template prima della re-applicazione → safe ri-applicare lo script più volte
+- Regex lazy (`[\s\S]*?`) → matcha sempre il blocco più piccolo, niente rischio over-match cross-section
 
 ---
 

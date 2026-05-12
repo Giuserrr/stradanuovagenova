@@ -7,19 +7,21 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 - Netlify Site ID: 3119e79e-ed19-4cbd-ac5f-f4fac7233c8e (team digitalwow)
 - Email negozio: stradanuova.7@gmail.com
 
-## Stack (aggiornato 2026-05-12)
+## Stack (aggiornato 2026-05-12 — post push live)
 
-**Migrazione SEO in corso (Fasi 0-13 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 28 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-13 ancora locali in attesa del push finale.
+**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`).**
+
+**Stato Fasi 0-13 + 13.6 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). Smoke 40/40 verde. Next: Fase 14 (GSC submit sitemap + Bing + IndexNow + Lighthouse audit live).**
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
 - **Catch-all SPA `/* → /index.html` rimosso** da netlify.toml in Fase 6
-- Nav + footer **duplicati esplicitamente** in ogni pagina (~16-20 righe). Pattern accettato fino a 25 pagine, riduce rischio rottura Decap CMS, diff-friendly
+- Nav + footer **duplicati esplicitamente** in ogni pagina. Pattern accettato fino a 30 pagine, riduce rischio rottura Decap CMS, diff-friendly. Sync via [tools/sync-nav-footer.js](tools/sync-nav-footer.js) che usa [templates/nav.html](templates/nav.html) e [templates/footer.html](templates/footer.html) come source of truth. `--dry-run` (default) prima di `--write`. Idempotente
 - Marker `<!-- BUILD:X:START/END -->` per zone auto-generate (drop grid da `_data/products.json`; magazine in Fase 12)
 - CSS condiviso in [assets/css/base.css](assets/css/base.css) — **blocking, non async** (anti-pattern critical inline scartato dopo lezione sister project)
 - Font Inter 400+600 **self-host woff2** in [assets/fonts/](assets/fonts/) (109KB + 112KB da rsms.me). Zero richieste a Google Fonts CDN
 - JS condiviso: [assets/js/nav-toggle.js](assets/js/nav-toggle.js), [assets/js/buy-product.js](assets/js/buy-product.js). Event listener no `onclick` inline
-- Script Node in [tools/](tools/): `store.js`, `build-sitemap.js`, `build-drop-grid.js`, `build-magazine.js` (stub Fase 12), `smoke-test.js`
+- Script Node in [tools/](tools/): `store.js`, `build-sitemap.js`, `build-drop-grid.js`, `build-magazine.js` (stub Fase 12), `sync-nav-footer.js`, `smoke-test.js`
 - Decap CMS v3.3.3 + Netlify Identity **invariati** su `/admin`
 - Netlify Functions `create-checkout` + `request-appointment` **invariate** (`node_bundler = "nft"`)
 - Build command: `npm install && npm run build` su Netlify
@@ -71,7 +73,8 @@ stradanuovagenova/
 │   ├── store.js                        ← NAP + JSON-LD helpers
 │   ├── build-sitemap.js
 │   ├── build-drop-grid.js
-│   ├── build-magazine.js               (stub Fase 12)
+│   ├── build-magazine.js               (stub, pipeline MD rimandata Fase 18)
+│   ├── sync-nav-footer.js              ← Fase 13.6: sync nav+footer da templates/ a tutti gli HTML
 │   └── smoke-test.js
 ├── magazine/{content,articles}/        ← cartelle placeholder Decap/MD pipeline (rimandata Fase 18)
 ├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp + avif, 1920x1080 / 1200x800)
@@ -127,6 +130,55 @@ stradanuovagenova/
 
 **Fase 13 chiusa (parziale):** AVIF generati con ImageMagick per tutte e 5 le immagini (hero 263→136 KB, materie 137→112 KB, palazzo-lomellino 107→86 KB, drop 162→129 KB, famiglia 111→90 KB). `<picture>` wrapping su 13 `<img>` con fallback WebP. Preload AVIF con `type="image/avif"` su 8 hero LCP. `_headers` Netlify: cache immutable 1 anno su `/assets/*` e `/img/*`, security headers globali (X-Content-Type-Options, X-Frame-Options SAMEORIGIN per compat Decap Identity, Referrer-Policy, Permissions-Policy minimal, HSTS 2 anni). **NO CSP** ora (rompe Stripe/Decap/Identity senza test). **PSI + Lighthouse rimandati a post-push live.**
 
+**Push live 2026-05-12 (commit `eb48fa9..c9ab104`):** 18 commit fino a quel momento in locale spinti in un singolo deploy. Sito multi-pagina ora live su https://stradanuovagenova.com. Smoke test 40/40 verde contro produzione. AVIF servito con `cache-control: public,max-age=31536000,immutable`. Security headers attivi (HSTS 2 anni, X-Frame-Options SAMEORIGIN, ecc.). Meta `google-site-verification=scnsJjaFbiL0tt1tOwIuGKWbw4iKpPGD4KwO07uFNFE` in [index.html:11](index.html#L11) — verifica GSC pendente (Giuseppe deve aggiungere proprietà via "Prefisso URL → Tag HTML" oppure Domain property via TXT DNS su Netlify).
+
+---
+
+## Architettura informativa: nav + footer
+
+**Definita 2026-05-12 dopo verifica competitor Pittaluga / Taddei / Tende SRL.** Source of truth: [templates/nav.html](templates/nav.html) + [templates/footer.html](templates/footer.html), propagati su tutti gli HTML pubblici via [tools/sync-nav-footer.js](tools/sync-nav-footer.js) (Fase 13.6). NON modificare nav/footer file-per-file: passa dai template e rilancia lo script con `--dry-run` prima di `--write`.
+
+### Nav top — 8 voci (in ordine)
+
+| # | Voce | Link | Razionale |
+|---|------|------|-----------|
+| 1 | Tessuti | `/tessuti-genova/` | Pillar keyword #1 + opportunità competitor |
+| 2 | Tendaggi | `/tendaggi-genova/` | Pillar keyword #2 + opportunità competitor |
+| 3 | Carta da parati | `/carta-da-parati-genova/` | Pillar keyword in crescita + opportunità competitor |
+| 4 | Marchi | `/marchi/` | Hub 10 brand → link juice ai brand singoli |
+| 5 | Magazine | `/magazine/` | Editorial signal + freshness |
+| 6 | Chi siamo | `/chi-siamo/` | Brand asset, standard settore |
+| 7 | Contatti | `/contatti/` | NAP, local SEO + UX standard |
+| 8 | Appuntamento | `/appuntamento/` | CTA primaria (style differenziato) |
+
+**Razionale competitor (sources):** [Pittaluga](https://www.pitcasa.com/), [Taddei](https://www.tessutigenovataddei.com/), [Tende SRL](https://www.tendesrl.it/) tutti nascondono le keyword pillar sotto dropdown "Prodotti". Esponendole top-level otteniamo anchor exact-match site-wide su 28 pagine = vantaggio competitivo SEO interno.
+
+### Footer — 4 colonne (mobile 2-col)
+
+- **Catalogo:** Tessuti · Tendaggi · Carta da parati · **Rivestimenti murali** · Marchi
+- **Specializzazioni:** Tessuti palazzi storici · Casa al mare Liguria · Portofino e Tigullio · Servizi consulenza · Palazzo Lomellino
+- **Negozio:** Chi siamo · Magazine · Drop · Appuntamento · Contatti
+- **Strada Nuova:** NAP completa (Via Garibaldi 7/a · +39 010 895 6256 · stradanuova.7@gmail.com) · orari Mar-Sab 10-12:30 / 16-19:30 · Instagram · Facebook · © 2026
+
+### Pagine fuori dal nav top (raggiungibili da footer + cross-link in-content)
+
+- `/rivestimenti-murali-genova/` — pillar 1672 parole
+- `/servizi/` + `/servizi/consulenza-arredo-tessile/`
+- `/tessuti-palazzi-storici-genova/`, `/tessuti-casa-al-mare-liguria/`, `/tessuti-tende-portofino-tigullio/` — verticali geo-luxe
+- `/palazzo-lomellino/` — asset autorità
+
+### Trigger di promozione nav (criteri oggettivi, monitorabili via GSC)
+
+- **Rivestimenti murali → entra nel nav** se CTR>1% e impressions>200/mese per 2 mesi consecutivi
+- **Servizi → entra nel nav** quando aggiungiamo secondo servizio reale
+- **Verticali geo-luxe → entrano nel nav** se diventano top-5 per impressions
+- **Magazine → resta nel nav** finché ≥3 articoli (oggi 1, trigger di uscita se non cresce in 6 mesi)
+- Candidato all'uscita per far spazio: "Carta da parati" se search volume risulta inferiore al nuovo entrante
+
+---
+
+**Fase 13.6 chiusa (2026-05-12):** nav 8 voci + footer 4 colonne propagati su 29 file via [tools/sync-nav-footer.js](tools/sync-nav-footer.js). Aria-current calcolato dal path file (descendant `/marchi/elitis/` marca Marchi nel nav). CTA Appuntamento differenziata con classe `.nav-cta` (border arancio, hover full background). Footer responsive: 4 col @desktop, 2 col @900px, 1 col @480px. Smoke test 40/40 verde post-sync. Script idempotente verificato (re-run = 0 modifiche).
+
 ## Drop / Stripe
 
 - Prodotti in [_data/products.json](_data/products.json): 6 pouf (N.01–N.06), schema `{id, name, detail, price, stock, available, image, stripePrice}`
@@ -161,6 +213,7 @@ stradanuovagenova/
 - **llms.txt:** indice markdown delle pagine principali per crawler AI
 - **NO FAQPage schema:** Google ha rimosso rich result in maggio 2026. FAQ tenute come HTML semantico (`<details>`/`<summary>`)
 - **NO Service.offers** senza price, **NO Service.aggregateRating** (Service non parent eligible rich snippet)
+- **Nav top site-wide con keyword pillar esposte:** anchor exact-match "Tessuti" / "Tendaggi" / "Carta da parati" presenti su tutte le 28 pagine. Vantaggio competitivo verificato vs Pittaluga/Taddei/Tende SRL che nascondono in dropdown. Footer 4 colonne assicura che ogni pagina non-nav (rivestimenti murali, servizi, verticali, palazzo) sia 1 click via footer da ogni altra pagina (crawl depth ≤2 garantita)
 
 ## Stile
 
@@ -179,10 +232,10 @@ stradanuovagenova/
 | `NETLIFY_BLOBS_TOKEN` | non in uso attivo nelle functions correnti | (riservato per Blobs futuri) |
 | `ADMIN_KEY` | non in uso attivo | (riservato) |
 
-## Stato (2026-05-12)
+## Stato (aggiornato 2026-05-12, post push live)
 
-✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 13** (28 pagine fisiche + AVIF + _headers)
+✅ Sito live con SSL su stradanuovagenova.com — **TUTTA la migrazione multi-pagina ora in produzione** (18 commit pushati 2026-05-12)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 13** (28 pagine fisiche + AVIF + _headers live)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
@@ -192,12 +245,15 @@ stradanuovagenova/
 ✅ Hub `/servizi/` + servizio `/servizi/consulenza-arredo-tessile/` (~1200 parole, Service JSON-LD valido)
 ✅ 3 verticali geo-luxe: palazzi-storici (1529) + casa-al-mare-liguria (1438) + tende-portofino-tigullio minimal (583)
 ✅ Hub `/magazine/` + 1° articolo "quanto costa ritappezzare un divano a Genova" (1567 parole, prezzi triangolati con WebSearch)
-✅ AVIF su tutte le immagini + `<picture>` wrapping con fallback WebP + `_headers` Netlify (cache immutable + security)
-✅ Smoke test 40/40 verde contro localhost
+✅ AVIF su tutte le immagini + `<picture>` wrapping con fallback WebP + `_headers` Netlify (cache immutable + security headers) — **tutto live**
+✅ Smoke test 40/40 verde contro https://stradanuovagenova.com
+✅ Meta `google-site-verification` inserito in home (commit `c9ab104`, live)
 
-🟡 **In corso:** Fasi 14 → 18 (GSC, a11y, magazine cadenza mensile, audit live Lighthouse) — vedi [PLAN.md](PLAN.md)
+✅ **Fase 13.6 chiusa:** nav 8 voci (Tessuti / Tendaggi / Carta da parati / Marchi / Magazine / Chi siamo / Contatti / Appuntamento-CTA) + footer 4 colonne (Catalogo / Specializzazioni / Negozio / NAP) propagati su 29 file. Pagine non più orfane: rivestimenti-murali, servizi, 3 verticali geo-luxe, palazzo-lomellino sono tutte raggiungibili in 1 click via footer da qualunque pagina.
 
-⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
+🟡 **Next: Fasi 14 → 18** (GSC submit sitemap + Bing + IndexNow, Lighthouse audit live, a11y, magazine cadenza mensile)
+
+⚠️ **Workflow attuale:** dopo il push del 2026-05-12 si torna a "commit + push frequenti" — migrazione chiusa, le piccole modifiche vanno live subito. La memoria `feedback_push_locale` resta valida per future migrazioni grosse
 
 ⚠️ **Da verificare/finire:**
 - `STRIPE_SECRET_KEY` configurata sulle env vars Netlify? Senza, il checkout torna 500
