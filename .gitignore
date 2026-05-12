@@ -5,3 +5,5 @@ node_modules/
 .env
 .env.local
 _test-pilot/
+.claude/
+PROMPT-RIPRESA.md
