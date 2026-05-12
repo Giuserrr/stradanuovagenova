@@ -27,8 +27,8 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 9.0 — hub /marchi/ | ✅ commit locale | 10 brand listati |
 | 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale (`1a24c73`) | 832 + 988 parole |
 | 9.2 — Dedar + Pierre Frey | ✅ commit locale (`ac115c8`) | 902 + 966 parole |
-| 9.3 — Designers Guild + Rubelli | ✅ commit locale | 914 + 1010 parole |
-| 9.4 — Sanderson/Morris + Zoffany | ⬜ | |
+| 9.3 — Designers Guild + Rubelli | ✅ commit locale (`ac1eac4`) | 914 + 1010 parole |
+| 9.4 — Sanderson/Morris + Zoffany | ✅ commit locale | 1050 + 944 parole |
 | 9.5 — Houlès + Etro Tessuti | ⬜ | |
 | 10 — servizi consulenza | ⬜ | |
 | 11 — verticali geo-luxe (3) | ⬜ | |
@@ -42,7 +42,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 18 — magazine cadenza mensile | ⬜ continuativo | |
 
 **Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 26/26 verde. **Sitemap:** 16 URL indicizzabili (esclude grazie noindex).
+**Smoke test localhost:** 28/28 verde. **Sitemap:** 18 URL indicizzabili (esclude grazie noindex).
 
 ---
 
@@ -370,10 +370,10 @@ stradanuovagenova/
 - [x] 9.3.1 — `marchi/designers-guild/index.html` (914 parole): brand di Tricia Guild dal 1970, total look colore (tessuto + carta + vernice + Christian Lacroix Maison). 4 applicazioni: stanze bambini, studi, camera padronale di rottura, Lacroix barocco-contemporaneo. Prezzi 60-220 €/m
 - [x] 9.3.2 — `marchi/rubelli/index.html` (1010 parole): manifattura veneziana dal 1858, referenza europea damaschi seta e soprarizzo. 3 nuclei (sete operate, velluti, contemporanei + Armani/Casa, Donghia). 3 applicazioni: boiserie palazzi, tendaggi importanti, ritappezzeria mobili antichi. Prezzi 100-2000 €/m, esempio budget boiserie completa
 
-### Fase 9.4 — Sanderson/Morris + Zoffany (1h)
+### Fase 9.4 — Sanderson/Morris + Zoffany (1h) ✅
 
-- [ ] 9.4.1 — `marchi/sanderson-morris-co/index.html`
-- [ ] 9.4.2 — `marchi/zoffany/index.html`
+- [x] 9.4.1 — `marchi/sanderson-morris-co/index.html` (1050 parole): copre due brand sister del Sanderson Design Group. Sanderson dal 1860 (country inglese, botanico) + Morris &amp; Co (archivio William Morris, Willow Bough/Strawberry Thief/Pimpernel, 200 anni dalla nascita). 4 applicazioni genovesi (studio/biblioteca, stanze bambini, camera padronale Morris parete-soggetto, dimore Ottocento Carignano). JSON-LD `about: [Brand, Brand]` array per copertura corretta dei due brand. Prezzi 60-300 €/m
+- [x] 9.4.2 — `marchi/zoffany/index.html` (944 parole): brand inglese più adatto a Genova del catalogo (palette terrosa desaturata, damaschi neoclassici, motivi persiani). 4 applicazioni (Rolli salone, sala da pranzo collina, studio/biblioteca, bagno rappresentanza). Sezione "carta o tessuto" per il coordinato. Prezzi 70-320 €/m
 
 ### Fase 9.5 — Houlès + Etro Tessuti (1h)
 
