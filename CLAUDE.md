@@ -9,7 +9,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 ## Stack (aggiornato 2026-05-12)
 
-**Migrazione SEO in corso (Fasi 0-12 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 28 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-12 ancora locali in attesa del push finale.
+**Migrazione SEO in corso (Fasi 0-13 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 28 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-13 ancora locali in attesa del push finale.
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -74,7 +74,8 @@ stradanuovagenova/
 │   ├── build-magazine.js               (stub Fase 12)
 │   └── smoke-test.js
 ├── magazine/{content,articles}/        ← cartelle placeholder Decap/MD pipeline (rimandata Fase 18)
-├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp 1920x1080 / 1200x800)
+├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp + avif, 1920x1080 / 1200x800)
+├── _headers                            ← Netlify cache + security headers
 └── netlify/functions/
     ├── create-checkout.js
     └── request-appointment.js
@@ -123,6 +124,8 @@ stradanuovagenova/
 **Fase 11 chiusa:** 3 verticali geo-luxe online in locale. `tessuti-palazzi-storici-genova` (1529 parole, asset autorità più forte del sito insieme a `palazzo-lomellino`). `tessuti-casa-al-mare-liguria` (1438 parole, taglio tecnico su sole/salsedine/umidità + distinzione Ponente/Centro/Levante). `tessuti-tende-portofino-tigullio` (583 parole, canale non investito ma presidiato per query).
 
 **Fase 12 chiusa (minimal):** hub `/magazine/` + 1° articolo pillar `quanto-costa-ritappezzare-divano-genova` (1567 parole, alto intent commerciale, prezzi triangolati con WebSearch nazionale/regionale, scenari A/B/C concreti, disclaimer onesto su cosa NON facciamo direttamente). Build script Markdown→HTML rimandato a Fase 18 (cadenza mensile). Tono asciutto richiesto esplicitamente da Giuseppe ("non scrivere come AI").
+
+**Fase 13 chiusa (parziale):** AVIF generati con ImageMagick per tutte e 5 le immagini (hero 263→136 KB, materie 137→112 KB, palazzo-lomellino 107→86 KB, drop 162→129 KB, famiglia 111→90 KB). `<picture>` wrapping su 13 `<img>` con fallback WebP. Preload AVIF con `type="image/avif"` su 8 hero LCP. `_headers` Netlify: cache immutable 1 anno su `/assets/*` e `/img/*`, security headers globali (X-Content-Type-Options, X-Frame-Options SAMEORIGIN per compat Decap Identity, Referrer-Policy, Permissions-Policy minimal, HSTS 2 anni). **NO CSP** ora (rompe Stripe/Decap/Identity senza test). **PSI + Lighthouse rimandati a post-push live.**
 
 ## Drop / Stripe
 
@@ -179,7 +182,7 @@ stradanuovagenova/
 ## Stato (2026-05-12)
 
 ✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 12** (28 pagine fisiche)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 13** (28 pagine fisiche + AVIF + _headers)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
@@ -189,9 +192,10 @@ stradanuovagenova/
 ✅ Hub `/servizi/` + servizio `/servizi/consulenza-arredo-tessile/` (~1200 parole, Service JSON-LD valido)
 ✅ 3 verticali geo-luxe: palazzi-storici (1529) + casa-al-mare-liguria (1438) + tende-portofino-tigullio minimal (583)
 ✅ Hub `/magazine/` + 1° articolo "quanto costa ritappezzare un divano a Genova" (1567 parole, prezzi triangolati con WebSearch)
-✅ Smoke test 37/37 verde contro localhost
+✅ AVIF su tutte le immagini + `<picture>` wrapping con fallback WebP + `_headers` Netlify (cache immutable + security)
+✅ Smoke test 40/40 verde contro localhost
 
-🟡 **In corso:** Fasi 13 → 18 (performance, GSC, a11y, magazine cadenza mensile) — vedi [PLAN.md](PLAN.md)
+🟡 **In corso:** Fasi 14 → 18 (GSC, a11y, magazine cadenza mensile, audit live Lighthouse) — vedi [PLAN.md](PLAN.md)
 
 ⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 

@@ -46,6 +46,9 @@ const URLS = [
   { path: '/assets/fonts/inter-400.woff2',  expected: 200, note: 'font 400' },
   { path: '/assets/fonts/inter-600.woff2',  expected: 200, note: 'font 600' },
   { path: '/assets/js/nav-toggle.js',       expected: 200, note: 'nav-toggle' },
+  { path: '/img/hero.avif',                 expected: 200, note: 'hero AVIF (LCP home)' },
+  { path: '/img/materie.avif',              expected: 200, note: 'materie AVIF' },
+  { path: '/img/palazzo-lomellino.avif',    expected: 200, note: 'palazzo AVIF' },
   { path: '/404.html',        expected: 200, note: '404 reale (servito 200 se richiesto direttamente)' },
   { path: '/sicuramentenonesiste',          expected: 404, note: 'fallback 404 (sito statico)' }
 ];

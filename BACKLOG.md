@@ -68,7 +68,7 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 10** servizi consulenza: hub `/servizi/` + `/servizi/consulenza-arredo-tessile/` (locale)
 - [x] **Fase 11** verticali geo-luxe: palazzi-storici-genova (1529) + casa-al-mare-liguria (1438) + tende-portofino-tigullio minimal (583) (locale)
 - [x] **Fase 12** magazine setup minimal + 1° articolo "quanto costa ritappezzare un divano a Genova" (1567 parole). Build script Markdown→HTML rimandato a Fase 18 (cadenza mensile)
-- [ ] Fase 13 performance pass (AVIF, headers, CWV)
+- [x] **Fase 13** performance pass (parziale lavorabile in locale): AVIF generati per tutte le immagini (-18%/-48% vs WebP), `<picture>` wrapping su 13 img, preload AVIF su 8 hero LCP, `_headers` Netlify con cache immutable + security headers. PageSpeed Insights / Lighthouse rimandati a post-push live (richiedono URL pubblico)
 - [ ] Fase 14 GSC + Bing + IndexNow + gsc.js
 - [ ] Fase 17 a11y full pass
 

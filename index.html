@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Strada Nuova">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="preload" href="/img/hero.webp" as="image" fetchpriority="high">
+<link rel="preload" href="/img/hero.avif" as="image" type="image/avif" fetchpriority="high">
 <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/base.css">
@@ -233,12 +233,15 @@
 
   <!-- HERO -->
   <section class="hero" aria-label="Hero">
-    <img class="hero-img"
-         src="/img/hero.webp"
-         width="1920" height="1080"
-         alt="Strada Nuova — showroom di tessuti in Palazzo Lomellino, Via Garibaldi 7/a, Genova"
-         fetchpriority="high"
-         decoding="async">
+    <picture>
+      <source srcset="/img/hero.avif" type="image/avif">
+      <img class="hero-img"
+           src="/img/hero.webp"
+           width="1920" height="1080"
+           alt="Strada Nuova — showroom di tessuti in Palazzo Lomellino, Via Garibaldi 7/a, Genova"
+           fetchpriority="high"
+           decoding="async">
+    </picture>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-content">
       <h1 class="hero-title">Strada<br><span>Nuova</span></h1>

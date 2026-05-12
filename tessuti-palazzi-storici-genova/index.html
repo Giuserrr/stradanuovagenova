@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Strada Nuova">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="preload" href="/img/palazzo-lomellino.webp" as="image" fetchpriority="high">
+<link rel="preload" href="/img/palazzo-lomellino.avif" as="image" type="image/avif" fetchpriority="high">
 <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/base.css">
@@ -149,7 +149,10 @@
 </nav>
 
 <div class="pillar-hero">
-  <img src="/img/palazzo-lomellino.webp" alt="Palazzo Lomellino di Strada Nuova, Via Garibaldi 7/a, Genova" width="1200" height="800" fetchpriority="high">
+  <picture>
+    <source srcset="/img/palazzo-lomellino.avif" type="image/avif">
+    <img src="/img/palazzo-lomellino.webp" alt="Palazzo Lomellino di Strada Nuova, Via Garibaldi 7/a, Genova" width="1200" height="800" fetchpriority="high">
+  </picture>
 </div>
 
 <main id="main">

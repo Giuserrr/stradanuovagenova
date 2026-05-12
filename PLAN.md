@@ -33,7 +33,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 10 — servizi consulenza | ✅ locale | hub `/servizi/` + consulenza-arredo-tessile |
 | 11 — verticali geo-luxe (3) | ✅ locale | palazzi storici (1529) + casa al mare (1438) + Tigullio (583) |
 | 12 — magazine setup + 1° articolo | ✅ locale | hub `/magazine/` + articolo ritappezzeria 1567 parole. Build script Markdown rimandato |
-| 13 — performance pass | ⬜ | AVIF, headers, CWV |
+| 13 — performance pass | ✅ locale (parziale) | AVIF + picture wrap + _headers fatti. Lighthouse/PSI a post-push |
 | 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
 | 14 — GSC + Bing + IndexNow | ⬜ | |
 | 15 — GBP aggiornamenti | ⬜ lato Giuseppe | |
@@ -444,13 +444,13 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 13.1 — PageSpeed Insights su 5 pagine campione (home, chi-siamo, tessuti-genova, marchi/elitis, magazine/articolo) — target LCP < 2.5s mobile, INP < 200ms, CLS < 0.1
-- [ ] 13.2 — `_headers` Netlify: cache-control immutable per `/assets/*`, `/img/*`, `/fonts/*`. Security headers (CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy)
-- [ ] 13.3 — Verifica peso hero ottimizzato (target < 80KB AVIF, < 120KB WebP)
-- [ ] 13.4 — Verifica `≤1 fetchpriority="high"` per pagina (sul vero LCP, mai logo)
-- [ ] 13.5 — Lighthouse SEO + Best Practices ≥ 95 su 5 pagine campione
+- [⏭] 13.1 — PageSpeed Insights su 5 pagine campione — **rimandata a post-push live** (richiede URL pubblico, attualmente Fasi 3-13 sono in locale)
+- [x] 13.2 — `_headers` Netlify: cache-control immutable su `/assets/*` e `/img/*` (max-age 1 anno). Cache 1h su sitemap/robots/llms. Security headers globali: X-Content-Type-Options nosniff, X-Frame-Options SAMEORIGIN (compatibile con Netlify Identity widget Decap CMS), Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy minimal restrittiva (geolocation/camera/microphone disabilitati, payment=self), HSTS 2 anni. **NO CSP** per ora (alta probabilità di rompere Stripe/Decap/Identity, va testato con audit dedicato)
+- [x] 13.3 — Peso immagini: AVIF generati per tutte e 5 le immagini con ImageMagick q=45-55. Risparmi: hero 263→136 KB (-48%), materie 137→112 KB (-18%), palazzo-lomellino 107→86 KB (-20%), drop 162→129 KB (-20%), famiglia 111→90 KB (-19%). **Hero a 136 KB sopra target PLAN <80 KB** — accettato come trade-off su LCP fotografico 1920x1080, comunque -48% vs WebP, ulteriore compressione richiederebbe ridimensionamento con perdita qualità visibile
+- [x] 13.4 — `<picture>` wrapping su 13 `<img>` (home + 4 pillar + hub marchi + 3 verticali + 1 magazine + 4 chi-siamo). Preload AVIF con `type="image/avif"` su 8 hero LCP. Verifica fetchpriority="high" = sempre ≤1 asset per pagina (preload + img stesso asset)
+- [⏭] 13.5 — Lighthouse SEO + Best Practices ≥ 95 — **rimandata a post-push live** (richiede URL pubblico)
 
-**DoD:** CWV pass, Lighthouse SEO ≥ 95 ovunque.
+**DoD parziale raggiunto:** AVIF live, _headers configurati, picture pattern uniforme. **Da fare a push live:** PSI + Lighthouse audit + eventuale fix LCP se hero non scende sotto soglia.
 
 ---
 
