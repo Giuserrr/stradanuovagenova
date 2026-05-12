@@ -1,129 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Strada Nuova — Genova</title>
-<meta name="description" content="Strada Nuova. Tessuti, tendaggi, design. Via Garibaldi 7/a, Genova.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strada Nuova — Tessuti e tendaggi a Genova</title>
+<meta name="description" content="Showroom di tessuti d'arredamento, tendaggi e carta da parati in Via Garibaldi 7/a, Palazzo Lomellino. Dedar, Pierre Frey, Élitis, Cole &amp; Son. Su appuntamento.">
+<link rel="canonical" href="https://stradanuovagenova.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#1a1a1a">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Strada Nuova — Tessuti e tendaggi a Genova">
+<meta property="og:description" content="Showroom di tessuti d'arredamento in Palazzo Lomellino, Via Garibaldi 7/a, Genova.">
+<meta property="og:url" content="https://stradanuovagenova.com/">
+<meta property="og:image" content="https://stradanuovagenova.com/img/hero.webp">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Strada Nuova">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="/img/hero.webp" as="image" fetchpriority="high">
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/base.css">
+
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg: #1a1a1a;
-  --bg-card: #242424;
-  --text: #f0f0f0;
-  --text-dim: #888;
-  --accent: #e8531e;
-  --accent-hover: #ff6a35;
-  --border: #333;
-  --max-w: 1200px;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-a { color: inherit; text-decoration: none; }
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(26, 26, 26, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active { color: var(--text); }
-
-/* MOBILE NAV */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 24px;
-  cursor: pointer;
-}
+/* ====== HOME page-specific ====== */
 
 /* HERO */
 .hero {
+  position: relative;
   min-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 40px;
-  padding-top: 80px;
-  position: relative;
-  overflow: hidden;
 }
-
-.hero-bg {
+.hero-img {
   position: absolute;
   inset: 0;
-  background: url('/img/hero.webp') center center / cover no-repeat;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
-
-.hero-bg .placeholder-label {
-  font-size: 14px;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, var(--bg) 0%, transparent 60%);
+  z-index: 1;
 }
-
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: var(--max-w);
   width: 100%;
   margin: 0 auto;
+  padding: 80px 40px 40px;
 }
-
 .hero-title {
   font-size: clamp(48px, 8vw, 96px);
   font-weight: 700;
@@ -131,9 +66,7 @@ nav {
   letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
-
 .hero-title span { color: var(--accent); }
-
 .hero-sub {
   font-size: 14px;
   color: var(--text-dim);
@@ -142,34 +75,24 @@ nav {
   margin-bottom: 48px;
 }
 
-/* SECTION */
-.section {
-  padding: 120px 40px;
+/* INTRO */
+.home-intro {
   max-width: var(--max-w);
   margin: 0 auto;
+  padding: 100px 40px 40px;
 }
-
-.section-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 24px;
+.home-intro p {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 760px;
 }
-
-.section-title {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-}
-
-.section-text {
-  font-size: 16px;
+.home-intro p + p {
+  margin-top: 20px;
   color: var(--text-dim);
-  max-width: 560px;
+  font-size: 16px;
   line-height: 1.7;
+  max-width: 680px;
 }
 
 /* DROP GRID */
@@ -179,57 +102,55 @@ nav {
   gap: 2px;
   margin-top: 48px;
 }
-
 .drop-card {
   background: var(--bg-card);
   position: relative;
   overflow: hidden;
   transition: background 0.2s;
 }
-
 .drop-card:hover { background: #2a2a2a; }
-
 .drop-card-img {
   aspect-ratio: 1 / 1;
   background: #2e2e2e;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: cover;
+  background-position: center;
 }
-
 .drop-card-img .placeholder-label {
   font-size: 48px;
   font-weight: 700;
   color: #3a3a3a;
 }
-
 .drop-card-info {
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
-
 .drop-card-name {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 4px;
 }
-
 .drop-card-detail {
   font-size: 12px;
   color: var(--text-dim);
 }
-
 .drop-card-price {
   font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
 }
-
+.drop-card-stock {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 0 20px 16px;
+}
 .drop-card-status {
   display: inline-block;
-  margin-top: 12px;
   padding: 8px 0;
   width: 100%;
   text-align: center;
@@ -240,29 +161,18 @@ nav {
   border: none;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: inherit;
 }
-
 .drop-card-status.available {
   background: var(--accent);
   color: #fff;
 }
-
-.drop-card-status.available:hover {
-  background: var(--accent-hover);
-}
-
+.drop-card-status.available:hover { background: var(--accent-hover); }
 .drop-card-status.soldout {
   background: transparent;
   color: var(--text-dim);
   border: 1px solid var(--border);
   cursor: default;
-}
-
-.drop-card-stock {
-  font-size: 11px;
-  color: var(--text-dim);
-  text-align: center;
-  padding: 0 20px 16px;
 }
 
 /* CONTATTI */
@@ -272,7 +182,6 @@ nav {
   gap: 60px;
   margin-top: 48px;
 }
-
 .contatti-block h3 {
   font-size: 12px;
   font-weight: 600;
@@ -281,1001 +190,281 @@ nav {
   color: var(--text-dim);
   margin-bottom: 12px;
 }
-
 .contatti-block p {
   font-size: 16px;
   line-height: 1.8;
 }
-
 .contatti-block a {
   color: var(--accent);
   transition: color 0.2s;
 }
-
 .contatti-block a:hover { color: var(--accent-hover); }
 
-/* FOOTER */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: var(--text-dim);
-}
-
-footer a {
-  color: var(--text-dim);
-  transition: color 0.2s;
-}
-
-footer a:hover { color: var(--text); }
-
-.footer-social {
-  display: flex;
-  gap: 20px;
-}
-
-/* CHI SIAMO PAGE */
-.chisiamo-page {
-  padding-top: 120px;
-  padding-bottom: 80px;
-}
-
-.chisiamo-hero {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 40px 80px;
-}
-
-.chisiamo-hero .section-label { margin-bottom: 24px; }
-
-.chisiamo-hero h1 {
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.chisiamo-hero h1 span { color: var(--accent); }
-
-.chisiamo-intro {
-  font-size: 18px;
-  color: var(--text-dim);
-  max-width: 600px;
-  line-height: 1.7;
-}
-
-.chisiamo-block {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 500px;
-}
-
-.chisiamo-block.reverse .chisiamo-block-img { order: 2; }
-.chisiamo-block.reverse .chisiamo-block-text { order: 1; }
-
-.chisiamo-block-img {
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-}
-
-.chisiamo-block-img .placeholder-label {
-  font-size: 14px;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.chisiamo-block-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px;
-}
-
-.chisiamo-block-text h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
-}
-
-.chisiamo-block-text p {
-  font-size: 16px;
-  color: var(--text-dim);
-  line-height: 1.8;
-  max-width: 480px;
-}
-
 @media (max-width: 768px) {
-  .chisiamo-block { grid-template-columns: 1fr; }
-  .chisiamo-block.reverse .chisiamo-block-img { order: 1; }
-  .chisiamo-block.reverse .chisiamo-block-text { order: 2; }
-  .chisiamo-block-text { padding: 40px 20px; }
-  .chisiamo-hero { padding: 0 20px 60px; }
-}
-
-/* APPUNTAMENTO PAGE */
-.appuntamento-page {
-  padding-top: 120px;
-  padding-bottom: 80px;
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.appt-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  margin-top: 48px;
-}
-
-.appt-form label {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-  margin-top: 20px;
-}
-
-.appt-form label:first-child { margin-top: 0; }
-
-.appt-form input,
-.appt-form textarea {
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-  border-radius: 0;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.appt-form input:focus,
-.appt-form textarea:focus {
-  border-color: var(--accent);
-}
-
-.appt-form textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.appt-form input::placeholder,
-.appt-form textarea::placeholder {
-  color: #555;
-}
-
-/* CALENDAR PICKER */
-.cal-container { margin-top: 0; }
-
-.cal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.cal-header h3 {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.cal-header button {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: border-color 0.2s;
-}
-
-.cal-header button:hover { border-color: var(--accent); }
-
-.cal-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-  margin-bottom: 2px;
-}
-
-.cal-weekdays span {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-dim);
-  padding: 8px 0;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.cal-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-}
-
-.cal-day {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  background: var(--bg-card);
-  cursor: default;
-  transition: all 0.2s;
-  border: 1px solid transparent;
-}
-
-.cal-day.empty { background: transparent; }
-.cal-day.disabled { color: #444; }
-.cal-day.available { cursor: pointer; color: var(--text); }
-.cal-day.available:hover { border-color: var(--accent); }
-.cal-day.selected { background: var(--accent); color: #fff; }
-
-/* TIME SLOTS */
-.time-slots {
-  margin-top: 16px;
-  display: none;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.time-slots.visible { display: flex; }
-
-.time-slot {
-  padding: 8px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-
-.time-slot:hover { border-color: var(--accent); }
-.time-slot.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-.appt-selected-datetime {
-  margin-top: 16px;
-  font-size: 14px;
-  color: var(--accent);
-  min-height: 20px;
-}
-
-.appt-submit {
-  margin-top: 32px;
-  padding: 14px 0;
-  width: 100%;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.appt-submit:hover { background: var(--accent-hover); }
-.appt-submit:disabled { background: #444; cursor: default; }
-
-.appt-msg {
-  margin-top: 16px;
-  font-size: 14px;
-  min-height: 20px;
-}
-
-.appt-msg.success { color: #4caf50; }
-.appt-msg.error { color: #e8531e; }
-
-@media (max-width: 768px) {
-  .appt-form-grid { grid-template-columns: 1fr; gap: 40px; }
-  .appuntamento-page { padding-left: 20px; padding-right: 20px; }
-}
-
-/* GRAZIE PAGE */
-.grazie-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px;
-}
-
-.grazie-page .check {
-  width: 64px;
-  height: 64px;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  color: var(--accent);
-  margin-bottom: 32px;
-}
-
-.grazie-page h1 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.grazie-page p {
-  color: var(--text-dim);
-  font-size: 16px;
-  max-width: 400px;
-  margin-bottom: 32px;
-}
-
-.grazie-page a {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  nav { padding: 16px 20px; }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--bg);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-    z-index: 200;
-    padding: 0;
-    margin: 0;
-    display: none !important;
-  }
-  .nav-links.open {
-    display: flex !important;
-  }
-  .nav-links.open a {
-    font-size: 20px;
-    color: var(--text);
-    letter-spacing: 0.15em;
-  }
-  .nav-toggle {
-    display: block;
-    z-index: 300;
-    font-size: 28px;
-  }
-
-  .hero { padding: 20px; padding-top: 80px; }
-  .section { padding: 80px 20px; }
-
+  .home-intro { padding: 80px 20px 20px; }
+  .hero-content { padding: 80px 20px 20px; }
   .drop-grid { grid-template-columns: repeat(2, 1fr); }
-
-  .contatti-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  footer {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-    padding: 32px 20px;
-  }
+  .contatti-grid { grid-template-columns: 1fr; gap: 40px; }
 }
-
 @media (max-width: 480px) {
   .drop-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">Strada Nuova</a>
-  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+<!-- ====== NAV ====== -->
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<nav class="site-nav" aria-label="Navigazione principale">
+  <a href="/" class="nav-logo" aria-current="page">Strada Nuova</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Apri menu">
+    <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+  </button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="/chi-siamo" onclick="closeMenu()">Chi siamo</a></li>
-    <li><a href="#drop" onclick="closeMenu()">Drop</a></li>
-    <li><a href="/appuntamento" onclick="closeMenu()">Appuntamento</a></li>
-    <li><a href="#contatti" onclick="closeMenu()">Contatti</a></li>
+    <li><a href="/chi-siamo/">Chi siamo</a></li>
+    <li><a href="#drop">Drop</a></li>
+    <li><a href="/appuntamento/">Appuntamento</a></li>
+    <li><a href="#contatti">Contatti</a></li>
     <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
   </ul>
 </nav>
 
-<!-- PAGES CONTAINER -->
-<div id="app">
+<main id="main">
 
-  <!-- MAIN PAGE -->
-  <div id="page-home">
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">Strada<br><span>Nuova</span></h1>
-        <p class="hero-sub">Via Garibaldi 7/a &mdash; Genova</p>
-      </div>
-    </section>
-
-    <!-- DROP -->
-    <section class="section" id="drop">
-      <span class="section-label">Drop</span>
-      <h2 class="section-title">Edizioni limitate</h2>
-      <p class="section-text">Pezzi unici e serie numerate. Quando finiscono, finiscono.</p>
-
-      <div class="drop-grid" id="dropGrid">
-        <!-- Products injected by JS -->
-      </div>
-    </section>
-
-    <!-- CONTATTI -->
-    <section class="section" id="contatti">
-      <span class="section-label">Contatti</span>
-      <h2 class="section-title">Vieni a trovarci</h2>
-
-      <div class="contatti-grid">
-        <div class="contatti-block">
-          <h3>Dove</h3>
-          <p>
-            Via Garibaldi 7/a<br>
-            Palazzo Lomellino<br>
-            16124 Genova
-          </p>
-        </div>
-        <div class="contatti-block">
-          <h3>Quando</h3>
-          <p>
-            Mar&ndash;Sab 10:00&ndash;12:30 / 16:00&ndash;19:30<br>
-            Lun e Dom chiuso
-          </p>
-        </div>
-        <div class="contatti-block">
-          <h3>Contatti</h3>
-          <p>
-            <a href="mailto:info@stradanuovagenova.com">info@stradanuovagenova.com</a><br>
-            <a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">@stradanuova</a>
-          </p>
-        </div>
-        <div class="contatti-block">
-          <h3>Il negozio</h3>
-          <p>
-            Tessuti, tendaggi, interior design.<br>
-            Palazzo Lomellino, Via Garibaldi.<br>
-            Patrimonio UNESCO dal 2006.
-          </p>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /page-home -->
-
-  <!-- CHI SIAMO PAGE -->
-  <div id="page-chisiamo" style="display:none;">
-    <div class="chisiamo-page">
-
-      <div class="chisiamo-hero">
-        <span class="section-label">Chi siamo</span>
-        <h1>Tre generazioni<br>in <span>Strada Nuova</span></h1>
-        <p class="chisiamo-intro">Un negozio di tessuti dentro un palazzo UNESCO. Famiglia, materia, progetto.</p>
-      </div>
-
-      <div class="chisiamo-block">
-        <div class="chisiamo-block-img" style="background:url('/img/palazzo-lomellino.webp') center center / cover no-repeat;">
-        </div>
-        <div class="chisiamo-block-text">
-          <h2>Palazzo Lomellino</h2>
-          <p>Via Garibaldi 7/a non è un indirizzo qualunque. È un palazzo dei Rolli, patrimonio UNESCO dal 2006. Ci siamo dentro dal primo giorno e non abbiamo intenzione di spostarci. I soffitti affrescati e i tessuti contemporanei convivono senza problemi — anzi, è il punto.</p>
-        </div>
-      </div>
-
-      <div class="chisiamo-block reverse">
-        <div class="chisiamo-block-img" style="background:url('/img/famiglia.webp') center center / cover no-repeat;">
-        </div>
-        <div class="chisiamo-block-text">
-          <h2>La famiglia</h2>
-          <p>L'attività nasce con il padre di Bruno, passa per Nervi e Piccapietra, e nel 2017 arriva in Strada Nuova. Oggi le redini sono in mano a Giulia Orlandini, ultima generazione, supportata dall'eclettica e instancabile Brunella. Non siamo un brand costruito a tavolino. Siamo un negozio di famiglia che ha scelto di stare in un posto importante.</p>
-        </div>
-      </div>
-
-      <div class="chisiamo-block">
-        <div class="chisiamo-block-img" style="background:url('/img/materie.webp') center center / cover no-repeat;">
-        </div>
-        <div class="chisiamo-block-text">
-          <h2>La materia</h2>
-          <p>Dedar, Pierre Frey, Designers Guild, Etro. Lavoriamo con chi fa tessuti seri. Tendaggi, rivestimenti, progetti su misura. Puoi venire con il tuo architetto o usare i nostri. Puoi anche solo passare a prendere un caffè — il negozio funziona così.</p>
-        </div>
-      </div>
-
-      <div class="chisiamo-block reverse">
-        <div class="chisiamo-block-img" style="background:url('/img/drop.webp') center center / cover no-repeat;">
-        </div>
-        <div class="chisiamo-block-text">
-          <h2>I drop</h2>
-          <p>Edizioni limitate di oggetti d'arredo realizzati con i nostri tessuti. Pochi pezzi, numerati, quando finiscono finiscono. Il primo progetto sono i pouf. Non è e-commerce — è un modo diverso di far uscire le cose dal negozio.</p>
-        </div>
-      </div>
-
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <img class="hero-img"
+         src="/img/hero.webp"
+         width="1920" height="1080"
+         alt="Strada Nuova — showroom di tessuti in Palazzo Lomellino, Via Garibaldi 7/a, Genova"
+         fetchpriority="high"
+         decoding="async">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Strada<br><span>Nuova</span></h1>
+      <p class="hero-sub">Via Garibaldi 7/a &mdash; Genova</p>
     </div>
-  </div>
+  </section>
 
-  <!-- APPUNTAMENTO PAGE -->
-  <div id="page-appuntamento" style="display:none;">
-    <div class="appuntamento-page">
-      <span class="section-label">Appuntamento</span>
-      <h2 class="section-title">Prenota una visita</h2>
-      <p class="section-text">Scegli data e orario. Ti confermeremo via email.</p>
+  <!-- INTRO -->
+  <section class="home-intro" aria-label="Introduzione">
+    <p>Tessuti, tendaggi e carta da parati a Genova. Showroom in Palazzo Lomellino, Via Garibaldi 7/a — patrimonio UNESCO dei Rolli.</p>
+    <p>Lavoriamo con Dedar, Pierre Frey, Élitis, Cole &amp; Son, Designers Guild, Rubelli, Sanderson, Morris &amp; Co, Zoffany, Houlès, Etro Tessuti. Vendita a privati e progettisti, su appuntamento.</p>
+  </section>
 
-      <div class="appt-form-grid">
-        <div class="appt-form">
-          <label for="apptName">Nome e cognome</label>
-          <input type="text" id="apptName" placeholder="Mario Rossi">
+  <!-- DROP -->
+  <section class="section" id="drop" aria-labelledby="drop-title">
+    <span class="section-label">Drop</span>
+    <h2 class="section-title" id="drop-title">Edizioni limitate</h2>
+    <p class="section-text">Pezzi unici e serie numerate realizzati con i nostri tessuti. Quando finiscono, finiscono.</p>
 
-          <label for="apptEmail">Email</label>
-          <input type="email" id="apptEmail" placeholder="mario@esempio.com">
-
-          <label for="apptPhone">Telefono</label>
-          <input type="tel" id="apptPhone" placeholder="+39 333 1234567">
-
-          <label for="apptMsg">Messaggio (facoltativo)</label>
-          <textarea id="apptMsg" placeholder="Di cosa hai bisogno?"></textarea>
-
-          <button class="appt-submit" id="apptSubmit" onclick="submitAppointment()" disabled>Seleziona data e orario</button>
-          <div class="appt-msg" id="apptFeedback"></div>
-        </div>
-
-        <div class="cal-container">
-          <div class="cal-header">
-            <button onclick="calPrev()">&larr;</button>
-            <h3 id="calTitle"></h3>
-            <button onclick="calNext()">&rarr;</button>
+    <div class="drop-grid" id="dropGrid">
+      <!-- BUILD:DROP_GRID:START -->
+      <article class="drop-card">
+        <div class="drop-card-img" role="img" aria-label="Pouf N.01"><span class="placeholder-label">01</span></div>
+        <div class="drop-card-info">
+          <div>
+            <h3 class="drop-card-name">Pouf N.01</h3>
+            <p class="drop-card-detail">Tessuto Dedar / Edizione di 12</p>
           </div>
-          <div class="cal-weekdays">
-            <span>Lun</span><span>Mar</span><span>Mer</span><span>Gio</span><span>Ven</span><span>Sab</span><span>Dom</span>
-          </div>
-          <div class="cal-days" id="calDays"></div>
-          <div class="time-slots" id="timeSlots"></div>
-          <div class="appt-selected-datetime" id="apptDateTime"></div>
+          <div class="drop-card-price">&euro;380</div>
         </div>
+        <div class="drop-card-stock">12 disponibili</div>
+        <button type="button" class="drop-card-status available" data-product-id="pouf-01">Acquista</button>
+      </article>
+      <article class="drop-card">
+        <div class="drop-card-img" role="img" aria-label="Pouf N.02"><span class="placeholder-label">02</span></div>
+        <div class="drop-card-info">
+          <div>
+            <h3 class="drop-card-name">Pouf N.02</h3>
+            <p class="drop-card-detail">Tessuto Pierre Frey / Edizione di 8</p>
+          </div>
+          <div class="drop-card-price">&euro;420</div>
+        </div>
+        <div class="drop-card-stock">8 disponibili</div>
+        <button type="button" class="drop-card-status available" data-product-id="pouf-02">Acquista</button>
+      </article>
+      <article class="drop-card">
+        <div class="drop-card-img" role="img" aria-label="Pouf N.03"><span class="placeholder-label">03</span></div>
+        <div class="drop-card-info">
+          <div>
+            <h3 class="drop-card-name">Pouf N.03</h3>
+            <p class="drop-card-detail">Velluto Designers Guild / Edizione di 6</p>
+          </div>
+          <div class="drop-card-price">&euro;450</div>
+        </div>
+        <div class="drop-card-stock">6 disponibili</div>
+        <button type="button" class="drop-card-status available" data-product-id="pouf-03">Acquista</button>
+      </article>
+      <article class="drop-card">
+        <div class="drop-card-img" role="img" aria-label="Pouf N.04"><span class="placeholder-label">04</span></div>
+        <div class="drop-card-info">
+          <div>
+            <h3 class="drop-card-name">Pouf N.04</h3>
+            <p class="drop-card-detail">Lino naturale / Edizione di 10</p>
+          </div>
+          <div class="drop-card-price">&euro;350</div>
+        </div>
+        <button type="button" class="drop-card-status soldout" disabled>Esaurito</button>
+      </article>
+      <article class="drop-card">
+        <div class="drop-card-img" role="img" aria-label="Pouf N.05"><span class="placeholder-label">05</span></div>
+        <div class="drop-card-info">
+          <div>
+            <h3 class="drop-card-name">Pouf N.05</h3>
+            <p class="drop-card-detail">Jacquard Etro / Edizione di 4</p>
+          </div>
+          <div class="drop-card-price">&euro;520</div>
+        </div>
+        <button type="button" class="drop-card-status soldout" disabled>Esaurito</button>
+      </article>
+      <article class="drop-card">
+        <div class="drop-card-img" role="img" aria-label="Pouf N.06"><span class="placeholder-label">06</span></div>
+        <div class="drop-card-info">
+          <div>
+            <h3 class="drop-card-name">Pouf N.06</h3>
+            <p class="drop-card-detail">Bouclé / Edizione di 8</p>
+          </div>
+          <div class="drop-card-price">&euro;400</div>
+        </div>
+        <button type="button" class="drop-card-status soldout" disabled>Esaurito</button>
+      </article>
+      <!-- BUILD:DROP_GRID:END -->
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section class="section" id="contatti" aria-labelledby="contatti-title">
+    <span class="section-label">Contatti</span>
+    <h2 class="section-title" id="contatti-title">Vieni a trovarci</h2>
+
+    <div class="contatti-grid">
+      <div class="contatti-block">
+        <h3>Dove</h3>
+        <p>
+          Via Garibaldi 7/a<br>
+          Palazzo Lomellino<br>
+          16124 Genova
+        </p>
+      </div>
+      <div class="contatti-block">
+        <h3>Quando</h3>
+        <p>
+          Mar&ndash;Sab 10:00&ndash;12:30 / 16:00&ndash;19:30<br>
+          Lun e Dom chiuso
+        </p>
+      </div>
+      <div class="contatti-block">
+        <h3>Telefono ed email</h3>
+        <p>
+          <a href="tel:+390108956256">010 895 6256</a><br>
+          <a href="mailto:stradanuova.7@gmail.com">stradanuova.7@gmail.com</a>
+        </p>
+      </div>
+      <div class="contatti-block">
+        <h3>Social</h3>
+        <p>
+          <a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram @stradanuova</a><br>
+          <a href="https://www.facebook.com/stradanuova.7/" target="_blank" rel="noopener">Facebook</a>
+        </p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- THANK YOU PAGE -->
-  <div id="page-grazie" style="display:none;">
-    <section class="grazie-page">
-      <div class="check">&#10003;</div>
-      <h1>Ordine confermato</h1>
-      <p>Riceverai una mail di conferma. Il ritiro avviene in negozio in Via Garibaldi 7/a.</p>
-      <a href="/">Torna alla home</a>
-    </section>
-  </div>
+</main>
 
-</div><!-- /app -->
-
-<!-- FOOTER -->
-<footer>
-  <span>&copy; 2026 Strada Nuova &mdash; Via Garibaldi 7/a, Genova</span>
+<!-- ====== FOOTER ====== -->
+<footer class="site-footer">
+  <span>&copy; 2026 Strada Nuova &mdash; Via Garibaldi 7/a, Palazzo Lomellino, Genova</span>
   <div class="footer-social">
+    <a href="/contatti/">Contatti</a>
     <a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.facebook.com/stradanuova.7/" target="_blank" rel="noopener">Facebook</a>
   </div>
 </footer>
 
-<script>
-// === PRODUCTS DATA (loaded from CMS-managed JSON) ===
-let PRODUCTS = [];
-
-async function loadProducts() {
-  try {
-    const res = await fetch('/_data/products.json?t=' + Date.now());
-    const data = await res.json();
-    PRODUCTS = data.products || [];
-  } catch (e) {
-    console.error('Errore caricamento prodotti:', e);
-    PRODUCTS = [];
-  }
-  renderProducts();
-}
-
-// === RENDER DROP PRODUCTS ===
-function renderProducts() {
-  const grid = document.getElementById('dropGrid');
-  if (!PRODUCTS.length) {
-    grid.innerHTML = '<p style="color:var(--text-dim);grid-column:1/-1;">Nessun prodotto disponibile al momento.</p>';
-    return;
-  }
-  grid.innerHTML = PRODUCTS.map((p, i) => `
-    <div class="drop-card">
-      <div class="drop-card-img" ${p.image ? `style="background-image:url('${p.image}');background-size:cover;background-position:center;"` : ''}>
-        ${p.image ? '' : `<span class="placeholder-label">${String(i + 1).padStart(2, '0')}</span>`}
-      </div>
-      <div class="drop-card-info">
-        <div>
-          <div class="drop-card-name">${p.name}</div>
-          <div class="drop-card-detail">${p.detail}</div>
-        </div>
-        <div class="drop-card-price">&euro;${p.price}</div>
-      </div>
-      ${p.available && p.stock > 0
-        ? `<div class="drop-card-stock">${p.stock} disponibil${p.stock === 1 ? 'e' : 'i'}</div>
-           <button class="drop-card-status available" onclick="buyProduct('${p.id}')">Acquista</button>`
-        : `<button class="drop-card-status soldout" disabled>Esaurito</button>`
-      }
-    </div>
-  `).join('');
-}
-
-// === STRIPE CHECKOUT ===
-async function buyProduct(productId) {
-  const btn = event.target;
-  const origText = btn.textContent;
-  btn.textContent = 'UN MOMENTO...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('/.netlify/functions/create-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId })
-    });
-
-    const data = await res.json();
-
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert(data.error || 'Errore. Riprova.');
-      btn.textContent = origText;
-      btn.disabled = false;
+<!-- ====== JSON-LD ====== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stradanuovagenova.com/#org",
+      "name": "Strada Nuova",
+      "url": "https://stradanuovagenova.com/",
+      "logo": "https://stradanuovagenova.com/img/hero.webp",
+      "email": "stradanuova.7@gmail.com",
+      "telephone": "+390108956256",
+      "sameAs": [
+        "https://www.instagram.com/stradanuova/",
+        "https://www.facebook.com/stradanuova.7/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://stradanuovagenova.com/#website",
+      "url": "https://stradanuovagenova.com/",
+      "name": "Strada Nuova — Tessuti, tendaggi, interior design",
+      "inLanguage": "it-IT",
+      "publisher": { "@id": "https://stradanuovagenova.com/#org" }
+    },
+    {
+      "@type": ["Store", "LocalBusiness"],
+      "@id": "https://stradanuovagenova.com/#store",
+      "name": "Strada Nuova — Tessuti, tendaggi, interior design",
+      "url": "https://stradanuovagenova.com/",
+      "image": "https://stradanuovagenova.com/img/hero.webp",
+      "email": "stradanuova.7@gmail.com",
+      "telephone": "+390108956256",
+      "priceRange": "€€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Garibaldi 7/a",
+        "postalCode": "16124",
+        "addressLocality": "Genova",
+        "addressRegion": "GE",
+        "addressCountry": "IT"
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "10:00", "closes": "12:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "16:00", "closes": "19:30" }
+      ],
+      "brand": [
+        { "@type": "Brand", "name": "Dedar" },
+        { "@type": "Brand", "name": "Pierre Frey" },
+        { "@type": "Brand", "name": "Élitis" },
+        { "@type": "Brand", "name": "Cole & Son" },
+        { "@type": "Brand", "name": "Designers Guild" },
+        { "@type": "Brand", "name": "Rubelli" },
+        { "@type": "Brand", "name": "Sanderson" },
+        { "@type": "Brand", "name": "Morris & Co" },
+        { "@type": "Brand", "name": "Zoffany" },
+        { "@type": "Brand", "name": "Houlès" },
+        { "@type": "Brand", "name": "Etro Tessuti" }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/stradanuova/",
+        "https://www.facebook.com/stradanuova.7/"
+      ],
+      "parentOrganization": { "@id": "https://stradanuovagenova.com/#org" }
     }
-  } catch (err) {
-    alert('Errore di connessione. Riprova.');
-    btn.textContent = origText;
-    btn.disabled = false;
-  }
+  ]
 }
-
-// === SPA ROUTER ===
-function route() {
-  const path = window.location.pathname;
-  const pages = {
-    home: document.getElementById('page-home'),
-    chisiamo: document.getElementById('page-chisiamo'),
-    appuntamento: document.getElementById('page-appuntamento'),
-    grazie: document.getElementById('page-grazie'),
-  };
-
-  // Hide all
-  Object.values(pages).forEach(p => p.style.display = 'none');
-
-  if (path === '/chi-siamo') {
-    pages.chisiamo.style.display = 'block';
-    window.scrollTo(0, 0);
-  } else if (path === '/appuntamento') {
-    pages.appuntamento.style.display = 'block';
-    window.scrollTo(0, 0);
-    renderCalendar();
-  } else if (path === '/grazie') {
-    pages.grazie.style.display = 'block';
-    window.scrollTo(0, 0);
-  } else {
-    pages.home.style.display = 'block';
-
-    // Handle hash scroll
-    if (window.location.hash) {
-      setTimeout(() => {
-        const el = document.querySelector(window.location.hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  }
-}
-
-// === CALENDAR / APPOINTMENT ===
-const ORARI = {
-  // 0=Dom, 1=Lun, 2=Mar, 3=Mer, 4=Gio, 5=Ven, 6=Sab
-  0: null, // Domenica chiuso
-  1: null, // Lunedì chiuso
-  2: [[9,13],[16,19]],  // Martedì
-  3: [[9,13],[16,19]],  // Mercoledì
-  4: [[9,13],[16,19]],  // Giovedì
-  5: [[9,13],[16,19]],  // Venerdì
-  6: [[9,13],[16,19]],  // Sabato
-};
-
-const MESI = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
-let calYear, calMonth, selectedDate = null, selectedTime = null;
-
-function initCalendar() {
-  const now = new Date();
-  calYear = now.getFullYear();
-  calMonth = now.getMonth();
-}
-
-function calPrev() {
-  calMonth--;
-  if (calMonth < 0) { calMonth = 11; calYear--; }
-  selectedDate = null; selectedTime = null;
-  updateApptButton();
-  renderCalendar();
-}
-
-function calNext() {
-  calMonth++;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
-  selectedDate = null; selectedTime = null;
-  updateApptButton();
-  renderCalendar();
-}
-
-function renderCalendar() {
-  if (calYear === undefined) initCalendar();
-
-  document.getElementById('calTitle').textContent = `${MESI[calMonth]} ${calYear}`;
-  const grid = document.getElementById('calDays');
-  const today = new Date(); today.setHours(0,0,0,0);
-
-  const firstDay = new Date(calYear, calMonth, 1);
-  let startDay = firstDay.getDay(); // 0=Dom
-  startDay = startDay === 0 ? 6 : startDay - 1; // Convert to Mon=0
-  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-
-  let html = '';
-
-  // Empty cells
-  for (let i = 0; i < startDay; i++) {
-    html += '<div class="cal-day empty"></div>';
-  }
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const date = new Date(calYear, calMonth, d);
-    date.setHours(0,0,0,0);
-    const dow = date.getDay();
-    const hasSlots = ORARI[dow] !== null;
-    const isPast = date < today;
-    const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
-
-    if (!hasSlots || isPast) {
-      html += `<div class="cal-day disabled">${d}</div>`;
-    } else {
-      html += `<div class="cal-day available${isSelected ? ' selected' : ''}" onclick="selectDate(${calYear},${calMonth},${d})">${d}</div>`;
-    }
-  }
-
-  grid.innerHTML = html;
-
-  // Show time slots if date selected
-  const slotsDiv = document.getElementById('timeSlots');
-  if (selectedDate) {
-    const dow = selectedDate.getDay();
-    const ranges = ORARI[dow];
-    let slotsHtml = '';
-    ranges.forEach(([start, end]) => {
-      for (let h = start; h < end; h++) {
-        const time = `${String(h).padStart(2,'0')}:00`;
-        const isSel = selectedTime === time;
-        slotsHtml += `<button class="time-slot${isSel ? ' selected' : ''}" onclick="selectTime('${time}')">${time}</button>`;
-        // Also add :30
-        const time30 = `${String(h).padStart(2,'0')}:30`;
-        const isSel30 = selectedTime === time30;
-        slotsHtml += `<button class="time-slot${isSel30 ? ' selected' : ''}" onclick="selectTime('${time30}')">${time30}</button>`;
-      }
-    });
-    slotsDiv.innerHTML = slotsHtml;
-    slotsDiv.classList.add('visible');
-  } else {
-    slotsDiv.innerHTML = '';
-    slotsDiv.classList.remove('visible');
-  }
-
-  updateApptDateTime();
-}
-
-function selectDate(y, m, d) {
-  selectedDate = new Date(y, m, d);
-  selectedTime = null;
-  updateApptButton();
-  renderCalendar();
-}
-
-function selectTime(t) {
-  selectedTime = t;
-  updateApptButton();
-  renderCalendar();
-}
-
-function updateApptDateTime() {
-  const el = document.getElementById('apptDateTime');
-  if (selectedDate && selectedTime) {
-    const giorni = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
-    const g = giorni[selectedDate.getDay()];
-    const d = selectedDate.getDate();
-    const m = MESI[selectedDate.getMonth()];
-    el.textContent = `${g} ${d} ${m} ${selectedDate.getFullYear()} alle ${selectedTime}`;
-  } else if (selectedDate) {
-    el.textContent = 'Seleziona un orario';
-  } else {
-    el.textContent = '';
-  }
-}
-
-function updateApptButton() {
-  const btn = document.getElementById('apptSubmit');
-  if (selectedDate && selectedTime) {
-    btn.disabled = false;
-    btn.textContent = 'RICHIEDI APPUNTAMENTO';
-  } else {
-    btn.disabled = true;
-    btn.textContent = 'SELEZIONA DATA E ORARIO';
-  }
-}
-
-async function submitAppointment() {
-  const name = document.getElementById('apptName').value.trim();
-  const email = document.getElementById('apptEmail').value.trim();
-  const phone = document.getElementById('apptPhone').value.trim();
-  const msg = document.getElementById('apptMsg').value.trim();
-  const feedback = document.getElementById('apptFeedback');
-  const btn = document.getElementById('apptSubmit');
-
-  if (!name || !email || !phone) {
-    feedback.textContent = 'Compila nome, email e telefono.';
-    feedback.className = 'appt-msg error';
-    return;
-  }
-
-  if (!selectedDate || !selectedTime) {
-    feedback.textContent = 'Seleziona data e orario.';
-    feedback.className = 'appt-msg error';
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = 'UN MOMENTO...';
-  feedback.textContent = '';
-
-  const giorni = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
-  const dateStr = `${giorni[selectedDate.getDay()]} ${selectedDate.getDate()} ${MESI[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
-
-  try {
-    const res = await fetch('/.netlify/functions/request-appointment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, phone, message: msg, date: dateStr, time: selectedTime })
-    });
-
-    const data = await res.json();
-
-    if (data.ok) {
-      feedback.textContent = 'Richiesta inviata. Riceverai una conferma via email.';
-      feedback.className = 'appt-msg success';
-      btn.textContent = 'INVIATO';
-      // Reset form
-      document.getElementById('apptName').value = '';
-      document.getElementById('apptEmail').value = '';
-      document.getElementById('apptPhone').value = '';
-      document.getElementById('apptMsg').value = '';
-      selectedDate = null; selectedTime = null;
-      renderCalendar();
-    } else {
-      feedback.textContent = data.error || 'Errore. Riprova.';
-      feedback.className = 'appt-msg error';
-      btn.disabled = false;
-      btn.textContent = 'RICHIEDI APPUNTAMENTO';
-    }
-  } catch (err) {
-    feedback.textContent = 'Errore di connessione. Riprova.';
-    feedback.className = 'appt-msg error';
-    btn.disabled = false;
-    btn.textContent = 'RICHIEDI APPUNTAMENTO';
-  }
-}
-
-// === NAV MOBILE ===
-function toggleMenu() {
-  const nav = document.getElementById('navLinks');
-  const btn = document.querySelector('.nav-toggle');
-  nav.classList.toggle('open');
-  btn.innerHTML = nav.classList.contains('open') ? '&#10005;' : '&#9776;';
-}
-function closeMenu() {
-  const nav = document.getElementById('navLinks');
-  const btn = document.querySelector('.nav-toggle');
-  nav.classList.remove('open');
-  btn.innerHTML = '&#9776;';
-}
-
-// === NAV SCROLL HIGHLIGHT ===
-function updateActiveNav() {
-  const sections = ['drop', 'contatti'];
-  const scrollPos = window.scrollY + 200;
-  const links = document.querySelectorAll('.nav-links a[href^="#"]');
-
-  links.forEach(link => link.classList.remove('active'));
-
-  for (let i = sections.length - 1; i >= 0; i--) {
-    const el = document.getElementById(sections[i]);
-    if (el && el.offsetTop <= scrollPos) {
-      const link = document.querySelector(`.nav-links a[href="#${sections[i]}"]`);
-      if (link) link.classList.add('active');
-      break;
-    }
-  }
-}
-
-// === INTERNAL NAV (pushState) ===
-document.addEventListener('click', (e) => {
-  const a = e.target.closest('a');
-  if (!a) return;
-  const href = a.getAttribute('href');
-
-  // Internal pages
-  if (href === '/' || href === '/chi-siamo' || href === '/appuntamento') {
-    e.preventDefault();
-    history.pushState({}, '', href);
-    route();
-    return;
-  }
-
-  // Hash links (#drop, #contatti) — if not on home, go home first then scroll
-  if (href && href.startsWith('#')) {
-    const currentPath = window.location.pathname;
-    if (currentPath !== '/') {
-      e.preventDefault();
-      history.pushState({}, '', '/' + href);
-      route();
-    }
-  }
-});
-
-// === INIT ===
-window.addEventListener('popstate', route);
-window.addEventListener('scroll', updateActiveNav);
-
-// === NETLIFY IDENTITY REDIRECT ===
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on('init', user => {
-    if (!user) {
-      window.netlifyIdentity.on('login', () => {
-        document.location.href = '/admin/';
-      });
-    }
-  });
-}
-
-loadProducts();
-route();
 </script>
 
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
+<script defer src="/assets/js/nav-toggle.js"></script>
+<script defer src="/assets/js/buy-product.js"></script>
+<script>
+  // Redirect a /admin/ dopo che un editor invitato setta la password via link Identity
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function (user) {
+      if (!user) {
+        window.netlifyIdentity.on('login', function () { document.location.href = '/admin/'; });
+      }
+    });
+  }
+</script>
 </body>
 </html>
