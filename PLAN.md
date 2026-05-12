@@ -166,17 +166,13 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 1.1 — Scaricare Inter woff2 (peso 400 + 600) e mettere in `assets/fonts/`. Niente Google Fonts CDN
-- [ ] 1.2 — Estrarre CSS condiviso da `index.html` attuale → `assets/css/base.css`: variabili colori, reset, nav, footer, tipografia, button, container, breadcrumb, faq-accordion. Includere `@font-face` con `font-display: swap` per Inter
-- [ ] 1.3 — Creare `tools/store.js` (modulo Node) che esporta:
-  - Costanti NAP (nome, indirizzo, telefono `010 895 6256`, mail `stradanuova.7@gmail.com`, coords TBD)
-  - Funzione `getStoreJsonLd()` che ritorna oggetto JSON-LD Store con `@id: "https://stradanuovagenova.com/#store"`, `hasMap` (URL GBP da inserire), `brand[]` lista 10 brand confermati, openingHoursSpecification mar-sab 10-12:30 + 16-19:30
-  - Funzione `getOrganizationJsonLd()` con `@id: "...#org"`
-  - Funzione `getBreadcrumb(items)` helper
-- [ ] 1.4 — Creare `templates/nav.html` con markup nav attuale (Strada Nuova logo + menu + hamburger). Aggiungere `<button aria-expanded="false" aria-controls="navLinks">` (fix a11y)
-- [ ] 1.5 — Creare `templates/footer.html` con markup footer attuale
-- [ ] 1.6 — Creare `assets/js/nav-toggle.js` con toggle accessibile (event listener, no `onclick=` inline, aria-expanded aggiornato)
-- [ ] 1.7 — Test pagina pilota: copia 80 righe nav+footer in una pagina test, verifica identità visiva al sito attuale
+- [x] 1.1 — Inter 400 + 600 woff2 self-host da rsms.me (109KB + 112KB) in `assets/fonts/`
+- [x] 1.2 — `assets/css/base.css` (5.4KB): variabili, reset, font-face Inter, nav, footer, container/section, breadcrumb, skip-link, focus-visible, responsive, prefers-reduced-motion. CSS blocking (non async)
+- [x] 1.3 — `tools/store.js`: NAP, `getStoreJsonLd()`, `getOrganizationJsonLd()`, `getWebSiteJsonLd()`, `storeRef()` con name+url inline, `getBreadcrumbJsonLd(items)`, `renderJsonLd(graph, pretty)`. Brand list 11 voci, openingHours 2 fasce, geo + hasMap placeholder
+- [x] 1.4 — `templates/nav.html`: skip-link + button aria-expanded/aria-controls + voci nav (Chi siamo, Tessuti, Marchi, Magazine, Appuntamento, Instagram)
+- [x] 1.5 — `templates/footer.html` con copyright + link Contatti/Instagram/Facebook
+- [x] 1.6 — `assets/js/nav-toggle.js`: toggle accessibile, aria-expanded true/false, label dinamica, chiusura su voce e Escape, IIFE no globals
+- [x] 1.7 — Pilota `_test-pilot/index.html` (gitignored) servito via python http.server, identità visiva confermata, font self-host caricati senza richieste Google Fonts
 
 **DoD:** una pagina di prova carica `base.css` + font Inter self-host + nav/footer duplicato → look identico a SPA attuale.
 
@@ -188,12 +184,12 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 2.1 — `robots.txt` con allow/disallow AI bot granulari (vedi memoria `feedback_seo_2026`): Allow `Google-Extended`, `GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-SearchBot`, `Claude-User`, `PerplexityBot`, `Perplexity-User`, `Applebot-Extended`. Disallow `Bytespider`, `CCBot`, `Diffbot`. Disallow `/admin/`, `/_data/`. Sitemap pointer
-- [ ] 2.2 — `llms.txt` con indice markdown delle pagine principali (template indicato nelle puntate precedenti)
-- [ ] 2.3 — `tools/build-sitemap.js`: scansiona ricorsivamente `*.html` (esclude `admin/`, `404.html`, file con `<meta robots noindex>`), produce `sitemap.xml` solo con `<loc>` + `<lastmod>` da `git log -1 --format=%cI <file>`. NIENTE priority/changefreq
-- [ ] 2.4 — Aggiornare `404.html` con base.css, nav, footer, link utili. `<meta name="robots" content="noindex">`
-- [ ] 2.5 — `tools/smoke-test.js`: dato un array di path (es. `['/', '/chi-siamo', '/tessuti-genova/']`), fa curl GET e logga status code. Failure se status ≠ 200 (o 404 per noindex)
-- [ ] 2.6 — Aggiornare `package.json` scripts: `"build": "node tools/build-drop-grid.js && node tools/build-magazine.js && node tools/build-sitemap.js"`
+- [x] 2.1 — `robots.txt`: allow `Google-Extended`, `GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-SearchBot`, `Claude-User`, `PerplexityBot`, `Perplexity-User`, `Applebot-Extended`. Disallow `Bytespider`, `CCBot`, `Diffbot`, `Omgilibot`, `ImagesiftBot`. Disallow `/admin/`, `/_data/`, `/_test-pilot/`. Sitemap pointer
+- [x] 2.2 — `llms.txt` con quote summary + contatti + brand + categorie + verticali + magazine. URL puntano a pagine future
+- [x] 2.3 — `tools/build-sitemap.js`: walk ricorsivo, exclude paths set, `<meta robots noindex>` check, lastmod da `git log -1 --format=%cI` con fallback mtime. NO priority/changefreq
+- [x] 2.4 — `404.html` redesign: base.css, nav, footer, codice 404 grande, link Home/Chi siamo/Appuntamento/Contatti, `noindex,follow`
+- [x] 2.5 — `tools/smoke-test.js`: 10 URL chiave con BASE_URL override (default produzione, fallback localhost). Verde 10/10 contro 127.0.0.1:8000
+- [x] 2.6 — `package.json` scripts già OK da Fase 0: `build`, `build:sitemap`, `build:magazine`, `build:drop-grid`, `validate`, `smoke-test`
 
 **DoD:** dopo build, `sitemap.xml` valido (può anche essere vuoto se ancora niente da indicizzare oltre home). `robots.txt`, `llms.txt`, `404.html` raggiungibili via curl.
 
