@@ -1,0 +1,91 @@
+# robots.txt — Strada Nuova
+# Aggiornato 2026-05-12. Policy per crawler search + AI.
+# Riferimento: feedback_seo_2026 + feedback_seo_pattern_verificati.
+
+# === Search engines tradizionali ===
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+Disallow: /.netlify/
+Disallow: /_test-pilot/
+
+# === AI Crawler ALLOW (search + indicizzazione modello con citazione) ===
+# Google AI Overviews / Gemini grounding
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# OpenAI search (citazione ChatGPT)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# OpenAI training
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# OpenAI live fetch (browsing tool ChatGPT)
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# Anthropic search (citazione Claude)
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# Anthropic indexing
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# Anthropic live fetch (Claude tool)
+User-agent: Claude-User
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# Perplexity search
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# Perplexity live fetch
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /_data/
+
+# === AI Crawler DISALLOW (scraper aggressivi, valore zero per noi) ===
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+# === Sitemap ===
+Sitemap: https://stradanuovagenova.com/sitemap.xml

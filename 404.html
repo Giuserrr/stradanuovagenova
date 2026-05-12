@@ -5,29 +5,111 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,follow">
   <title>Pagina non trovata — Strada Nuova</title>
+  <meta name="description" content="La pagina cercata non esiste o è stata spostata. Torna alla home di Strada Nuova.">
+  <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    :root { --bg:#1a1a1a; --text:#f0f0f0; --text-dim:#888; --accent:#e8531e; --border:#333; }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.5}
-    main{max-width:640px;text-align:center}
-    h1{font-size:clamp(2rem,6vw,3rem);font-weight:600;margin-bottom:16px;letter-spacing:-.02em}
-    p{color:var(--text-dim);margin-bottom:32px;font-size:1.05rem}
-    .links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-    a{color:var(--text);text-decoration:none;border:1px solid var(--border);padding:12px 20px;border-radius:2px;transition:all .2s;font-size:.95rem}
-    a:hover{border-color:var(--accent);color:var(--accent)}
-    .primary{background:var(--accent);border-color:var(--accent);color:#fff}
-    .primary:hover{background:#ff6a35;border-color:#ff6a35;color:#fff}
+    .e404 {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 60px;
+    }
+    .e404 .code {
+      font-size: clamp(80px, 14vw, 160px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .e404 h1 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .e404 p {
+      color: var(--text-dim);
+      max-width: 480px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .e404 .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .e404 .links a {
+      border: 1px solid var(--border);
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .e404 .links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .e404 .links a.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .e404 .links a.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>404</h1>
-    <p>La pagina che cerchi non esiste o è stata spostata.</p>
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<nav class="site-nav" aria-label="Navigazione principale">
+  <a href="/" class="nav-logo">Strada Nuova</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Apri menu">
+    <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/chi-siamo/">Chi siamo</a></li>
+    <li><a href="/tessuti-genova/">Tessuti</a></li>
+    <li><a href="/marchi/">Marchi</a></li>
+    <li><a href="/magazine/">Magazine</a></li>
+    <li><a href="/appuntamento/">Appuntamento</a></li>
+    <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+  <section class="e404">
+    <div class="code">404</div>
+    <h1>Pagina non trovata</h1>
+    <p>La pagina che cerchi non esiste o è stata spostata. Da qui puoi tornare alla home, scoprire chi siamo o prenotare un appuntamento in showroom.</p>
     <div class="links">
-      <a class="primary" href="/">Torna alla home</a>
-      <a href="/chi-siamo">Chi siamo</a>
-      <a href="/appuntamento">Appuntamento</a>
+      <a class="primary" href="/">Home</a>
+      <a href="/chi-siamo/">Chi siamo</a>
+      <a href="/appuntamento/">Appuntamento</a>
+      <a href="/contatti/">Contatti</a>
     </div>
-  </main>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <span>&copy; 2026 Strada Nuova &mdash; Via Garibaldi 7/a, Palazzo Lomellino, Genova</span>
+  <div class="footer-social">
+    <a href="/contatti/">Contatti</a>
+    <a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/stradanuova.7/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+<script defer src="/assets/js/nav-toggle.js"></script>
 </body>
 </html>
