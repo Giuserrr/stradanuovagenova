@@ -57,7 +57,7 @@
       "price": 400,
       "stock": 8,
       "available": false,
-      "image": "",
+      "image": "/img/drop/06.webp",
       "stripePrice": ""
     }
   ]
