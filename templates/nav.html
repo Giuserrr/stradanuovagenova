@@ -1,0 +1,19 @@
+<!-- nav.html — duplicato per ogni pagina (~20 righe).
+     Pattern: ZERO partial system, ZERO bundler. Quando aggiorni
+     questa nav, fai trova/sostituisci su tutte le pagine HTML.
+     Sostituire l'attributo aria-current="page" sulla voce attiva. -->
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<nav class="site-nav" aria-label="Navigazione principale">
+  <a href="/" class="nav-logo">Strada Nuova</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Apri menu">
+    <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/chi-siamo/">Chi siamo</a></li>
+    <li><a href="/tessuti-genova/">Tessuti</a></li>
+    <li><a href="/marchi/">Marchi</a></li>
+    <li><a href="/magazine/">Magazine</a></li>
+    <li><a href="/appuntamento/">Appuntamento</a></li>
+    <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</nav>
