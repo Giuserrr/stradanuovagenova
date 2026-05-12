@@ -9,7 +9,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 ## Stack (aggiornato 2026-05-12)
 
-**Migrazione SEO in corso (Fasi 0-11 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 26 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-11 ancora locali in attesa del push finale.
+**Migrazione SEO in corso (Fasi 0-12 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 28 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-12 ancora locali in attesa del push finale.
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -54,6 +54,8 @@ stradanuovagenova/
 ├── tessuti-palazzi-storici-genova/index.html    ← verticale 1529 parole
 ├── tessuti-casa-al-mare-liguria/index.html      ← verticale 1438 parole
 ├── tessuti-tende-portofino-tigullio/index.html  ← verticale minimal 583 parole
+├── magazine/index.html                 ← hub magazine minimal
+├── magazine/quanto-costa-ritappezzare-divano-genova/index.html ← articolo pillar 1567 parole
 ├── 404.html                            ← fallback
 ├── robots.txt llms.txt sitemap.xml
 ├── netlify.toml                        ← nft bundler, niente catch-all
@@ -71,7 +73,7 @@ stradanuovagenova/
 │   ├── build-drop-grid.js
 │   ├── build-magazine.js               (stub Fase 12)
 │   └── smoke-test.js
-├── magazine/{content,articles}/        ← Fase 12 placeholder
+├── magazine/{content,articles}/        ← cartelle placeholder Decap/MD pipeline (rimandata Fase 18)
 ├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp 1920x1080 / 1200x800)
 └── netlify/functions/
     ├── create-checkout.js
@@ -108,15 +110,19 @@ stradanuovagenova/
 | `/tessuti-palazzi-storici-genova/` | [tessuti-palazzi-storici-genova/index.html](tessuti-palazzi-storici-genova/index.html) | CollectionPage + Place + TouristAttraction + BreadcrumbList | Verticale 1529 parole, Rolli, soprintendenza, boiserie tessile, Palazzo Lomellino case study |
 | `/tessuti-casa-al-mare-liguria/` | [tessuti-casa-al-mare-liguria/index.html](tessuti-casa-al-mare-liguria/index.html) | CollectionPage + AdministrativeArea + BreadcrumbList | Verticale 1438 parole, sole/salsedine/umidità, outdoor solution-dyed, Ponente/Centro/Levante |
 | `/tessuti-tende-portofino-tigullio/` | [tessuti-tende-portofino-tigullio/index.html](tessuti-tende-portofino-tigullio/index.html) | WebPage + Place + BreadcrumbList | Verticale minimal 583 parole, canale Levante non investito |
+| `/magazine/` | [magazine/index.html](magazine/index.html) | CollectionPage + BreadcrumbList | Hub magazine minimal, article card scritta a mano |
+| `/magazine/quanto-costa-ritappezzare-divano-genova/` | [magazine/quanto-costa-ritappezzare-divano-genova/index.html](magazine/quanto-costa-ritappezzare-divano-genova/index.html) | Article + WebPage + BreadcrumbList | Articolo pillar 1567 parole, prezzi triangolati con WebSearch, scenari A/B/C, disclaimer onesto |
 | `/admin/` | [admin/index.html](admin/index.html) | (CMS) | Decap CMS, robots disallow |
 
-**Sitemap:** 25 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
+**Sitemap:** 27 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
 
 **Fase 9 chiusa:** tutte e 10 le brand page sono online in locale. Niente link interni rotti residui da Fase 9.
 
 **Fase 10 chiusa:** hub `/servizi/` + pagina servizio `/servizi/consulenza-arredo-tessile/` online in locale. Service JSON-LD senza offers/aggregateRating (Service non parent-eligible rich snippet). Esplicita disambiguazione cosa facciamo vs cosa NON facciamo (posa carta, confezionamento tende, ritappezzeria affidati ad artigiani esterni).
 
 **Fase 11 chiusa:** 3 verticali geo-luxe online in locale. `tessuti-palazzi-storici-genova` (1529 parole, asset autorità più forte del sito insieme a `palazzo-lomellino`). `tessuti-casa-al-mare-liguria` (1438 parole, taglio tecnico su sole/salsedine/umidità + distinzione Ponente/Centro/Levante). `tessuti-tende-portofino-tigullio` (583 parole, canale non investito ma presidiato per query).
+
+**Fase 12 chiusa (minimal):** hub `/magazine/` + 1° articolo pillar `quanto-costa-ritappezzare-divano-genova` (1567 parole, alto intent commerciale, prezzi triangolati con WebSearch nazionale/regionale, scenari A/B/C concreti, disclaimer onesto su cosa NON facciamo direttamente). Build script Markdown→HTML rimandato a Fase 18 (cadenza mensile). Tono asciutto richiesto esplicitamente da Giuseppe ("non scrivere come AI").
 
 ## Drop / Stripe
 
@@ -173,7 +179,7 @@ stradanuovagenova/
 ## Stato (2026-05-12)
 
 ✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 11** (26 pagine fisiche)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 12** (28 pagine fisiche)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
@@ -182,9 +188,10 @@ stradanuovagenova/
 ✅ Hub `/marchi/` + **tutte le 10 brand pages**: Élitis (832) + Cole & Son (988) + Dedar (902) + Pierre Frey (966) + Designers Guild (914) + Rubelli (1010) + Sanderson/Morris (1050) + Zoffany (944) + Houlès (999) + Etro Tessuti (883)
 ✅ Hub `/servizi/` + servizio `/servizi/consulenza-arredo-tessile/` (~1200 parole, Service JSON-LD valido)
 ✅ 3 verticali geo-luxe: palazzi-storici (1529) + casa-al-mare-liguria (1438) + tende-portofino-tigullio minimal (583)
-✅ Smoke test 35/35 verde contro localhost
+✅ Hub `/magazine/` + 1° articolo "quanto costa ritappezzare un divano a Genova" (1567 parole, prezzi triangolati con WebSearch)
+✅ Smoke test 37/37 verde contro localhost
 
-🟡 **In corso:** Fasi 12 → 18 (magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
+🟡 **In corso:** Fasi 13 → 18 (performance, GSC, a11y, magazine cadenza mensile) — vedi [PLAN.md](PLAN.md)
 
 ⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 

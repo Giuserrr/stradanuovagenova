@@ -37,6 +37,8 @@ const URLS = [
   { path: '/tessuti-palazzi-storici-genova/',           expected: 200, note: 'verticale palazzi storici' },
   { path: '/tessuti-casa-al-mare-liguria/',             expected: 200, note: 'verticale casa al mare' },
   { path: '/tessuti-tende-portofino-tigullio/',         expected: 200, note: 'verticale Tigullio' },
+  { path: '/magazine/',                                          expected: 200, note: 'hub magazine' },
+  { path: '/magazine/quanto-costa-ritappezzare-divano-genova/',  expected: 200, note: 'articolo ritappezzeria' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },

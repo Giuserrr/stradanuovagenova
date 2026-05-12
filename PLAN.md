@@ -32,7 +32,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 9.5 — Houlès + Etro Tessuti | ✅ commit locale | 999 + 883 parole |
 | 10 — servizi consulenza | ✅ locale | hub `/servizi/` + consulenza-arredo-tessile |
 | 11 — verticali geo-luxe (3) | ✅ locale | palazzi storici (1529) + casa al mare (1438) + Tigullio (583) |
-| 12 — magazine setup + 1° articolo | ⬜ | |
+| 12 — magazine setup + 1° articolo | ✅ locale | hub `/magazine/` + articolo ritappezzeria 1567 parole. Build script Markdown rimandato |
 | 13 — performance pass | ⬜ | AVIF, headers, CWV |
 | 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
 | 14 — GSC + Bing + IndexNow | ⬜ | |
@@ -428,14 +428,15 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 12.1 — `tools/build-magazine.js`: scansiona `magazine/content/*.md`, parsing YAML frontmatter con `gray-matter`, body Markdown con `marked`. Per ogni file: output `magazine/articles/{slug}/index.html` con layout articolo (nav+footer duplicati, hero image, contenuto, breadcrumb, JSON-LD Article + author Person nested)
-- [ ] 12.2 — Schema YAML frontmatter: `title, slug, description, date, author (name+url+sameAs), image, tags, faq` (opzionale)
-- [ ] 12.3 — `magazine/index.html` (hub): marker `<!-- BUILD:MAGAZINE_LATEST:START -->` ... build-magazine.js inietta lista articoli ordinati per data
-- [ ] 12.4 — Primo articolo: `magazine/content/come-scegliere-tessuti-per-tende-genova.md` (3000-4000 parole) — pillar nazionale didattico, NO prezzi, NO CTA locale forte, 10-15 internal link contestuali ai pillar locali
-- [ ] 12.5 — Eseguire `npm run build:magazine` → verifica generazione HTML
-- [ ] 12.6 — Aggiornare `build-sitemap.js` per includere `magazine/articles/**/index.html`
+- [⏭] 12.1 — `tools/build-magazine.js` Markdown→HTML pipeline: **rimandata** a Fase 18 (quando il magazine sarà a 3+ articoli). Per 1 articolo non vale l'astrazione: build di gray-matter+marked introdurrebbe complessità senza guadagno
+- [⏭] 12.2 — schema YAML frontmatter: rimandato con 12.1
+- [x] 12.3 — `magazine/index.html` hub minimal (CollectionPage + BreadcrumbList). Article card scritta a mano (1 articolo). Quando saranno >2 articoli si valuta build script
+- [x] 12.4 — Primo articolo: `magazine/quanto-costa-ritappezzare-divano-genova/index.html` (1567 parole, scelto da Giuseppe — alto intent commerciale, prezzi triangolati con WebSearch). NO target 3000 forzato per evitare padding. Article+WebPage+BreadcrumbList JSON-LD valido
+- [x] 12.5 — `build-sitemap.js` ha già auto-discovery: include automaticamente magazine/**
 
-**DoD:** primo articolo accessibile via URL, hub mostra lista, schema Article validato.
+**DoD:** ✅ articolo accessibile via URL, hub mostra lista, schema Article + WebPage + BreadcrumbList valido. Smoke test 37/37 verde.
+
+**Nota tono:** prima richiesta esplicita di Giuseppe di "non scrivere come AI" — registro asciutto, dettagli concreti (metri tessuto, range manodopera per tipologia, scenari A/B/C con range numerici), zero retorica/aggettivi vuoti, disclaimer onesto su cosa NON facciamo direttamente. Stesso registro applicato anche alla Fase 11 (verticali geo-luxe).
 
 ---
 

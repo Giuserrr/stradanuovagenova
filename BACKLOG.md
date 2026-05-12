@@ -67,7 +67,7 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 9.5** Houlès (999 parole) + Etro Tessuti (883 parole) (locale) — Fase 9 chiusa
 - [x] **Fase 10** servizi consulenza: hub `/servizi/` + `/servizi/consulenza-arredo-tessile/` (locale)
 - [x] **Fase 11** verticali geo-luxe: palazzi-storici-genova (1529) + casa-al-mare-liguria (1438) + tende-portofino-tigullio minimal (583) (locale)
-- [ ] Fase 12 magazine setup + 1° articolo
+- [x] **Fase 12** magazine setup minimal + 1° articolo "quanto costa ritappezzare un divano a Genova" (1567 parole). Build script Markdown→HTML rimandato a Fase 18 (cadenza mensile)
 - [ ] Fase 13 performance pass (AVIF, headers, CWV)
 - [ ] Fase 14 GSC + Bing + IndexNow + gsc.js
 - [ ] Fase 17 a11y full pass
