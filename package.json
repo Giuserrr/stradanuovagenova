@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:drop-grid && npm run build:magazine && npm run build:sitemap",
+    "build": "npm run build:drop-grid && npm run build:magazine && npm run build:reviews && npm run build:sitemap",
     "build:sitemap": "node tools/build-sitemap.js",
     "build:magazine": "node tools/build-magazine.js",
     "build:drop-grid": "node tools/build-drop-grid.js",
+    "build:reviews": "node tools/build-reviews.js",
     "validate": "node tools/validate-jsonld.js",
     "smoke-test": "node tools/smoke-test.js"
   },
