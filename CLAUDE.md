@@ -7,9 +7,19 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 - Netlify Site ID: 3119e79e-ed19-4cbd-ac5f-f4fac7233c8e (team digitalwow)
 - Email negozio: stradanuova.7@gmail.com
 
-## Stack (aggiornato 2026-05-12 — post push live + serata di rifiniture)
+## Stack (aggiornato 2026-05-13 notte — post push live + serata di rifiniture)
 
-**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`) + 9 commit di rifinitura post-push la sera del 2026-05-12 (`8a43a78..77a7448`).**
+**Migrazione SEO PUSHATA IN PRODUZIONE il 2026-05-12.** La SPA originale è ufficialmente sparita; il sito è ora HTML5 vanilla multi-pagina vero, live su stradanuovagenova.com. 28 pagine pubbliche (+ admin Decap + 404): 8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 3 verticali geo-luxe + 1 hub /magazine/ + 1 articolo + 2 noindex/admin. Smoke test 40/40 verde contro produzione. **18 commit pushati in un singolo deploy (`eb48fa9..c9ab104`) + 13 commit di rifinitura post-push nella nottata 2026-05-12 → 2026-05-13 (`8a43a78..5cdb45c`).**
+
+### Serata 2026-05-12 → notte 2026-05-13 (13 commit)
+
+- `8a43a78` audit fix (title magazine + 4 description >175ch)
+- `e030b7d` disambiguazione brand "Strada Nuova" → "Strada Nuova Genova" su 27 file + Organization `alternateName`/`legalName` + author Person Giulia Organo nel magazine + cognome Orlandini→Organo
+- `48d881e` cleanup `.claude/` + `PROMPT-RIPRESA.md` dal tracking
+- `2aee2f0..77a7448` Fase 13.7: 6 drop card con foto pouf reali scontornate via rembg+u2net + magick -trim
+- `3c11183` Fase 13.5: Maps embed in /contatti + `geo`+`hasMap` JSON-LD
+- `544c9c8` Entity unification: GBP URL in `sameAs` Store
+- `93fb6b8..5cdb45c` Fase 13.8: build-reviews.js + blocco Recensioni Google in home+contatti (5★ · 14 recensioni)
 
 **Stato Fasi 0-13 + 13.5 + 13.6 + 13.7 + 13.8 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file. 6 drop card con foto reali scontornate via rembg. Maps embed in `/contatti/` + `geo` + `hasMap` JSON-LD su Store/Place. **Blocco "Recensioni Google" in home+contatti** via Places API (New) + [tools/build-reviews.js](tools/build-reviews.js) — 5★ · 14 recensioni renderizzate al build. GSC verificato + sitemap submittata + 10 URL forzate. Smoke 40/40 verde. Next: Fase 14 step 2 (Bing WMT + IndexNow + Lighthouse).**
 
@@ -291,6 +301,8 @@ stradanuovagenova/
 14. **`Cache-Control: immutable` su asset con nome non versionato** → browser non rivalida mai, vedi sempre vecchio CSS/JS anche dopo push. Soluzione: aggiungere `?v=<data>` ai `<link>`/`<script>` quando cambi `base.css`, `nav-toggle.js`, `buy-product.js`. Pattern: bump del query string ad ogni modifica asset
 15. **Background removal foto prodotto:** rembg+u2net via `pip install` su Python 3.14 fallisce (PEP 668 external-managed). Soluzione: `pipx install 'rembg[cli]'` + `pipx inject rembg onnxruntime`. Per pouf con frange morbide il modello u2net è ok ma può lasciare bordi sfilacciati — il rimedio è `-trim` (riduce al bounding box reale) + `-resize 1100x1100 -extent 1200x1200` (padding alpha al 92%) per dimensione uniforme tra card diverse. Sfondo PNG/WebP/AVIF trasparente + CSS `.drop-card-img background: #2e2e2e` = look edge-to-edge senza dover replicare gradient
 16. **`object-fit: cover` su card prodotto con foto verticale** → il soggetto viene tagliato. `object-fit: contain` + background neutro card è il pattern showroom (Hay, Vitra). Allineato meglio con foto product-on-white o scontornate
+17. **Places API ha 2 versioni distinte in Google Cloud:** `Places API` (legacy) e `Places API (New)`. L'endpoint `places.googleapis.com/v1/places/{place_id}` richiede la "(New)". Attivare entrambe non fa danno; restrizioni API della chiave devono includere "(New)" altrimenti `API_KEY_SERVICE_BLOCKED` 403. Anche dopo attivazione, ~1-2 min di propagazione prima che le chiamate vadano a buon fine
+18. **Maps client-side vs Places server-side richiedono chiavi distinte:** client-side (iframe Maps Embed) ha referrer-restriction HTTP `*.dominio/*` perché finisce in HTML pubblico; server-side (build-reviews.js da Netlify build) NON può avere referrer-restriction perché build server ha referrer vuoto. Soluzione: 2 chiavi separate sullo stesso progetto Cloud, ognuna con scope diverso. Spending cap 0€ via carta virtuale protegge entrambe
 
 ## File da ignorare
 
