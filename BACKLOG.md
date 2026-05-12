@@ -61,7 +61,7 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 8.2** pillar carta-da-parati-genova (1929 parole) + rivestimenti-murali-genova (1672 parole) (locale)
 - [x] **Fase 9.0** hub /marchi/ (locale)
 - [x] **Fase 9.1** Élitis (832 parole) + Cole & Son (988 parole) (locale)
-- [ ] Fase 9.2 Dedar + Pierre Frey
+- [x] **Fase 9.2** Dedar (902 parole) + Pierre Frey (966 parole) (locale)
 - [ ] Fase 9.3 Designers Guild + Rubelli
 - [ ] Fase 9.4 Sanderson/Morris/Zoffany
 - [ ] Fase 9.5 Houlès + Etro Tessuti

@@ -24,6 +24,8 @@ const URLS = [
   { path: '/marchi/',                     expected: 200, note: 'hub marchi' },
   { path: '/marchi/elitis/',              expected: 200, note: 'brand Elitis' },
   { path: '/marchi/cole-and-son/',        expected: 200, note: 'brand Cole & Son' },
+  { path: '/marchi/dedar/',               expected: 200, note: 'brand Dedar' },
+  { path: '/marchi/pierre-frey/',         expected: 200, note: 'brand Pierre Frey' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },

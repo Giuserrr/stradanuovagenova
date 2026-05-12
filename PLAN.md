@@ -25,8 +25,8 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 8.1 — tessuti + tendaggi pillar | ✅ commit locale (`be17e6d`) | 1523 + 1557 parole |
 | 8.2 — carta da parati + rivestimenti | ✅ commit locale (`82acfaf`) | 1929 + 1672 parole |
 | 9.0 — hub /marchi/ | ✅ commit locale | 10 brand listati |
-| 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale | 832 + 988 parole |
-| 9.2 — Dedar + Pierre Frey | ⬜ | |
+| 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale (`1a24c73`) | 832 + 988 parole |
+| 9.2 — Dedar + Pierre Frey | ✅ commit locale | 902 + 966 parole |
 | 9.3 — Designers Guild + Rubelli | ⬜ | |
 | 9.4 — Sanderson/Morris + Zoffany | ⬜ | |
 | 9.5 — Houlès + Etro Tessuti | ⬜ | |
@@ -42,7 +42,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 18 — magazine cadenza mensile | ⬜ continuativo | |
 
 **Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 22/22 verde. **Sitemap:** 12 URL indicizzabili (esclude grazie noindex).
+**Smoke test localhost:** 24/24 verde. **Sitemap:** 14 URL indicizzabili (esclude grazie noindex).
 
 ---
 
@@ -359,10 +359,11 @@ stradanuovagenova/
 - JSON-LD pattern: WebPage + about Brand inline (name, url ufficiale, description) + BreadcrumbList 3 livelli
 - Le altre 8 brand pages restano 404 fino a Fase 9.2-9.5: i link da pillar a /marchi/dedar/ ecc. sono link interni "broken" accettati nel piano
 
-### Fase 9.2 — Dedar + Pierre Frey (1h)
+### Fase 9.2 — Dedar + Pierre Frey (1h) ✅
 
-- [ ] 9.2.1 — `marchi/dedar/index.html`
-- [ ] 9.2.2 — `marchi/pierre-frey/index.html`
+- [x] 9.2.1 — `marchi/dedar/index.html` (902 parole): casa familiare Como 1976, sintesi ricerca contemporanea + tradizione tessile italiana. 4 famiglie prodotto (tende, rivestimento, carta, contract). 3 applicazioni genovesi: tendaggi palazzi storici, ritappezzeria contemporanea, boiserie tessile rappresentanza. Prezzi 80-500 €/m
+- [x] 9.2.2 — `marchi/pierre-frey/index.html` (966 parole): casa francese 1935 + archivi Braquenié (1824) e Le Manach (1829) + Boussac. 5 famiglie (stampe archivio, contemporanei, outdoor, carta, tappeti). 4 applicazioni: palazzi storici, boiserie, case mare (linea Outdoor), case ottocentesche collina. Prezzi 80-800 €/m, forbice più ampia del catalogo
+- Stesso JSON-LD pattern WebPage + Brand inline. Link a fratello brand (Dedar↔Pierre Frey) per side navigation
 
 ### Fase 9.3 — Designers Guild + Rubelli (1h)
 
