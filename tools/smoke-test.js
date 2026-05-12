@@ -16,6 +16,7 @@ const URLS = [
   { path: '/appuntamento/',   expected: 200, note: 'appuntamento' },
   { path: '/grazie/',         expected: 200, note: 'grazie (noindex)' },
   { path: '/contatti/',       expected: 200, note: 'contatti' },
+  { path: '/palazzo-lomellino/', expected: 200, note: 'palazzo' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },
