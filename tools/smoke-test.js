@@ -14,6 +14,8 @@ const URLS = [
   { path: '/',                expected: 200, note: 'home' },
   { path: '/chi-siamo/',      expected: 200, note: 'chi-siamo' },
   { path: '/appuntamento/',   expected: 200, note: 'appuntamento' },
+  { path: '/grazie/',         expected: 200, note: 'grazie (noindex)' },
+  { path: '/contatti/',       expected: 200, note: 'contatti' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>Ordine confermato — Strada Nuova</title>
+<meta name="description" content="Grazie del tuo acquisto. Riceverai una mail di conferma da Strada Nuova.">
+
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/base.css">
+
+<style>
+.grazie-page {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 20px 60px;
+}
+.grazie-page .check {
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+.grazie-page h1 {
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.grazie-page p {
+  color: var(--text-dim);
+  max-width: 480px;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.grazie-page .links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.grazie-page .links a {
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.grazie-page .links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.grazie-page .links a.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.grazie-page .links a.primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<nav class="site-nav" aria-label="Navigazione principale">
+  <a href="/" class="nav-logo">Strada Nuova</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Apri menu">
+    <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/chi-siamo/">Chi siamo</a></li>
+    <li><a href="/#drop">Drop</a></li>
+    <li><a href="/appuntamento/">Appuntamento</a></li>
+    <li><a href="/contatti/">Contatti</a></li>
+    <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+  <section class="grazie-page">
+    <div class="check" aria-hidden="true">&#10003;</div>
+    <h1>Ordine confermato</h1>
+    <p>Grazie per l'acquisto. Riceverai una mail di conferma con i dettagli. Il ritiro avviene in negozio in Via Garibaldi 7/a, Palazzo Lomellino.</p>
+    <div class="links">
+      <a class="primary" href="/">Torna alla home</a>
+      <a href="/contatti/">Contatti</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <span>&copy; 2026 Strada Nuova &mdash; Via Garibaldi 7/a, Palazzo Lomellino, Genova</span>
+  <div class="footer-social">
+    <a href="/contatti/">Contatti</a>
+    <a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/stradanuova.7/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+<script defer src="/assets/js/nav-toggle.js"></script>
+</body>
+</html>

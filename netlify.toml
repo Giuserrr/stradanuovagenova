@@ -6,10 +6,6 @@
 [functions]
   node_bundler = "nft"
 
-# Catch-all SPA temporaneo: rimuovere quando /chi-siamo, /appuntamento, /grazie
-# saranno migrate a file fisici (Fase 6 PLAN.md). Netlify serve i file fisici
-# prima del catch-all, quindi le nuove pagine create prevarranno automaticamente.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Catch-all SPA rimosso in Fase 6 (commit con conversione /chi-siamo /appuntamento
+# /grazie /contatti a file fisici). Netlify serve i file fisici e ricade su
+# 404.html per i path inesistenti.
