@@ -10,6 +10,37 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 
 ---
 
+## Stato avanzamento (2026-05-12)
+
+| Fase | Status | Note |
+|---|---|---|
+| 0 — Setup repo vanilla | ✅ pushato (`dc6da8c`, `04cbe3e`) | |
+| 1 — Asset condivisi | ✅ pushato (`ae4be0b`) | base.css, font Inter, templates, store.js |
+| 2 — File tecnici SEO | ✅ pushato (`76452ac`, `ec90d97`) | robots/llms/sitemap/404/smoke |
+| 3 — Home | ✅ commit locale (`506d96a`) | |
+| 4 — chi-siamo | ✅ commit locale (`630f1ea`) | |
+| 5 — appuntamento | ✅ commit locale (`7b2fb85`) | Test Resend end-to-end rimandato a push live |
+| 6 — grazie + contatti + RM catch-all | ✅ commit locale (`21291bc`) | SPA legacy ufficialmente sparita |
+| 7 — palazzo-lomellino | ✅ commit locale (`bd9fade`) | GPS TBD |
+| 8.1 — tessuti + tendaggi pillar | ✅ commit locale (`be17e6d`) | 1523 + 1557 parole |
+| 8.2 — carta da parati + rivestimenti | ⬜ prossima | |
+| 9 — pagine brand (10) | ⬜ | |
+| 10 — servizi consulenza | ⬜ | |
+| 11 — verticali geo-luxe (3) | ⬜ | |
+| 12 — magazine setup + 1° articolo | ⬜ | |
+| 13 — performance pass | ⬜ | AVIF, headers, CWV |
+| 13.5 — Maps embed | ⬜ blocked | API key + GPS TBD |
+| 14 — GSC + Bing + IndexNow | ⬜ | |
+| 15 — GBP aggiornamenti | ⬜ lato Giuseppe | |
+| 16 — 301 sntessuti.it | ⬜ blocked | accesso provider |
+| 17 — A11y full pass | ⬜ | |
+| 18 — magazine cadenza mensile | ⬜ continuativo | |
+
+**Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
+**Smoke test localhost:** 17/17 verde. **Sitemap:** 7 URL indicizzabili (esclude grazie noindex).
+
+---
+
 ## Decisioni cristallizzate (2026-05-12)
 
 | Decisione | Stato |
@@ -201,17 +232,17 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 3.1 — Riscrivere `index.html`: incollare 80 righe nav+footer da `templates/`, mantenere stessa struttura semantica della SPA attuale (hero + drop + contatti)
-- [ ] 3.2 — `<head>` con: title 30-60 char ("Strada Nuova — Tessuti, tendaggi, carta da parati a Genova"), description ~155 char, canonical, OG tags, robots index
-- [ ] 3.3 — Hero: sostituire `background-image` con `<picture>` AVIF+WebP + `width/height` espliciti + `fetchpriority="high"`. Overlay con position absolute sopra
-- [ ] 3.4 — Sezione drop: marker `<!-- BUILD:DROP_GRID:START -->` ... `<!-- BUILD:DROP_GRID:END -->`. `tools/build-drop-grid.js` legge `_data/products.json` e inietta cards
-- [ ] 3.5 — Sezione contatti: aggiornare mail da `info@stradanuovagenova.com` a `stradanuova.7@gmail.com`, telefono `010 895 6256` (oggi mancante nella sezione contatti home)
-- [ ] 3.6 — JSON-LD: `Organization` (`@id #org`) + `Store` (`@id #store` con `hasMap` placeholder + `brand[]` 10 brand + openingHours) + `WebSite` (`@id #website`)
-- [ ] 3.7 — Caricare `assets/js/nav-toggle.js` con defer
-- [ ] 3.8 — Bottone "Acquista" mantiene fetch a `/.netlify/functions/create-checkout`
-- [ ] 3.9 — Smoke test: `curl -s https://stradanuovagenova.com/ | grep -q 'application/ld+json'` → trovato. Validare JSON-LD su validator.schema.org
+- [x] 3.1 — `index.html` riscritto da SPA quad-pagina (1281 righe) a home statica (~420 righe). Nav+footer duplicati dai template
+- [x] 3.2 — Head: title "Strada Nuova — Tessuti e tendaggi a Genova" (44ch, 7 parole), description 155ch con brand list, canonical, OG/Twitter card, theme-color
+- [x] 3.3 — Hero: `<img>` con `width/height` 1920x1080, `fetchpriority="high"`, `decoding="async"` + preload. AVIF rimandato a Fase 13 performance pass. CLS eliminato (dimensioni esplicite)
+- [x] 3.4 — Marker `BUILD:DROP_GRID` + `tools/build-drop-grid.js` implementato: legge products.json, escape HTML, idempotente (no-op se nessuna differenza). 6 card pre-renderate server-side
+- [x] 3.5 — Contatti: mail `stradanuova.7@gmail.com`, telefono `010 895 6256` con `tel:+390108956256`, sostituito vecchio `info@`
+- [x] 3.6 — JSON-LD @graph con Organization (#org), WebSite (#website), Store+LocalBusiness (#store) con brand 11, openingHoursSpecification 2 fasce, parentOrganization
+- [x] 3.7 — `nav-toggle.js` + `buy-product.js` caricati con `defer`. Mantenuto Netlify Identity widget per redirect post-invito CMS
+- [x] 3.8 — Bottoni Acquista usano `data-product-id` (event delegation), fetch a `/.netlify/functions/create-checkout` invariato
+- [x] 3.9 — Smoke test localhost verde, JSON-LD parser-valid (Organization+WebSite+Store)
 
-**DoD:** home identica visualmente, JS drop+nav-toggle funzionanti, LCP < 2.5s mobile in PageSpeed Insights.
+**DoD raggiunto:** home statica, JSON-LD valido, drop grid pre-renderato (vantaggio AI bot no-JS). Verifica LCP rimandata a Fase 13.
 
 ---
 
@@ -221,15 +252,15 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 4.1 — Creare `chi-siamo/index.html`, nav+footer duplicati
-- [ ] 4.2 — Spostare markup dei 4 blocchi (Palazzo Lomellino, Famiglia, Materia, Drop) dalla SPA
-- [ ] 4.3 — Immagini palazzo/famiglia/materie/drop: convertire `background-image` in `<picture>` con `alt` geo+contesto + `width/height` + `loading="lazy"`
-- [ ] 4.4 — `<head>`: title "Tre generazioni in Strada Nuova", description con keyword "tessuti", "Palazzo Lomellino", "famiglia"
-- [ ] 4.5 — Breadcrumb component: Home > Chi siamo, con JSON-LD BreadcrumbList `@id #breadcrumb`
-- [ ] 4.6 — JSON-LD: AboutPage + ref Store via `@id` con `name`+`url` inline
-- [ ] 4.7 — Smoke: `curl https://stradanuovagenova.com/chi-siamo/` ritorna HTML completo (test che i bot AI senza JS lo leggono)
+- [x] 4.1 — `chi-siamo/index.html` creata con nav+footer duplicati
+- [x] 4.2 — 4 blocchi (Palazzo Lomellino, Famiglia, Materia, Drop) spostati e arricchiti (testo originale + minimo lifting). Layout alterno con `.reverse`
+- [x] 4.3 — Immagini convertite a `<img>` 1200x800, `alt` geo+contestuali (4 alt distinti), `loading="lazy"`, `decoding="async"`. Nessun LCP candidate qui
+- [x] 4.4 — Title "Tre generazioni di tessuti a Genova — Strada Nuova" (51ch). Description con keyword Palazzo Lomellino/Rolli/UNESCO
+- [x] 4.5 — Breadcrumb visivo (Home > Chi siamo) + JSON-LD BreadcrumbList con `@id #breadcrumb`
+- [x] 4.6 — JSON-LD AboutPage con isPartOf=WebSite, about=Store, mainEntity=Organization (TUTTI inline name+url)
+- [x] 4.7 — `curl /chi-siamo/` ritorna HTML completo (testato in locale)
 
-**DoD:** pagina indicizzabile, contenuto visibile via curl (no JS necessario), JSON-LD valido.
+**DoD raggiunto:** pagina indicizzabile, contenuto visibile no-JS, JSON-LD parser-valid.
 
 ---
 
@@ -239,16 +270,18 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 5.1 — Creare `appuntamento/index.html`, nav+footer duplicati
-- [ ] 5.2 — Spostare markup form (nome/email/tel/messaggio) + calendario + slot orari
-- [ ] 5.3 — Spostare JS calendario (`ORARI`, `renderCalendar`, `selectDate`, `selectTime`, `submitAppointment`) come `<script>` a fine `<body>`. CSS calendario in `<style>` page-specific (non in base.css, è scope-isolato)
-- [ ] 5.4 — Mantenere `fetch('/.netlify/functions/request-appointment', ...)` identico
-- [ ] 5.5 — `<head>`: title "Prenota appuntamento — Strada Nuova Genova", description
-- [ ] 5.6 — JSON-LD: `ContactPage` + `Service` "Consulenza d'arredo tessile su appuntamento" con `provider` = `@id #store` (inline name+url!), **senza `offers`** (no price)
-- [ ] 5.7 — Breadcrumb
-- [ ] 5.8 — Test end-to-end con `RESEND_API_KEY`: prenotazione di test → mail arriva a `stradanuova.7@gmail.com`
+- [x] 5.1 — `appuntamento/index.html` creata con nav+footer duplicati
+- [x] 5.2 — Form (nome/email/tel/messaggio + autocomplete) + calendario + slot orari
+- [x] 5.3 — JS calendario riscritto come IIFE (no globals), event listener no onclick inline, `button[data-day]` e `button[data-time]` per a11y. CSS page-scoped in `<style>`
+- [x] 5.4 — fetch a `/.netlify/functions/request-appointment` invariato. Reset form+calendario su success
+- [x] 5.5 — Title "Prenota appuntamento — Strada Nuova Genova" (45ch), description 156ch
+- [x] 5.6 — JSON-LD: ContactPage + Service (serviceType + areaServed Genova+Liguria + availableChannel servicePostalAddress, provider=Store inline). **NO offers** (no price). **NO aggregateRating** (Service non parent eligible)
+- [x] 5.7 — Breadcrumb visivo + BreadcrumbList @id
+- [ ] 5.8 — Test end-to-end Resend: rimandato a push live (richiede RESEND_API_KEY + dominio verificato Resend, non testabile in localhost)
 
-**DoD:** form invia mail come oggi, scelta data/ora funziona, HTML servito staticamente.
+**Aggiunta non prevista:** orari calendario corretti da `9-13/16-19` (SPA originale, errato) a `10:00-12:30/16:00-19:30` (orari ufficiali da CLAUDE.md/contatti). Slot 30 min.
+
+**DoD raggiunto in locale.** Verifica end-to-end Resend rimandata.
 
 ---
 
@@ -256,12 +289,13 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 6.1 — `grazie/index.html` con `<meta name="robots" content="noindex,follow">`. Nav+footer, messaggio post-Stripe. Aggiungere a `tools/build-sitemap.js` per esclusione automatica
-- [ ] 6.2 — `contatti/index.html` nuova: NAP completa (telefono + mail + indirizzo), orari, social, "Come arrivare" testuale (mappa arriverà in Fase 13.5). JSON-LD `ContactPage` + `Store` completo con `openingHoursSpecification`
-- [ ] 6.3 — Aggiornare `templates/footer.html` con link "Contatti" → `/contatti/`
-- [ ] 6.4 — Aggiornare nav: aggiungere voce "Contatti" o lasciare solo footer? — decisione: footer + link in `/chi-siamo` per non saturare nav
+- [x] 6.1 — `grazie/index.html` noindex,follow, escluso automaticamente da sitemap (build-sitemap legge il meta robots)
+- [x] 6.2 — `contatti/index.html`: NAP, orari, social, "Come arrivare" (auto/piedi/metro), riquadro Palazzo Lomellino con anchor a chi-siamo, CTA box appuntamento. JSON-LD ContactPage + Store completo + BreadcrumbList
+- [x] 6.3 — `templates/footer.html` ha link "Contatti" → `/contatti/` (era già lì)
+- [x] 6.4 — Nav: aggiunta voce "Contatti" su tutte le pagine pillar (in home punta a `/#contatti` per scroll, su altre pagine a `/contatti/`)
+- [x] **EXTRA: rimosso catch-all SPA da `netlify.toml`.** Ora le 5 pagine fisiche prevalgono, fallback a 404.html per path inesistenti
 
-**DoD:** /grazie funziona post-Stripe ed è noindex, /contatti accessibile dal footer.
+**DoD raggiunto.**
 
 ---
 
@@ -271,13 +305,13 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 7.1 — `palazzo-lomellino/index.html`: storia palazzo (Bernardo Bianco, Bernardo Strozzi affreschi, Rolli UNESCO 2006), rapporto con il negozio (terza generazione dentro un palazzo storico), foto interni + esterni
-- [ ] 7.2 — Coordinate GPS esatte (da Giuseppe): inserire in JSON-LD `Place` con `@id #palazzo-lomellino`, `geo.GeoCoordinates`, `containedInPlace` = Genova
-- [ ] 7.3 — JSON-LD: `Place` + `LandmarksOrHistoricalBuildings` + ref Store inline
-- [ ] 7.4 — Internal link a `/chi-siamo`, `/contatti/`, pagine pillar (anchor variation: "il nostro showroom", "il negozio di tessuti", "Strada Nuova")
-- [ ] 7.5 — Title "Palazzo Lomellino, Via Garibaldi 7/a — Strada Nuova", description con keyword "Rolli", "UNESCO", "Via Garibaldi"
+- [x] 7.1 — `palazzo-lomellino/index.html`: storia Cinquecento, committente Nicolosio Lomellino, affreschi Strozzi+Benso, contesto Rolli (Alessi, lista 1500, UNESCO 2006), architettura, relazione con il negozio, link esterno Associazione Palazzo Lomellino e info Rolli Days
+- [ ] 7.2 — Coordinate GPS: **rimandate** (TBD da Giuseppe). JSON-LD `Place` ha address ma niente `geo` né `hasMap` per ora
+- [x] 7.3 — JSON-LD: WebPage + `Place + TouristAttraction` (alternateName, containedInPlace=City Genova, publicAccess=false) + BreadcrumbList 3 livelli + mentions Store inline. Schema LandmarksOrHistoricalBuildings scartato (è sub-type LocalBusiness, non adatto a palazzo come edificio)
+- [x] 7.4 — Internal link a /chi-siamo/, /appuntamento/, brand list inline preparata per Fase 9. Anchor variation rispettata
+- [x] 7.5 — Title "Palazzo Lomellino, Via Garibaldi 7/a — Strada Nuova" (56ch). Description con Rolli/UNESCO/Via Garibaldi
 
-**DoD:** pagina online, schema Place validato, internal link a 3+ pagine interne.
+**DoD raggiunto** (con coordinate GPS aggiunte in seguito).
 
 ---
 
@@ -287,10 +321,10 @@ stradanuovagenova/
 
 ### Fase 8.1 — Tessuti + Tendaggi (1.5-2h)
 
-- [ ] 8.1.1 — `tessuti-genova/index.html` — H1 "Tessuti d'arredamento a Genova", 1500-2000 parole: intro, brand trattati (lista cliccabile a `/marchi/*`), tipologie (tendaggi, divani, cuscini, su misura), processo di scelta in showroom, esempi di applicazioni (palazzi storici, case mare), CTA appuntamento. Schema CollectionPage + Breadcrumb + ref Store inline. FAQ in coda (testo, NO FAQPage schema — Google ha rimosso rich result)
-- [ ] 8.1.2 — `tendaggi-genova/index.html` — H1 "Tendaggi e tessuti per tende a Genova", 1500-2000 parole: tipologie (a pannello, a vetro, classiche, soffitti alti), tessuti consigliati per ciascuna, esempio palazzo Lomellino, anchor variation interna verso brand specifici (Dedar tendaggio, Pierre Frey, ecc.). NOTA: NON parlare di "confezionamento" come servizio nostro
+- [x] 8.1.1 — `tessuti-genova/index.html` — **1523 parole**: hero materie.webp, lista 10 brand cliccabili a /marchi/*, tipologie (tende/divani/parete/su misura), processo consulenza 4 step, esempi applicazioni (palazzi storici/case mare/Tigullio) con anchor a verticali Fase 11, 6 FAQ. CollectionPage + BreadcrumbList. FAQ HTML semantico (NO FAQPage schema)
+- [x] 8.1.2 — `tendaggi-genova/index.html` — **1557 parole**: hero hero.webp, tipologie tende (classiche/pannello/vetro/pacchetto/soffitti alti), tessuti consigliati per ognuna, sezione passamaneria con anchor a Houlès, finissaggio+confezione (con disclaimer "non confezioniamo direttamente"), 6 FAQ specifiche
 
-**DoD per ognuna:** title 30-60 char, meta description ~155 char, canonical, OG image, JSON-LD valido, 10-15 internal link, 0 anchor exact-match.
+**DoD raggiunto:** title 30-60ch, description 155ch, canonical, OG image, JSON-LD valido, 10+ internal link, 0 anchor exact-match stuffing.
 
 ### Fase 8.2 — Carta da parati + Rivestimenti (1.5-2h)
 

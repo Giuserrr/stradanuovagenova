@@ -48,18 +48,37 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 
 ## 🟡 In corso
 
-- [x] CLAUDE.md stato dell'arte
-- [x] Backlog
+### Migrazione sito SEO (lavoro locale, no push)
+- [x] **Fase 0** setup repo vanilla (pushato `dc6da8c`)
+- [x] **Fase 1** asset condivisi base.css/font/templates/store.js (pushato `ae4be0b`)
+- [x] **Fase 2** robots.txt + llms.txt + sitemap.xml + 404.html (pushato `76452ac`)
+- [x] **Fase 3** home statica (locale `506d96a`)
+- [x] **Fase 4** chi-siamo (locale `630f1ea`)
+- [x] **Fase 5** appuntamento + form Resend (locale `7b2fb85`, test end-to-end rimandato)
+- [x] **Fase 6** grazie + contatti + rimosso catch-all SPA (locale `21291bc`)
+- [x] **Fase 7** palazzo-lomellino asset autorità (locale `bd9fade`)
+- [x] **Fase 8.1** pillar tessuti-genova (1523 parole) + tendaggi-genova (1557 parole) (locale `be17e6d`)
+- [ ] Fase 8.2 carta da parati + rivestimenti murali
+- [ ] Fase 9 brand pages (10 + hub)
+- [ ] Fase 10 servizi consulenza
+- [ ] Fase 11 verticali geo-luxe
+- [ ] Fase 12 magazine setup + 1° articolo
+- [ ] Fase 13 performance pass (AVIF, headers, CWV)
+- [ ] Fase 14 GSC + Bing + IndexNow + gsc.js
+- [ ] Fase 17 a11y full pass
+
+### GBP (lato Giuseppe)
 - [x] GBP — sito web aggiornato a stradanuovagenova.com
-- [x] GBP — categorie secondarie aggiunte (tende, carta da parati, interior designer, moquette/tappeti)
+- [x] GBP — categorie secondarie aggiunte
 - [ ] GBP — descrizione: applicata? confermare
-- [ ] GBP — servizi: da popolare (vedi lista pronta sotto in MOSSE SUCCESSIVE)
+- [ ] GBP — servizi: da popolare (lista in MOSSE SUCCESSIVE)
+- [ ] GBP — rimuovere categoria "Negozio di moquette e tappeti"
 - [ ] GBP — foto interni Palazzo Lomellino + showroom (almeno 15-20)
-- ~~GBP — Q&A precaricate~~ **CANCELLATO**: funzione Q&A spenta da Google il 3 dicembre 2025. Migrare i contenuti FAQ nel sito.
-- [ ] GBP — campagna recensioni (focus su recency: 50 recenti > 300 vecchie nel 2026)
-- [ ] GBP — video brevi (≤30s, almeno 1 al mese — signal emergente 2026)
-- [ ] GBP — Products popolati (surface usata da "Ask Maps" Gemini per query commerciali)
-- [ ] 301 sntessuti.it → stradanuovagenova.com
+- ~~GBP — Q&A precaricate~~ **CANCELLATO**: Google ha disattivato il 3 dic 2025
+- [ ] GBP — campagna recensioni (focus su recency 2026)
+- [ ] GBP — video brevi (≤30s, almeno 1 al mese)
+- [ ] GBP — Products popolati (surface "Ask Maps" Gemini)
+- [ ] 301 sntessuti.it → stradanuovagenova.com (richiede accesso provider)
 
 ---
 
@@ -68,6 +87,11 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] Audit struttura sito esistente
 - [x] Keyword research (3 slice paralleli: brand / categoria-locale / intent-competitor)
 - [x] Set keyword consolidato con cluster, intent, priorità, gap
+- [x] SPA → multi-pagina (8 pagine pubblicate in locale: home + chi-siamo + appuntamento + grazie + contatti + palazzo-lomellino + tessuti-genova + tendaggi-genova)
+- [x] Robots.txt con policy AI bot granulare, llms.txt indice markdown
+- [x] Sitemap auto-generato da git log, esclude noindex
+- [x] JSON-LD globale (Organization+Store+WebSite) + page-specific (AboutPage, ContactPage, Service, Place+TouristAttraction, CollectionPage, BreadcrumbList) tutti con cross-page @id ref name+url inline
+- [x] Catch-all SPA `/* → /index.html` rimosso, ora sito statico multi-pagina vero
 
 ---
 

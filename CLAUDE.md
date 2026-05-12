@@ -7,82 +7,116 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 - Netlify Site ID: 3119e79e-ed19-4cbd-ac5f-f4fac7233c8e (team digitalwow)
 - Email negozio: stradanuova.7@gmail.com
 
-## Stack
+## Stack (aggiornato 2026-05-12)
 
-### Stato attuale (pre-migrazione SEO)
-- SPA vanilla: **un unico [index.html](index.html)** (~1280 righe, HTML+CSS+JS inline)
-- Routing SPA con `pushState`/`popstate` + hash, redirect catch-all `/* → /index.html status=200` in [netlify.toml](netlify.toml)
-- CMS: **Decap CMS** v3.3.3 con git-gateway su `/admin`
-- Auth CMS: **Netlify Identity** (invite-only, utente g.rizzo86@gmail.com)
-- Functions Node.js con `node_bundler = "nft"`
-- Pagamenti: Stripe Checkout — [netlify/functions/create-checkout.js](netlify/functions/create-checkout.js)
-- Email appuntamenti: Resend API — [netlify/functions/request-appointment.js](netlify/functions/request-appointment.js)
+**Migrazione SEO in corso (Fasi 0-8.1 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 8 pagine fisiche in locale, 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-8.1 ancora locali in attesa del push finale.
 
-### Stack target (post-migrazione SEO, vedi [PLAN.md](PLAN.md))
-- **HTML5 vanilla multi-pagina**, ~20-25 file in cartelle dedicate (`/tessuti-genova/`, `/marchi/dedar/`, ecc.)
-- **Nessun framework, nessun bundler.** Duplicazione esplicita di nav/footer per pagina (~80 righe), accettabile fino a 25 pagine, riduce rischio rottura Decap CMS
-- Marker pattern `<!-- BUILD:X:START/END -->` per zone auto-generate (drop grid da products.json, magazine latest, FAQ)
-- Script Node mirati in `tools/`: `build-sitemap.js`, `build-magazine.js` (`marked` + `gray-matter`), `build-drop-grid.js`, `validate-jsonld.js`, `smoke-test.js`, `gsc.js`
-- CSS condiviso in `assets/css/base.css` (NON inline), font Inter self-host woff2
-- Decap CMS + Netlify Functions invariati
-- Catch-all SPA rimosso da netlify.toml, 404.html reale come fallback
+### Caratteristiche
+- **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
+- **Catch-all SPA `/* → /index.html` rimosso** da netlify.toml in Fase 6
+- Nav + footer **duplicati esplicitamente** in ogni pagina (~16-20 righe). Pattern accettato fino a 25 pagine, riduce rischio rottura Decap CMS, diff-friendly
+- Marker `<!-- BUILD:X:START/END -->` per zone auto-generate (drop grid da `_data/products.json`; magazine in Fase 12)
+- CSS condiviso in [assets/css/base.css](assets/css/base.css) — **blocking, non async** (anti-pattern critical inline scartato dopo lezione sister project)
+- Font Inter 400+600 **self-host woff2** in [assets/fonts/](assets/fonts/) (109KB + 112KB da rsms.me). Zero richieste a Google Fonts CDN
+- JS condiviso: [assets/js/nav-toggle.js](assets/js/nav-toggle.js), [assets/js/buy-product.js](assets/js/buy-product.js). Event listener no `onclick` inline
+- Script Node in [tools/](tools/): `store.js`, `build-sitemap.js`, `build-drop-grid.js`, `build-magazine.js` (stub Fase 12), `smoke-test.js`
+- Decap CMS v3.3.3 + Netlify Identity **invariati** su `/admin`
+- Netlify Functions `create-checkout` + `request-appointment` **invariate** (`node_bundler = "nft"`)
+- Build command: `npm install && npm run build` su Netlify
 
 ## Struttura
 
 ```
 stradanuovagenova/
-├── index.html                          ← SPA completa
-├── netlify.toml                        ← nft bundler + redirect SPA
-├── package.json                        ← stripe, @netlify/blobs, resend
-├── package-lock.json                   ← OBBLIGATORIO nel repo
-├── _data/
-│   └── products.json                   ← prodotti drop (CMS-managed)
-├── admin/
-│   ├── index.html                      ← Decap CMS + Identity widget
-│   └── config.yml                      ← schema CMS
-├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp)
+├── index.html                          ← home statica (ex SPA)
+├── chi-siamo/index.html
+├── appuntamento/index.html             ← form Resend + calendario
+├── grazie/index.html                   ← post-Stripe, noindex
+├── contatti/index.html
+├── palazzo-lomellino/index.html        ← asset autorità
+├── tessuti-genova/index.html           ← pillar 1523 parole
+├── tendaggi-genova/index.html          ← pillar 1557 parole
+├── 404.html                            ← fallback
+├── robots.txt llms.txt sitemap.xml
+├── netlify.toml                        ← nft bundler, niente catch-all
+├── package.json                        ← stripe, resend, @netlify/blobs, marked, gray-matter
+├── _data/products.json                 ← CMS-managed
+├── admin/index.html admin/config.yml   ← Decap CMS
+├── assets/
+│   ├── css/base.css
+│   ├── fonts/inter-{400,600}.woff2
+│   └── js/{nav-toggle,buy-product}.js
+├── templates/{nav,footer}.html         ← snippet da duplicare in pagine
+├── tools/                              ← build/validate scripts
+│   ├── store.js                        ← NAP + JSON-LD helpers
+│   ├── build-sitemap.js
+│   ├── build-drop-grid.js
+│   ├── build-magazine.js               (stub Fase 12)
+│   └── smoke-test.js
+├── magazine/{content,articles}/        ← Fase 12 placeholder
+├── img/                                ← hero, palazzo-lomellino, famiglia, materie, drop (webp 1920x1080 / 1200x800)
 └── netlify/functions/
     ├── create-checkout.js
     └── request-appointment.js
 ```
 
-## Pagine SPA
+## Pagine pubblicate
 
-| Path | Sorgente | Note |
-|------|----------|------|
-| `/` | [index.html:717-780](index.html#L717-L780) | Hero (img/hero.webp) + sezione Drop (#drop, griglia da JSON) + Contatti (#contatti) |
-| `/chi-siamo` | [index.html:782-829](index.html#L782-L829) | 4 blocchi alternati foto/testo: Palazzo, Famiglia, Materia, Drop |
-| `/appuntamento` | [index.html:831-871](index.html#L831-L871) | Form (nome, email, tel, msg) + calendario interattivo; orari mar-sab 9-13 / 16-19, slot ogni 30 min ([index.html:1005-1014](index.html#L1005-L1014)) |
-| `/grazie` | [index.html:873-881](index.html#L873-L881) | Post-checkout Stripe |
-| `/admin` | [admin/index.html](admin/index.html) | Decap CMS |
+| URL | File | Schema JSON-LD | Note |
+|-----|------|----------------|------|
+| `/` | [index.html](index.html) | Organization + WebSite + Store+LocalBusiness | Hero `<img>` fetchpriority=high, drop pre-renderato |
+| `/chi-siamo/` | [chi-siamo/index.html](chi-siamo/index.html) | AboutPage + BreadcrumbList | 4 blocchi (Palazzo/Famiglia/Materia/Drop) |
+| `/appuntamento/` | [appuntamento/index.html](appuntamento/index.html) | ContactPage + Service + BreadcrumbList | Form + calendario JS IIFE, orari mar-sab 10-12:30 / 16-19:30 slot 30min |
+| `/grazie/` | [grazie/index.html](grazie/index.html) | (none) | Post-Stripe, **noindex,follow** |
+| `/contatti/` | [contatti/index.html](contatti/index.html) | ContactPage + Store + BreadcrumbList | NAP completa + come arrivare + CTA appuntamento |
+| `/palazzo-lomellino/` | [palazzo-lomellino/index.html](palazzo-lomellino/index.html) | WebPage + Place+TouristAttraction + BreadcrumbList | Asset autorità SEO, storia palazzo |
+| `/tessuti-genova/` | [tessuti-genova/index.html](tessuti-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1523 parole + 6 FAQ |
+| `/tendaggi-genova/` | [tendaggi-genova/index.html](tendaggi-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1557 parole + 6 FAQ |
+| `/admin/` | [admin/index.html](admin/index.html) | (CMS) | Decap CMS, robots disallow |
+
+**Sitemap:** 7 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
 
 ## Drop / Stripe
 
 - Prodotti in [_data/products.json](_data/products.json): 6 pouf (N.01–N.06), schema `{id, name, detail, price, stock, available, image, stripePrice}`
-- Render lato client da `fetch('/_data/products.json')` con cache buster ([index.html:898-908](index.html#L898-L908))
-- Acquisto chiama `POST /.netlify/functions/create-checkout` con `{productId}` → ritorna URL Stripe Checkout
-- La function legge `products.json` da filesystem (NON da JSON in build), valida `available && stock > 0`, crea sessione one-shot con `price_data` dinamico (no Stripe Price ID fisso necessario), shipping IT-only
-- Success URL → `/grazie?session_id=…`, cancel URL → `/#drop`
+- **Pre-rendering server-side**: [tools/build-drop-grid.js](tools/build-drop-grid.js) inietta le card tra `<!-- BUILD:DROP_GRID:START/END -->` di index.html. Idempotente. Vantaggio: AI bot no-JS vedono i prodotti
+- Bottone "Acquista" usa `data-product-id`, [assets/js/buy-product.js](assets/js/buy-product.js) fa event delegation → fetch `/.netlify/functions/create-checkout`
+- Function legge `products.json` da filesystem, valida `available && stock > 0`, crea sessione one-shot Stripe con `price_data` dinamico, shipping IT-only
+- Success URL → `/grazie/?session_id=…`, cancel URL → `/#drop`
 
 ## Appuntamento / Resend
 
 - Function manda 2 email: una al negozio (`stradanuova.7@gmail.com`) e una di conferma al cliente
 - From: `Strada Nuova <noreply@stradanuovagenova.com>` — **richiede dominio verificato su Resend**
 - Require di `resend` è lazy dentro try/catch (NON top level — vedi lezioni imparate)
+- Calendario page-scoped IIFE, orari mar-sab 10:00-12:30 / 16:00-19:30 (corretti rispetto SPA originale che aveva 9-13/16-19)
 
 ## CMS
 
 - Backend git-gateway su branch `main`, scrive su `_data/products.json` e `_data/info.json` (quest'ultimo non esiste ancora, lo crea al primo save)
 - Schema con 2 collection: "Prodotti Drop" (list widget) + "Info Negozio" (email/tel/social)
 - Media folder: `img/`
-- Le scritture del CMS sono commit sul repo → se il dev lavora in locale e c'è stato un save CMS: `git stash && git pull --rebase origin main && git stash pop`
+- Dopo un save CMS: `git stash && git pull --rebase origin main && git stash pop`
+- **Trigger build:** quando il CMS committa, l'hook Netlify rilancia `npm install && npm run build` → `build-drop-grid` re-inietta automaticamente le card aggiornate nella home
+
+## SEO highlights
+
+- **JSON-LD pattern:** ogni cross-page `@id` ref ha `name` + `url` inline (Google processa page-by-page, no resolution cross-page)
+- **Title:** 30-60 char, max 7 parole, no brand trailing, no anno generico
+- **Description:** ~155 char, info aggiuntiva al title, no keyword stuffing
+- **Internal linking:** anchor variation primaria, 0 exact-match stuffing
+- **A11y:** skip-link, `<main id="main">`, `<button aria-expanded>` per hamburger, `aria-live="polite"` per status, prefers-reduced-motion in base.css
+- **robots.txt:** allow AI bot (Google-Extended, GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, Applebot-Extended). Disallow Bytespider/CCBot/Diffbot/Omgilibot/ImagesiftBot
+- **llms.txt:** indice markdown delle pagine principali per crawler AI
+- **NO FAQPage schema:** Google ha rimosso rich result in maggio 2026. FAQ tenute come HTML semantico (`<details>`/`<summary>`)
+- **NO Service.offers** senza price, **NO Service.aggregateRating** (Service non parent eligible rich snippet)
 
 ## Stile
 
 - Palette: `--bg #1a1a1a`, `--bg-card #242424`, `--text #f0f0f0`, `--text-dim #888`, `--accent #e8531e` (arancio logo SN), `--accent-hover #ff6a35`, `--border #333`
-- Font: Inter (400/500/600/700) da Google Fonts
+- Font: Inter 400/600 self-host woff2
 - Ispirazione: Supreme streetwear ma sobrio. Tono frasi corte, zero retorica
-- Mobile: menu fullscreen overlay con `!important` ([index.html:645+](index.html#L645)), toggle X ↔ ☰
+- Mobile: menu fullscreen overlay con `!important`, toggle X ↔ ☰
 
 ## ENV vars su Netlify
 
@@ -94,30 +128,29 @@ stradanuovagenova/
 | `NETLIFY_BLOBS_TOKEN` | non in uso attivo nelle functions correnti | (riservato per Blobs futuri) |
 | `ADMIN_KEY` | non in uso attivo | (riservato) |
 
-## Stato attuale (aggiornato al 2026-05-12)
+## Stato (2026-05-12)
 
-✅ Site live con SSL su stradanuovagenova.com
-✅ Tutte e 4 le pagine SPA funzionanti
-✅ CMS Decap configurato su `/admin` con Identity widget e Decap v3.3.3 pinned
-✅ Foto reali caricate in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
-✅ Menu mobile fix con !important + toggle X
-✅ Calendario appuntamenti funzionante (orari mar-sab)
-✅ GBP migrato a stradanuovagenova.com (era su sntessuti.it)
-✅ GBP categorie secondarie aggiunte
-✅ Audit SEO 2026 completato con fonti datate (vedi memoria `feedback_seo_2026` + `feedback_seo_pattern_verificati`)
-✅ Decisione stack target: HTML5 vanilla multi-pagina (vedi [PLAN.md](PLAN.md))
-✅ Brand trattati confermati (10 brand premium, vedi [BACKLOG.md](BACKLOG.md))
+✅ Sito live con SSL su stradanuovagenova.com
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 8.1** (8 pagine fisiche)
+✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
+✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
+✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
+✅ robots.txt, llms.txt, sitemap.xml, 404.html, JSON-LD su tutte le pagine
+✅ Pillar tessuti-genova + tendaggi-genova online (1500+ parole each)
+✅ Smoke test 17/17 verde contro localhost
 
-🟡 **In partenza:** migrazione da SPA singola a multi-pagina HTML5 vanilla SEO-first (18 fasi descritte in [PLAN.md](PLAN.md))
+🟡 **In corso:** Fasi 8.2 → 18 (carta da parati, rivestimenti, brand, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
+
+⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 
 ⚠️ **Da verificare/finire:**
 - `STRIPE_SECRET_KEY` configurata sulle env vars Netlify? Senza, il checkout torna 500
-- `RESEND_API_KEY` configurata? E dominio `stradanuovagenova.com` verificato su Resend (altrimenti `from: noreply@...` non parte)
-- Stock dei pouf NON viene decrementato dopo acquisto (no webhook Stripe)
-- Conferma manuale appuntamenti: la mail è solo "richiesta ricevuta"
-- `_data/info.json` non esiste ancora — il CMS lo creerà al primo save dalla collection "Info Negozio"
-- 301 da sntessuti.it (vedi BACKLOG)
-- Coordinate GPS esatte negozio + URL `maps.app.goo.gl/<id>` GBP per `hasMap` JSON-LD
+- `RESEND_API_KEY` configurata? Dominio `stradanuovagenova.com` verificato su Resend?
+- Test end-to-end form appuntamento Fase 5 (rimandato a push live)
+- Stock pouf NON decrementato dopo acquisto (no webhook Stripe)
+- `_data/info.json` non esiste ancora — il CMS lo creerà al primo save
+- Coordinate GPS esatte negozio + Place ID GBP per `hasMap` (Fase 13.5)
+- 301 da sntessuti.it (richiede accesso provider vecchio sito)
 
 ## Lezioni imparate (NON ripetere)
 
@@ -129,13 +162,18 @@ stradanuovagenova/
 6. Git push rejected = qualcuno ha committato dal CMS → `git stash && git pull --rebase origin main && git stash pop`
 7. Git Gateway perde periodicamente il token GitHub → rigenerare PAT e reinserirlo nelle settings Netlify Identity
 8. **Non aggiungere MAI funzionalità non richieste** — solo quello che chiede Giuseppe
-9. Dare sempre il comando `git push` dopo ogni modifica
-10. Apici singoli nei commit message per evitare problemi con zsh + `!`
+9. Apici singoli nei commit message per evitare problemi con zsh + `!`
+10. **Critical CSS inline + main.css async senza copertura img → CLS massivo.** Mantenere CSS blocking, accettare ~50ms FCP extra (lezione costata 1 revert su sister project)
+11. **Cross-page `@id` reference senza inline `name`+`url`** → 3 warning GSC. Sempre includerli
+12. **Service.offers senza `price`** o **Service.aggregateRating** → schema invalido. Service non parent eligible rich snippet
+13. **`fade-in` su elemento LCP candidate** → Lighthouse aspetta la transizione, LCP crash
 
-## File da ignorare / sporcizia repo
+## File da ignorare
 
-- `.DS_Store` (root e `img/`) — untracked, andrebbero in `.gitignore` ma per ora non è un problema
-- `PROMPT-RIPRESA.md` — untracked, è il vecchio bootstrap prompt; questo file lo sostituisce. Si può cancellare quando vuoi
+- `.DS_Store` (root e `img/`) — coperti da `.gitignore`
+- `PROMPT-RIPRESA.md` — vecchio bootstrap prompt, da cancellare
+- `_test-pilot/` — pagine di test locali, in `.gitignore`
+- `node_modules/`, `.cache/`, `.env*` — in `.gitignore`
 
 ## Profilo utente
 
