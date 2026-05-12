@@ -28,8 +28,8 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale (`1a24c73`) | 832 + 988 parole |
 | 9.2 — Dedar + Pierre Frey | ✅ commit locale (`ac115c8`) | 902 + 966 parole |
 | 9.3 — Designers Guild + Rubelli | ✅ commit locale (`ac1eac4`) | 914 + 1010 parole |
-| 9.4 — Sanderson/Morris + Zoffany | ✅ commit locale | 1050 + 944 parole |
-| 9.5 — Houlès + Etro Tessuti | ⬜ | |
+| 9.4 — Sanderson/Morris + Zoffany | ✅ commit locale (`31d6d0e`) | 1050 + 944 parole |
+| 9.5 — Houlès + Etro Tessuti | ✅ commit locale | 999 + 883 parole |
 | 10 — servizi consulenza | ⬜ | |
 | 11 — verticali geo-luxe (3) | ⬜ | |
 | 12 — magazine setup + 1° articolo | ⬜ | |
@@ -42,7 +42,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 18 — magazine cadenza mensile | ⬜ continuativo | |
 
 **Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 28/28 verde. **Sitemap:** 18 URL indicizzabili (esclude grazie noindex).
+**Smoke test localhost:** 30/30 verde. **Sitemap:** 20 URL indicizzabili (esclude grazie noindex).
 
 ---
 
@@ -375,10 +375,10 @@ stradanuovagenova/
 - [x] 9.4.1 — `marchi/sanderson-morris-co/index.html` (1050 parole): copre due brand sister del Sanderson Design Group. Sanderson dal 1860 (country inglese, botanico) + Morris &amp; Co (archivio William Morris, Willow Bough/Strawberry Thief/Pimpernel, 200 anni dalla nascita). 4 applicazioni genovesi (studio/biblioteca, stanze bambini, camera padronale Morris parete-soggetto, dimore Ottocento Carignano). JSON-LD `about: [Brand, Brand]` array per copertura corretta dei due brand. Prezzi 60-300 €/m
 - [x] 9.4.2 — `marchi/zoffany/index.html` (944 parole): brand inglese più adatto a Genova del catalogo (palette terrosa desaturata, damaschi neoclassici, motivi persiani). 4 applicazioni (Rolli salone, sala da pranzo collina, studio/biblioteca, bagno rappresentanza). Sezione "carta o tessuto" per il coordinato. Prezzi 70-320 €/m
 
-### Fase 9.5 — Houlès + Etro Tessuti (1h)
+### Fase 9.5 — Houlès + Etro Tessuti (1h) ✅
 
-- [ ] 9.5.1 — `marchi/houles/index.html`
-- [ ] 9.5.2 — `marchi/etro-tessuti/index.html`
+- [x] 9.5.1 — `marchi/houles/index.html` (999 parole): casa francese passamaneria dal 1928. 5 famiglie prodotto (cordoncini, bordure, frange, tirelle, galloni). 4 applicazioni (boiserie tessile obbligatorio, tendaggi importanti, mobili antichi, cuscini/accessori). Prezzi per metro lineare 8-150 €/m. Esempio budget integrato boiserie completa.
+- [x] 9.5.2 — `marchi/etro-tessuti/index.html` (883 parole): divisione tessuti d'arredamento di Etro (Milano 1968). Disambiguazione esplicita Etro Tessuti vs Etro Home in apertura (richiesta da decisione brand). Cifra paisley signature, palette mediterranee, jacquard complessi. 4 applicazioni (ritappezzeria contemporanea, cuscini/plaid, tendaggi mediterranei, interni di personalità). Prezzi 90-600 €/m
 
 ### Template brand page (600-1000 parole)
 

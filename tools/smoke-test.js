@@ -30,6 +30,8 @@ const URLS = [
   { path: '/marchi/rubelli/',             expected: 200, note: 'brand Rubelli' },
   { path: '/marchi/sanderson-morris-co/', expected: 200, note: 'brand Sanderson + Morris' },
   { path: '/marchi/zoffany/',             expected: 200, note: 'brand Zoffany' },
+  { path: '/marchi/houles/',              expected: 200, note: 'brand Houles' },
+  { path: '/marchi/etro-tessuti/',        expected: 200, note: 'brand Etro Tessuti' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },
