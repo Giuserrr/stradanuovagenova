@@ -9,7 +9,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 ## Stack (aggiornato 2026-05-12)
 
-**Migrazione SEO in corso (Fasi 0-8.2 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 10 pagine fisiche in locale, 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-8.2 ancora locali in attesa del push finale.
+**Migrazione SEO in corso (Fasi 0-9.1 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 13 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 2 brand pages + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-9.1 ancora locali in attesa del push finale.
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -38,6 +38,9 @@ stradanuovagenova/
 ├── tendaggi-genova/index.html          ← pillar 1557 parole
 ├── carta-da-parati-genova/index.html   ← pillar 1929 parole
 ├── rivestimenti-murali-genova/index.html ← pillar 1672 parole
+├── marchi/index.html                   ← hub 10 brand
+├── marchi/elitis/index.html            ← brand 832 parole
+├── marchi/cole-and-son/index.html      ← brand 988 parole
 ├── 404.html                            ← fallback
 ├── robots.txt llms.txt sitemap.xml
 ├── netlify.toml                        ← nft bundler, niente catch-all
@@ -76,9 +79,14 @@ stradanuovagenova/
 | `/tendaggi-genova/` | [tendaggi-genova/index.html](tendaggi-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1557 parole + 6 FAQ |
 | `/carta-da-parati-genova/` | [carta-da-parati-genova/index.html](carta-da-parati-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1929 parole, brand wallpaper + tipologie + tendenze 2026, 6 FAQ |
 | `/rivestimenti-murali-genova/` | [rivestimenti-murali-genova/index.html](rivestimenti-murali-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1672 parole, boiserie + tessuto a parete + pannelli, 6 FAQ |
+| `/marchi/` | [marchi/index.html](marchi/index.html) | CollectionPage + BreadcrumbList | Hub 10 brand con descrizioni |
+| `/marchi/elitis/` | [marchi/elitis/index.html](marchi/elitis/index.html) | WebPage + Brand + BreadcrumbList | Brand 832 parole |
+| `/marchi/cole-and-son/` | [marchi/cole-and-son/index.html](marchi/cole-and-son/index.html) | WebPage + Brand + BreadcrumbList | Brand 988 parole |
 | `/admin/` | [admin/index.html](admin/index.html) | (CMS) | Decap CMS, robots disallow |
 
-**Sitemap:** 9 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
+**Sitemap:** 12 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
+
+**Brand pages mancanti:** 8 link interni da pillar e hub (Dedar, Pierre Frey, Designers Guild, Rubelli, Sanderson/Morris, Zoffany, Houlès, Etro Tessuti) sono accettati come 404 interni fino alla chiusura di Fase 9.2–9.5.
 
 ## Drop / Stripe
 
@@ -135,15 +143,16 @@ stradanuovagenova/
 ## Stato (2026-05-12)
 
 ✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 8.2** (10 pagine fisiche)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 9.1** (13 pagine fisiche)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
 ✅ robots.txt, llms.txt, sitemap.xml, 404.html, JSON-LD su tutte le pagine
 ✅ 4 pillar online: tessuti-genova (1523) + tendaggi-genova (1557) + carta-da-parati-genova (1929) + rivestimenti-murali-genova (1672)
-✅ Smoke test 19/19 verde contro localhost
+✅ Hub `/marchi/` + brand pages Élitis (832) e Cole & Son (988)
+✅ Smoke test 22/22 verde contro localhost
 
-🟡 **In corso:** Fasi 9 → 18 (brand pages, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
+🟡 **In corso:** Fasi 9.2 → 18 (8 brand pages rimanenti, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
 
 ⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 

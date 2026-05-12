@@ -59,7 +59,12 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 7** palazzo-lomellino asset autorità (locale `bd9fade`)
 - [x] **Fase 8.1** pillar tessuti-genova (1523 parole) + tendaggi-genova (1557 parole) (locale `be17e6d`)
 - [x] **Fase 8.2** pillar carta-da-parati-genova (1929 parole) + rivestimenti-murali-genova (1672 parole) (locale)
-- [ ] Fase 9 brand pages (10 + hub)
+- [x] **Fase 9.0** hub /marchi/ (locale)
+- [x] **Fase 9.1** Élitis (832 parole) + Cole & Son (988 parole) (locale)
+- [ ] Fase 9.2 Dedar + Pierre Frey
+- [ ] Fase 9.3 Designers Guild + Rubelli
+- [ ] Fase 9.4 Sanderson/Morris/Zoffany
+- [ ] Fase 9.5 Houlès + Etro Tessuti
 - [ ] Fase 10 servizi consulenza
 - [ ] Fase 11 verticali geo-luxe
 - [ ] Fase 12 magazine setup + 1° articolo

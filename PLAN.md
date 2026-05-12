@@ -23,8 +23,13 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 6 — grazie + contatti + RM catch-all | ✅ commit locale (`21291bc`) | SPA legacy ufficialmente sparita |
 | 7 — palazzo-lomellino | ✅ commit locale (`bd9fade`) | GPS TBD |
 | 8.1 — tessuti + tendaggi pillar | ✅ commit locale (`be17e6d`) | 1523 + 1557 parole |
-| 8.2 — carta da parati + rivestimenti | ✅ commit locale | 1929 + 1672 parole |
-| 9 — pagine brand (10) | ⬜ | |
+| 8.2 — carta da parati + rivestimenti | ✅ commit locale (`82acfaf`) | 1929 + 1672 parole |
+| 9.0 — hub /marchi/ | ✅ commit locale | 10 brand listati |
+| 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale | 832 + 988 parole |
+| 9.2 — Dedar + Pierre Frey | ⬜ | |
+| 9.3 — Designers Guild + Rubelli | ⬜ | |
+| 9.4 — Sanderson/Morris + Zoffany | ⬜ | |
+| 9.5 — Houlès + Etro Tessuti | ⬜ | |
 | 10 — servizi consulenza | ⬜ | |
 | 11 — verticali geo-luxe (3) | ⬜ | |
 | 12 — magazine setup + 1° articolo | ⬜ | |
@@ -37,7 +42,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 18 — magazine cadenza mensile | ⬜ continuativo | |
 
 **Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 19/19 verde. **Sitemap:** 9 URL indicizzabili (esclude grazie noindex).
+**Smoke test localhost:** 22/22 verde. **Sitemap:** 12 URL indicizzabili (esclude grazie noindex).
 
 ---
 
@@ -342,15 +347,17 @@ stradanuovagenova/
 
 **Obiettivo:** 10 brand pages + hub. Ordine = opportunità SEO. Ogni pagina 600-1000 parole, foto vere campionario, ZERO copia da sito ufficiale brand.
 
-### Fase 9.0 — Hub `/marchi/` (45 min)
+### Fase 9.0 — Hub `/marchi/` (45 min) ✅
 
-- [ ] 9.0.1 — `marchi/index.html` con griglia 10 loghi + 2-3 righe descrittive per ciascuno + link alla brand page
-- [ ] 9.0.2 — JSON-LD CollectionPage + Breadcrumb
+- [x] 9.0.1 — `marchi/index.html` con lista 10 brand + 2-3 righe descrittive + link alla brand page. Niente loghi reali (placeholder grafico, hub testuale)
+- [x] 9.0.2 — JSON-LD CollectionPage + BreadcrumbList con `about`+`isPartOf` inline
 
-### Fase 9.1 — Élitis + Cole & Son (1h) ⭐ priorità massima blue ocean
+### Fase 9.1 — Élitis + Cole & Son (1h) ⭐ priorità massima blue ocean ✅
 
-- [ ] 9.1.1 — `marchi/elitis/index.html`
-- [ ] 9.1.2 — `marchi/cole-and-son/index.html`
+- [x] 9.1.1 — `marchi/elitis/index.html` (832 parole): cifra materica, produzione, applicazioni Genova/Liguria (parete-soggetto, contemp. + materiali naturali, palazzi storici riletti), workflow showroom, prezzi indicativi 120-500 €/m. Link a /marchi/cole-and-son/, /carta-da-parati-genova/, /rivestimenti-murali-genova/
+- [x] 9.1.2 — `marchi/cole-and-son/index.html` (988 parole): storia 1875 Royal Warrant, pattern iconici (Hummingbirds/Woods/Palm Jungle/Versailles/Botanical Botanica), applicazioni genovesi (ingresso, bagno cieco, sala da pranzo, camera padronale), prezzi 80-350 €/m. Link a /marchi/elitis/
+- JSON-LD pattern: WebPage + about Brand inline (name, url ufficiale, description) + BreadcrumbList 3 livelli
+- Le altre 8 brand pages restano 404 fino a Fase 9.2-9.5: i link da pillar a /marchi/dedar/ ecc. sono link interni "broken" accettati nel piano
 
 ### Fase 9.2 — Dedar + Pierre Frey (1h)
 
