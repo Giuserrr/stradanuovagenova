@@ -13,6 +13,7 @@ const BASE = (process.env.BASE_URL || 'https://stradanuovagenova.com').replace(/
 const URLS = [
   { path: '/',                expected: 200, note: 'home' },
   { path: '/chi-siamo/',      expected: 200, note: 'chi-siamo' },
+  { path: '/appuntamento/',   expected: 200, note: 'appuntamento' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },

@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prenota appuntamento — Strada Nuova Genova</title>
+<meta name="description" content="Prenota una visita allo showroom Strada Nuova in Via Garibaldi 7/a, Palazzo Lomellino. Tessuti, tendaggi e carta da parati a Genova, su appuntamento.">
+<link rel="canonical" href="https://stradanuovagenova.com/appuntamento/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#1a1a1a">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prenota appuntamento — Strada Nuova Genova">
+<meta property="og:description" content="Visita lo showroom Strada Nuova in Palazzo Lomellino, Via Garibaldi 7/a. Tessuti e tendaggi a Genova, su appuntamento.">
+<meta property="og:url" content="https://stradanuovagenova.com/appuntamento/">
+<meta property="og:image" content="https://stradanuovagenova.com/img/hero.webp">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Strada Nuova">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/base.css">
+
+<style>
+/* ====== APPUNTAMENTO page-specific ====== */
+
+.appt-page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 40px 40px 80px;
+}
+
+.appt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.appt-form label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+.appt-form label:first-child { margin-top: 0; }
+
+.appt-form input,
+.appt-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.appt-form input:focus,
+.appt-form textarea:focus { border-color: var(--accent); }
+.appt-form textarea { resize: vertical; min-height: 100px; }
+.appt-form input::placeholder,
+.appt-form textarea::placeholder { color: #555; }
+
+/* CAL */
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.cal-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.cal-header button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.cal-header button:hover { border-color: var(--accent); }
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.cal-weekdays span {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  padding: 8px 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  background: var(--bg-card);
+  cursor: default;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+.cal-day.empty { background: transparent; }
+.cal-day.disabled { color: #444; }
+.cal-day.available { cursor: pointer; color: var(--text); }
+.cal-day.available:hover { border-color: var(--accent); }
+.cal-day.selected { background: var(--accent); color: #fff; }
+
+.time-slots {
+  margin-top: 16px;
+  display: none;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.time-slots.visible { display: flex; }
+
+.time-slot {
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.time-slot:hover { border-color: var(--accent); }
+.time-slot.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.appt-selected {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--accent);
+  min-height: 20px;
+}
+
+.appt-submit {
+  margin-top: 32px;
+  padding: 14px 0;
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.appt-submit:hover { background: var(--accent-hover); }
+.appt-submit:disabled { background: #444; cursor: default; }
+
+.appt-msg {
+  margin-top: 16px;
+  font-size: 14px;
+  min-height: 20px;
+}
+.appt-msg.success { color: #4caf50; }
+.appt-msg.error { color: var(--accent); }
+
+.appt-orari {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.appt-orari strong { color: var(--text); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .appt-page { padding: 30px 20px 60px; }
+  .appt-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<nav class="site-nav" aria-label="Navigazione principale">
+  <a href="/" class="nav-logo">Strada Nuova</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Apri menu">
+    <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/chi-siamo/">Chi siamo</a></li>
+    <li><a href="/#drop">Drop</a></li>
+    <li><a href="/appuntamento/" aria-current="page">Appuntamento</a></li>
+    <li><a href="/#contatti">Contatti</a></li>
+    <li><a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</nav>
+
+<nav class="breadcrumb" aria-label="Briciole di pane">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><span aria-current="page">Appuntamento</span></li>
+  </ol>
+</nav>
+
+<main id="main">
+
+  <section class="appt-page">
+    <span class="section-label">Appuntamento</span>
+    <h1 class="section-title">Prenota una visita</h1>
+    <p class="section-text">Scegli data e orario. Ti confermeremo via email entro 24 ore.</p>
+
+    <div class="appt-grid">
+
+      <form class="appt-form" id="apptForm" novalidate>
+        <label for="apptName">Nome e cognome</label>
+        <input type="text" id="apptName" name="name" autocomplete="name" placeholder="Mario Rossi" required>
+
+        <label for="apptEmail">Email</label>
+        <input type="email" id="apptEmail" name="email" autocomplete="email" placeholder="mario@esempio.com" required>
+
+        <label for="apptPhone">Telefono</label>
+        <input type="tel" id="apptPhone" name="phone" autocomplete="tel" placeholder="+39 333 1234567" required>
+
+        <label for="apptMsg">Messaggio (facoltativo)</label>
+        <textarea id="apptMsg" name="message" placeholder="Di cosa hai bisogno?"></textarea>
+
+        <button type="submit" class="appt-submit" id="apptSubmit" disabled>Seleziona data e orario</button>
+        <div class="appt-msg" id="apptFeedback" role="status" aria-live="polite"></div>
+
+        <div class="appt-orari">
+          <p><strong>Orari showroom</strong></p>
+          <p>Martedì – Sabato<br>10:00–12:30 / 16:00–19:30<br>Lunedì e Domenica chiuso</p>
+          <p>Via Garibaldi 7/a, Palazzo Lomellino, Genova<br><a href="tel:+390108956256" style="color:var(--accent)">010 895 6256</a></p>
+        </div>
+      </form>
+
+      <div class="cal-container">
+        <div class="cal-header">
+          <button type="button" id="calPrev" aria-label="Mese precedente">&larr;</button>
+          <h2 id="calTitle">…</h2>
+          <button type="button" id="calNext" aria-label="Mese successivo">&rarr;</button>
+        </div>
+        <div class="cal-weekdays" aria-hidden="true">
+          <span>Lun</span><span>Mar</span><span>Mer</span><span>Gio</span><span>Ven</span><span>Sab</span><span>Dom</span>
+        </div>
+        <div class="cal-days" id="calDays" role="grid" aria-label="Giorni disponibili"></div>
+        <div class="time-slots" id="timeSlots" role="group" aria-label="Orari disponibili"></div>
+        <div class="appt-selected" id="apptSelected" aria-live="polite"></div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>&copy; 2026 Strada Nuova &mdash; Via Garibaldi 7/a, Palazzo Lomellino, Genova</span>
+  <div class="footer-social">
+    <a href="/contatti/">Contatti</a>
+    <a href="https://www.instagram.com/stradanuova/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/stradanuova.7/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://stradanuovagenova.com/appuntamento/#page",
+      "url": "https://stradanuovagenova.com/appuntamento/",
+      "name": "Prenota appuntamento — Strada Nuova Genova",
+      "description": "Prenota una visita allo showroom Strada Nuova in Via Garibaldi 7/a, Palazzo Lomellino. Tessuti, tendaggi e carta da parati a Genova, su appuntamento.",
+      "inLanguage": "it-IT",
+      "isPartOf": {
+        "@id": "https://stradanuovagenova.com/#website",
+        "name": "Strada Nuova — Tessuti, tendaggi, interior design",
+        "url": "https://stradanuovagenova.com/"
+      },
+      "about": {
+        "@id": "https://stradanuovagenova.com/#store",
+        "name": "Strada Nuova — Tessuti, tendaggi, interior design",
+        "url": "https://stradanuovagenova.com/"
+      },
+      "breadcrumb": { "@id": "https://stradanuovagenova.com/appuntamento/#breadcrumb" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://stradanuovagenova.com/appuntamento/#service",
+      "serviceType": "Consulenza d'arredo tessile su appuntamento",
+      "name": "Visita in showroom su appuntamento",
+      "description": "Visita guidata al campionario di tessuti, tendaggi e carta da parati nello showroom Strada Nuova, Palazzo Lomellino, Genova. Selezione personalizzata per privati e progettisti.",
+      "provider": {
+        "@id": "https://stradanuovagenova.com/#store",
+        "name": "Strada Nuova — Tessuti, tendaggi, interior design",
+        "url": "https://stradanuovagenova.com/"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Genova" },
+        { "@type": "AdministrativeArea", "name": "Liguria" }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "servicePostalAddress": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Garibaldi 7/a",
+          "postalCode": "16124",
+          "addressLocality": "Genova",
+          "addressRegion": "GE",
+          "addressCountry": "IT"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://stradanuovagenova.com/appuntamento/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",         "item": "https://stradanuovagenova.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Appuntamento", "item": "https://stradanuovagenova.com/appuntamento/" }
+      ]
+    }
+  ]
+}
+</script>
+
+<script defer src="/assets/js/nav-toggle.js"></script>
+<script>
+// ====== APPOINTMENT BOOKING — page-scoped, no globals ======
+(function () {
+  'use strict';
+
+  // 0=Dom, 1=Lun, ... 6=Sab — null = chiuso
+  const ORARI = {
+    0: null, 1: null,
+    2: [[10, 12.5], [16, 19.5]],
+    3: [[10, 12.5], [16, 19.5]],
+    4: [[10, 12.5], [16, 19.5]],
+    5: [[10, 12.5], [16, 19.5]],
+    6: [[10, 12.5], [16, 19.5]]
+  };
+  const MESI = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+  const GIORNI = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+
+  const now = new Date();
+  let calYear = now.getFullYear();
+  let calMonth = now.getMonth();
+  let selectedDate = null;
+  let selectedTime = null;
+
+  const $title = document.getElementById('calTitle');
+  const $days = document.getElementById('calDays');
+  const $slots = document.getElementById('timeSlots');
+  const $selected = document.getElementById('apptSelected');
+  const $submit = document.getElementById('apptSubmit');
+  const $form = document.getElementById('apptForm');
+  const $feedback = document.getElementById('apptFeedback');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function generateSlotsForDay(dow) {
+    const ranges = ORARI[dow];
+    if (!ranges) return [];
+    const slots = [];
+    ranges.forEach(([start, end]) => {
+      let h = start;
+      while (h < end) {
+        const hh = Math.floor(h);
+        const mm = (h - hh) === 0.5 ? 30 : 0;
+        slots.push(`${pad(hh)}:${pad(mm)}`);
+        h += 0.5;
+      }
+    });
+    return slots;
+  }
+
+  function renderCalendar() {
+    $title.textContent = `${MESI[calMonth]} ${calYear}`;
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const firstDay = new Date(calYear, calMonth, 1);
+    let startDay = firstDay.getDay();
+    startDay = startDay === 0 ? 6 : startDay - 1;
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+    let html = '';
+    for (let i = 0; i < startDay; i++) html += '<div class="cal-day empty"></div>';
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(calYear, calMonth, d);
+      date.setHours(0, 0, 0, 0);
+      const dow = date.getDay();
+      const hasSlots = ORARI[dow] !== null;
+      const isPast = date < today;
+      const isSel = selectedDate && date.getTime() === selectedDate.getTime();
+      if (!hasSlots || isPast) {
+        html += `<div class="cal-day disabled" aria-disabled="true">${d}</div>`;
+      } else {
+        html += `<button type="button" class="cal-day available${isSel ? ' selected' : ''}" data-day="${d}" aria-label="${d} ${MESI[calMonth]}">${d}</button>`;
+      }
+    }
+    $days.innerHTML = html;
+
+    if (selectedDate) {
+      const dow = selectedDate.getDay();
+      const slots = generateSlotsForDay(dow);
+      $slots.innerHTML = slots.map(t => {
+        const sel = selectedTime === t ? ' selected' : '';
+        return `<button type="button" class="time-slot${sel}" data-time="${t}">${t}</button>`;
+      }).join('');
+      $slots.classList.add('visible');
+    } else {
+      $slots.innerHTML = '';
+      $slots.classList.remove('visible');
+    }
+
+    updateSelected();
+  }
+
+  function updateSelected() {
+    if (selectedDate && selectedTime) {
+      const g = GIORNI[selectedDate.getDay()];
+      $selected.textContent = `${g} ${selectedDate.getDate()} ${MESI[selectedDate.getMonth()]} ${selectedDate.getFullYear()} alle ${selectedTime}`;
+      $submit.disabled = false;
+      $submit.textContent = 'Richiedi appuntamento';
+    } else if (selectedDate) {
+      $selected.textContent = 'Seleziona un orario';
+      $submit.disabled = true;
+      $submit.textContent = 'Seleziona orario';
+    } else {
+      $selected.textContent = '';
+      $submit.disabled = true;
+      $submit.textContent = 'Seleziona data e orario';
+    }
+  }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    selectedDate = null; selectedTime = null;
+    renderCalendar();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    selectedDate = null; selectedTime = null;
+    renderCalendar();
+  });
+
+  $days.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-day]');
+    if (!btn) return;
+    const d = parseInt(btn.getAttribute('data-day'), 10);
+    selectedDate = new Date(calYear, calMonth, d);
+    selectedDate.setHours(0, 0, 0, 0);
+    selectedTime = null;
+    renderCalendar();
+  });
+
+  $slots.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-time]');
+    if (!btn) return;
+    selectedTime = btn.getAttribute('data-time');
+    renderCalendar();
+  });
+
+  $form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('apptName').value.trim();
+    const email = document.getElementById('apptEmail').value.trim();
+    const phone = document.getElementById('apptPhone').value.trim();
+    const message = document.getElementById('apptMsg').value.trim();
+
+    if (!name || !email || !phone) {
+      $feedback.textContent = 'Compila nome, email e telefono.';
+      $feedback.className = 'appt-msg error';
+      return;
+    }
+    if (!selectedDate || !selectedTime) {
+      $feedback.textContent = 'Seleziona data e orario.';
+      $feedback.className = 'appt-msg error';
+      return;
+    }
+
+    $submit.disabled = true;
+    $submit.textContent = 'Invio in corso…';
+    $feedback.textContent = '';
+
+    const dateStr = `${GIORNI[selectedDate.getDay()]} ${selectedDate.getDate()} ${MESI[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
+
+    try {
+      const res = await fetch('/.netlify/functions/request-appointment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message, date: dateStr, time: selectedTime })
+      });
+      const data = await res.json();
+      if (data && data.ok) {
+        $feedback.textContent = 'Richiesta inviata. Riceverai una conferma via email.';
+        $feedback.className = 'appt-msg success';
+        $submit.textContent = 'Inviato';
+        $form.reset();
+        selectedDate = null; selectedTime = null;
+        renderCalendar();
+      } else {
+        $feedback.textContent = (data && data.error) || 'Errore. Riprova.';
+        $feedback.className = 'appt-msg error';
+        $submit.disabled = false;
+        $submit.textContent = 'Richiedi appuntamento';
+      }
+    } catch (err) {
+      $feedback.textContent = 'Errore di connessione. Riprova.';
+      $feedback.className = 'appt-msg error';
+      $submit.disabled = false;
+      $submit.textContent = 'Richiedi appuntamento';
+    }
+  });
+
+  renderCalendar();
+})();
+</script>
+
+</body>
+</html>
