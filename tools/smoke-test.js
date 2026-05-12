@@ -26,6 +26,8 @@ const URLS = [
   { path: '/marchi/cole-and-son/',        expected: 200, note: 'brand Cole & Son' },
   { path: '/marchi/dedar/',               expected: 200, note: 'brand Dedar' },
   { path: '/marchi/pierre-frey/',         expected: 200, note: 'brand Pierre Frey' },
+  { path: '/marchi/designers-guild/',     expected: 200, note: 'brand Designers Guild' },
+  { path: '/marchi/rubelli/',             expected: 200, note: 'brand Rubelli' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },

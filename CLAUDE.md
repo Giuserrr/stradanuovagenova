@@ -9,7 +9,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 ## Stack (aggiornato 2026-05-12)
 
-**Migrazione SEO in corso (Fasi 0-9.2 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 15 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 4 brand pages + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-9.2 ancora locali in attesa del push finale.
+**Migrazione SEO in corso (Fasi 0-9.3 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 17 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 6 brand pages + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-9.3 ancora locali in attesa del push finale.
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -43,6 +43,8 @@ stradanuovagenova/
 ├── marchi/cole-and-son/index.html      ← brand 988 parole
 ├── marchi/dedar/index.html             ← brand 902 parole
 ├── marchi/pierre-frey/index.html       ← brand 966 parole
+├── marchi/designers-guild/index.html   ← brand 914 parole
+├── marchi/rubelli/index.html           ← brand 1010 parole
 ├── 404.html                            ← fallback
 ├── robots.txt llms.txt sitemap.xml
 ├── netlify.toml                        ← nft bundler, niente catch-all
@@ -86,11 +88,13 @@ stradanuovagenova/
 | `/marchi/cole-and-son/` | [marchi/cole-and-son/index.html](marchi/cole-and-son/index.html) | WebPage + Brand + BreadcrumbList | Brand 988 parole |
 | `/marchi/dedar/` | [marchi/dedar/index.html](marchi/dedar/index.html) | WebPage + Brand + BreadcrumbList | Brand 902 parole |
 | `/marchi/pierre-frey/` | [marchi/pierre-frey/index.html](marchi/pierre-frey/index.html) | WebPage + Brand + BreadcrumbList | Brand 966 parole |
+| `/marchi/designers-guild/` | [marchi/designers-guild/index.html](marchi/designers-guild/index.html) | WebPage + Brand + BreadcrumbList | Brand 914 parole |
+| `/marchi/rubelli/` | [marchi/rubelli/index.html](marchi/rubelli/index.html) | WebPage + Brand + BreadcrumbList | Brand 1010 parole |
 | `/admin/` | [admin/index.html](admin/index.html) | (CMS) | Decap CMS, robots disallow |
 
-**Sitemap:** 14 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
+**Sitemap:** 16 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
 
-**Brand pages mancanti:** 6 link interni da pillar e hub (Designers Guild, Rubelli, Sanderson/Morris, Zoffany, Houlès, Etro Tessuti) sono accettati come 404 interni fino alla chiusura di Fase 9.3–9.5.
+**Brand pages mancanti:** 4 link interni da pillar e hub (Sanderson/Morris, Zoffany, Houlès, Etro Tessuti) sono accettati come 404 interni fino alla chiusura di Fase 9.4–9.5.
 
 ## Drop / Stripe
 
@@ -147,16 +151,16 @@ stradanuovagenova/
 ## Stato (2026-05-12)
 
 ✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 9.2** (15 pagine fisiche)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 9.3** (17 pagine fisiche)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
 ✅ robots.txt, llms.txt, sitemap.xml, 404.html, JSON-LD su tutte le pagine
 ✅ 4 pillar online: tessuti-genova (1523) + tendaggi-genova (1557) + carta-da-parati-genova (1929) + rivestimenti-murali-genova (1672)
-✅ Hub `/marchi/` + 4 brand pages: Élitis (832) + Cole & Son (988) + Dedar (902) + Pierre Frey (966)
-✅ Smoke test 24/24 verde contro localhost
+✅ Hub `/marchi/` + 6 brand pages: Élitis (832) + Cole & Son (988) + Dedar (902) + Pierre Frey (966) + Designers Guild (914) + Rubelli (1010)
+✅ Smoke test 26/26 verde contro localhost
 
-🟡 **In corso:** Fasi 9.3 → 18 (6 brand pages rimanenti, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
+🟡 **In corso:** Fasi 9.4 → 18 (4 brand pages rimanenti, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
 
 ⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 

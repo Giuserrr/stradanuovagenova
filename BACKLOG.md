@@ -62,7 +62,7 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 9.0** hub /marchi/ (locale)
 - [x] **Fase 9.1** Élitis (832 parole) + Cole & Son (988 parole) (locale)
 - [x] **Fase 9.2** Dedar (902 parole) + Pierre Frey (966 parole) (locale)
-- [ ] Fase 9.3 Designers Guild + Rubelli
+- [x] **Fase 9.3** Designers Guild (914 parole) + Rubelli (1010 parole) (locale)
 - [ ] Fase 9.4 Sanderson/Morris/Zoffany
 - [ ] Fase 9.5 Houlès + Etro Tessuti
 - [ ] Fase 10 servizi consulenza

@@ -26,8 +26,8 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 8.2 — carta da parati + rivestimenti | ✅ commit locale (`82acfaf`) | 1929 + 1672 parole |
 | 9.0 — hub /marchi/ | ✅ commit locale | 10 brand listati |
 | 9.1 — Élitis + Cole & Son ⭐ | ✅ commit locale (`1a24c73`) | 832 + 988 parole |
-| 9.2 — Dedar + Pierre Frey | ✅ commit locale | 902 + 966 parole |
-| 9.3 — Designers Guild + Rubelli | ⬜ | |
+| 9.2 — Dedar + Pierre Frey | ✅ commit locale (`ac115c8`) | 902 + 966 parole |
+| 9.3 — Designers Guild + Rubelli | ✅ commit locale | 914 + 1010 parole |
 | 9.4 — Sanderson/Morris + Zoffany | ⬜ | |
 | 9.5 — Houlès + Etro Tessuti | ⬜ | |
 | 10 — servizi consulenza | ⬜ | |
@@ -42,7 +42,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 18 — magazine cadenza mensile | ⬜ continuativo | |
 
 **Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 24/24 verde. **Sitemap:** 14 URL indicizzabili (esclude grazie noindex).
+**Smoke test localhost:** 26/26 verde. **Sitemap:** 16 URL indicizzabili (esclude grazie noindex).
 
 ---
 
@@ -365,10 +365,10 @@ stradanuovagenova/
 - [x] 9.2.2 — `marchi/pierre-frey/index.html` (966 parole): casa francese 1935 + archivi Braquenié (1824) e Le Manach (1829) + Boussac. 5 famiglie (stampe archivio, contemporanei, outdoor, carta, tappeti). 4 applicazioni: palazzi storici, boiserie, case mare (linea Outdoor), case ottocentesche collina. Prezzi 80-800 €/m, forbice più ampia del catalogo
 - Stesso JSON-LD pattern WebPage + Brand inline. Link a fratello brand (Dedar↔Pierre Frey) per side navigation
 
-### Fase 9.3 — Designers Guild + Rubelli (1h)
+### Fase 9.3 — Designers Guild + Rubelli (1h) ✅
 
-- [ ] 9.3.1 — `marchi/designers-guild/index.html`
-- [ ] 9.3.2 — `marchi/rubelli/index.html`
+- [x] 9.3.1 — `marchi/designers-guild/index.html` (914 parole): brand di Tricia Guild dal 1970, total look colore (tessuto + carta + vernice + Christian Lacroix Maison). 4 applicazioni: stanze bambini, studi, camera padronale di rottura, Lacroix barocco-contemporaneo. Prezzi 60-220 €/m
+- [x] 9.3.2 — `marchi/rubelli/index.html` (1010 parole): manifattura veneziana dal 1858, referenza europea damaschi seta e soprarizzo. 3 nuclei (sete operate, velluti, contemporanei + Armani/Casa, Donghia). 3 applicazioni: boiserie palazzi, tendaggi importanti, ritappezzeria mobili antichi. Prezzi 100-2000 €/m, esempio budget boiserie completa
 
 ### Fase 9.4 — Sanderson/Morris + Zoffany (1h)
 
