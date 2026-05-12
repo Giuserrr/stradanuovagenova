@@ -279,6 +279,7 @@ stradanuovagenova/
 11. **Cross-page `@id` reference senza inline `name`+`url`** → 3 warning GSC. Sempre includerli
 12. **Service.offers senza `price`** o **Service.aggregateRating** → schema invalido. Service non parent eligible rich snippet
 13. **`fade-in` su elemento LCP candidate** → Lighthouse aspetta la transizione, LCP crash
+14. **`Cache-Control: immutable` su asset con nome non versionato** → browser non rivalida mai, vedi sempre vecchio CSS/JS anche dopo push. Soluzione: aggiungere `?v=<data>` ai `<link>`/`<script>` quando cambi `base.css`, `nav-toggle.js`, `buy-product.js`. Pattern: bump del query string ad ogni modifica asset
 
 ## File da ignorare
 
