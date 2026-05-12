@@ -148,17 +148,13 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 0.1 — Aggiornare `package.json`: aggiungere `marked` ^14, `gray-matter` ^4 a dependencies. Aggiungere scripts: `build`, `build:sitemap`, `build:magazine`, `build:drop-grid`, `validate`, `smoke-test`
-- [ ] 0.2 — Creare cartelle vuote: `tools/`, `templates/`, `assets/css/`, `assets/fonts/`, `assets/js/`, `magazine/content/`, `magazine/articles/`
-- [ ] 0.3 — Aggiornare `netlify.toml`:
-  - `[build] command = "npm install && npm run build"`
-  - `publish = "."`
-  - **rimuovere** catch-all `/* → /index.html status=200` (esiste 404.html, Netlify lo serve auto)
-  - mantenere `[functions] node_bundler = "nft"`
-- [ ] 0.4 — Aggiungere `.gitignore` con `node_modules/`, `.cache/`, `.DS_Store`
-- [ ] 0.5 — Creare `404.html` minimal (style inline, link a home + categorie)
-- [ ] 0.6 — Stub `tools/build-sitemap.js`, `tools/build-magazine.js`, `tools/build-drop-grid.js` (solo console.log per il momento)
-- [ ] 0.7 — Smoke test: `npm install` locale, `npm run build` non rompe, push → deploy Netlify verde
+- [x] 0.1 — Aggiornare `package.json`: aggiunti `marked` ^14, `gray-matter` ^4 + scripts `build`, `build:sitemap`, `build:magazine`, `build:drop-grid`, `validate`, `smoke-test`
+- [x] 0.2 — Cartelle create: `tools/`, `templates/`, `assets/css/`, `assets/fonts/`, `assets/js/`, `magazine/content/`, `magazine/articles/` (con `.gitkeep` per tracking)
+- [x] 0.3 — `netlify.toml` aggiornato: build command `npm install && npm run build`, publish `.`. **Catch-all SPA MANTENUTO temporaneamente** con annotazione: sarà rimosso in Fase 6 quando `/chi-siamo`, `/appuntamento`, `/grazie` saranno file fisici (Netlify serve i file fisici prima del catch-all, quindi le nuove pagine prevarranno automaticamente)
+- [x] 0.4 — `.gitignore` aggiunto: `node_modules/`, `.cache/`, `.DS_Store`, `.env`
+- [x] 0.5 — `404.html` minimal con style inline + link a home / chi-siamo / appuntamento + `noindex`
+- [x] 0.6 — Stub `tools/build-sitemap.js`, `tools/build-magazine.js`, `tools/build-drop-grid.js` con commento di rinvio alla fase di implementazione
+- [x] 0.7 — `npm install` ✅ (108 pkg), `npm run build` ✅ (3 stub girano), push `dc6da8c` → deploy in corso
 
 **DoD:** deploy verde, sito attuale ancora funzionante, struttura cartelle in place.
 
