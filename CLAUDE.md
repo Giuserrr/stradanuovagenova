@@ -9,7 +9,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 ## Stack (aggiornato 2026-05-12)
 
-**Migrazione SEO in corso (Fasi 0-9 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 21 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-9 ancora locali in attesa del push finale.
+**Migrazione SEO in corso (Fasi 0-10 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 23 pagine fisiche in locale (8 contenuto + 1 hub /marchi/ + 10 brand pages + 1 hub /servizi/ + 1 servizio + 2 noindex/admin), 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-10 ancora locali in attesa del push finale.
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -49,6 +49,8 @@ stradanuovagenova/
 ├── marchi/zoffany/index.html           ← brand 944 parole
 ├── marchi/houles/index.html            ← brand 999 parole (passamaneria)
 ├── marchi/etro-tessuti/index.html      ← brand 883 parole
+├── servizi/index.html                  ← hub servizi
+├── servizi/consulenza-arredo-tessile/index.html ← servizio ~1200 parole
 ├── 404.html                            ← fallback
 ├── robots.txt llms.txt sitemap.xml
 ├── netlify.toml                        ← nft bundler, niente catch-all
@@ -98,11 +100,15 @@ stradanuovagenova/
 | `/marchi/zoffany/` | [marchi/zoffany/index.html](marchi/zoffany/index.html) | WebPage + Brand + BreadcrumbList | Brand 944 parole |
 | `/marchi/houles/` | [marchi/houles/index.html](marchi/houles/index.html) | WebPage + Brand + BreadcrumbList | Brand 999 parole (passamaneria) |
 | `/marchi/etro-tessuti/` | [marchi/etro-tessuti/index.html](marchi/etro-tessuti/index.html) | WebPage + Brand + BreadcrumbList | Brand 883 parole |
+| `/servizi/` | [servizi/index.html](servizi/index.html) | CollectionPage + BreadcrumbList | Hub servizi minimal |
+| `/servizi/consulenza-arredo-tessile/` | [servizi/consulenza-arredo-tessile/index.html](servizi/consulenza-arredo-tessile/index.html) | WebPage + Service + BreadcrumbList | Servizio ~1200 parole, NO offers, NO aggregateRating |
 | `/admin/` | [admin/index.html](admin/index.html) | (CMS) | Decap CMS, robots disallow |
 
-**Sitemap:** 20 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
+**Sitemap:** 22 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
 
 **Fase 9 chiusa:** tutte e 10 le brand page sono online in locale. Niente link interni rotti residui da Fase 9.
+
+**Fase 10 chiusa:** hub `/servizi/` + pagina servizio `/servizi/consulenza-arredo-tessile/` online in locale. Service JSON-LD senza offers/aggregateRating (Service non parent-eligible rich snippet). Esplicita disambiguazione cosa facciamo vs cosa NON facciamo (posa carta, confezionamento tende, ritappezzeria affidati ad artigiani esterni).
 
 ## Drop / Stripe
 
@@ -159,16 +165,17 @@ stradanuovagenova/
 ## Stato (2026-05-12)
 
 ✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 9** (21 pagine fisiche)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 10** (23 pagine fisiche)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
 ✅ robots.txt, llms.txt, sitemap.xml, 404.html, JSON-LD su tutte le pagine
 ✅ 4 pillar online: tessuti-genova (1523) + tendaggi-genova (1557) + carta-da-parati-genova (1929) + rivestimenti-murali-genova (1672)
 ✅ Hub `/marchi/` + **tutte le 10 brand pages**: Élitis (832) + Cole & Son (988) + Dedar (902) + Pierre Frey (966) + Designers Guild (914) + Rubelli (1010) + Sanderson/Morris (1050) + Zoffany (944) + Houlès (999) + Etro Tessuti (883)
-✅ Smoke test 30/30 verde contro localhost
+✅ Hub `/servizi/` + servizio `/servizi/consulenza-arredo-tessile/` (~1200 parole, Service JSON-LD valido)
+✅ Smoke test 32/32 verde contro localhost
 
-🟡 **In corso:** Fasi 10 → 18 (servizi consulenza, verticali geo-luxe, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
+🟡 **In corso:** Fasi 11 → 18 (verticali geo-luxe, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
 
 ⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 

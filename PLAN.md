@@ -30,7 +30,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 9.3 — Designers Guild + Rubelli | ✅ commit locale (`ac1eac4`) | 914 + 1010 parole |
 | 9.4 — Sanderson/Morris + Zoffany | ✅ commit locale (`31d6d0e`) | 1050 + 944 parole |
 | 9.5 — Houlès + Etro Tessuti | ✅ commit locale | 999 + 883 parole |
-| 10 — servizi consulenza | ⬜ | |
+| 10 — servizi consulenza | ✅ locale | hub `/servizi/` + consulenza-arredo-tessile |
 | 11 — verticali geo-luxe (3) | ⬜ | |
 | 12 — magazine setup + 1° articolo | ⬜ | |
 | 13 — performance pass | ⬜ | AVIF, headers, CWV |
@@ -401,11 +401,12 @@ stradanuovagenova/
 
 ### Task
 
-- [ ] 10.1 — `servizi/consulenza-arredo-tessile/index.html` 600-800 parole: cosa includono le consulenze, modalità (showroom o sopralluogo), processo, tempistiche, prerequisiti (foto stanza, misure, mood)
-- [ ] 10.2 — JSON-LD: `Service` con `provider` = `@id #store` inline + `serviceType` + `areaServed` Genova/Liguria + Breadcrumb. **Senza `offers` e senza `aggregateRating`** (Service non è parent eligible)
-- [ ] 10.3 — CTA verso `/appuntamento`
+- [x] 10.0 — `servizi/index.html` hub minimal con il servizio (CollectionPage + BreadcrumbList)
+- [x] 10.1 — `servizi/consulenza-arredo-tessile/index.html` (~1200 parole): cosa facciamo + cosa NON facciamo direttamente (posa carta, confezionamento, ritappezzeria) + workflow 3 step + audience + aree servite Genova/Liguria
+- [x] 10.2 — JSON-LD: WebPage + `Service` con `provider` = `@id #store` inline name+url + `serviceType` + `areaServed` City Genova + AdministrativeArea Liguria + `audience` + BreadcrumbList. **Senza `offers` e senza `aggregateRating`** (Service non è parent eligible)
+- [x] 10.3 — CTA verso `/appuntamento`
 
-**DoD:** pagina online, schema Service valido senza warning.
+**DoD:** pagina online, schema Service valido senza warning. ✅ commit locale (smoke test 32/32 verde).
 
 ---
 

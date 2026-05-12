@@ -65,7 +65,7 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 9.3** Designers Guild (914 parole) + Rubelli (1010 parole) (locale)
 - [x] **Fase 9.4** Sanderson/Morris &amp; Co (1050 parole) + Zoffany (944 parole) (locale)
 - [x] **Fase 9.5** Houlès (999 parole) + Etro Tessuti (883 parole) (locale) — Fase 9 chiusa
-- [ ] Fase 10 servizi consulenza
+- [x] **Fase 10** servizi consulenza: hub `/servizi/` + `/servizi/consulenza-arredo-tessile/` (locale)
 - [ ] Fase 11 verticali geo-luxe
 - [ ] Fase 12 magazine setup + 1° articolo
 - [ ] Fase 13 performance pass (AVIF, headers, CWV)

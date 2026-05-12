@@ -32,6 +32,8 @@ const URLS = [
   { path: '/marchi/zoffany/',             expected: 200, note: 'brand Zoffany' },
   { path: '/marchi/houles/',              expected: 200, note: 'brand Houles' },
   { path: '/marchi/etro-tessuti/',        expected: 200, note: 'brand Etro Tessuti' },
+  { path: '/servizi/',                                  expected: 200, note: 'hub servizi' },
+  { path: '/servizi/consulenza-arredo-tessile/',        expected: 200, note: 'servizio consulenza' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },
