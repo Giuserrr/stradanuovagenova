@@ -17,6 +17,8 @@ const URLS = [
   { path: '/grazie/',         expected: 200, note: 'grazie (noindex)' },
   { path: '/contatti/',       expected: 200, note: 'contatti' },
   { path: '/palazzo-lomellino/', expected: 200, note: 'palazzo' },
+  { path: '/tessuti-genova/',  expected: 200, note: 'pillar tessuti' },
+  { path: '/tendaggi-genova/', expected: 200, note: 'pillar tendaggi' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },
