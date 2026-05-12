@@ -23,7 +23,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 6 — grazie + contatti + RM catch-all | ✅ commit locale (`21291bc`) | SPA legacy ufficialmente sparita |
 | 7 — palazzo-lomellino | ✅ commit locale (`bd9fade`) | GPS TBD |
 | 8.1 — tessuti + tendaggi pillar | ✅ commit locale (`be17e6d`) | 1523 + 1557 parole |
-| 8.2 — carta da parati + rivestimenti | ⬜ prossima | |
+| 8.2 — carta da parati + rivestimenti | ✅ commit locale | 1929 + 1672 parole |
 | 9 — pagine brand (10) | ⬜ | |
 | 10 — servizi consulenza | ⬜ | |
 | 11 — verticali geo-luxe (3) | ⬜ | |
@@ -37,7 +37,7 @@ Per il quadro generale vedi [CLAUDE.md](CLAUDE.md). Per decisioni aperte vedi [B
 | 18 — magazine cadenza mensile | ⬜ continuativo | |
 
 **Workflow corrente:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita.
-**Smoke test localhost:** 17/17 verde. **Sitemap:** 7 URL indicizzabili (esclude grazie noindex).
+**Smoke test localhost:** 19/19 verde. **Sitemap:** 9 URL indicizzabili (esclude grazie noindex).
 
 ---
 
@@ -326,12 +326,15 @@ stradanuovagenova/
 
 **DoD raggiunto:** title 30-60ch, description 155ch, canonical, OG image, JSON-LD valido, 10+ internal link, 0 anchor exact-match stuffing.
 
-### Fase 8.2 — Carta da parati + Rivestimenti (1.5-2h)
+### Fase 8.2 — Carta da parati + Rivestimenti (1.5-2h) ✅
 
-- [ ] 8.2.1 — `carta-da-parati-genova/index.html` — H1 "Carta da parati di pregio a Genova", 1500-2000 parole: brand wallpaper (Élitis, Cole & Son, Designers Guild, Zoffany — anchor a brand pages), tipologie (vinilica, TNT, tessile, materica), tendenze 2026 (Cloud Dancer Pantone, neoclassico, William Morris revival), FAQ "quanto costa al metro". NON parlare di posa come servizio nostro
-- [ ] 8.2.2 — `rivestimenti-murali-genova/index.html` — H1 "Rivestimenti murali e boiserie tessile a Genova", 1500-2000 parole: tessuti a parete, boiserie tessile, applicazioni in dimore storiche (capitalizza su Palazzo Lomellino)
+- [x] 8.2.1 — `carta-da-parati-genova/index.html` (1929 parole) — brand Élitis/Cole & Son/Designers Guild/Zoffany (+ Sanderson/Pierre Frey), tipologie vinilica/TNT/tessile/materica, tendenze 2026 (Cloud Dancer Pantone, neoclassico, Morris revival, materica), 6 FAQ incluso "quanto costa al metro" + bagno/cucina + campioni a casa. NO posa come servizio nostro (tappezzieri esterni). Hero `materie.webp`
+- [x] 8.2.2 — `rivestimenti-murali-genova/index.html` (1672 parole) — boiserie tessile (tecnica, tessuti adatti — damaschi seta Rubelli, sete Dedar, lini Pierre Frey), tessuto a parete con bordura + passamaneria Houlès, pannelli modulari. Applicazioni Rolli/centro storico/Carignano. 6 FAQ. Hero `palazzo-lomellino.webp` (cattura autorità). NO posa diretta
+- Link bidirezionali: home → 4 pillar (anchor variato "tessuti/tendaggi/carta da parati/rivestimenti murali"); tessuti-genova → carta da parati + rivestimenti murali; rivestimenti-murali ↔ carta-da-parati ↔ palazzo-lomellino ↔ marchi/*
+- JSON-LD: CollectionPage + BreadcrumbList con `isPartOf`+`about` inline name+url. Niente FAQPage schema (rich result rimosso mag 2026)
+- Smoke test: aggiornato a 19 URL, tutti 200 in locale. Sitemap: 9 URL indicizzabili
 
-**DoD:** entrambe online, internal link bidirezionali pillar ↔ brand attivi.
+**DoD raggiunto:** entrambe le pagine online in locale, internal link bidirezionali pillar ↔ brand attivi (target brand-page in arrivo in Fase 9).
 
 ---
 

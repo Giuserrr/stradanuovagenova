@@ -9,7 +9,7 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 
 ## Stack (aggiornato 2026-05-12)
 
-**Migrazione SEO in corso (Fasi 0-8.1 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 8 pagine fisiche in locale, 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-8.1 ancora locali in attesa del push finale.
+**Migrazione SEO in corso (Fasi 0-8.2 chiuse, vedi [PLAN.md](PLAN.md)).** La SPA originale è morta: il sito è ora HTML5 vanilla multi-pagina vero. 10 pagine fisiche in locale, 5 commit pushati in produzione (Fasi 0-2 = asset condivisi + file tecnici), Fasi 3-8.2 ancora locali in attesa del push finale.
 
 ### Caratteristiche
 - **HTML5 vanilla multi-pagina.** Niente framework, niente bundler
@@ -36,6 +36,8 @@ stradanuovagenova/
 ├── palazzo-lomellino/index.html        ← asset autorità
 ├── tessuti-genova/index.html           ← pillar 1523 parole
 ├── tendaggi-genova/index.html          ← pillar 1557 parole
+├── carta-da-parati-genova/index.html   ← pillar 1929 parole
+├── rivestimenti-murali-genova/index.html ← pillar 1672 parole
 ├── 404.html                            ← fallback
 ├── robots.txt llms.txt sitemap.xml
 ├── netlify.toml                        ← nft bundler, niente catch-all
@@ -72,9 +74,11 @@ stradanuovagenova/
 | `/palazzo-lomellino/` | [palazzo-lomellino/index.html](palazzo-lomellino/index.html) | WebPage + Place+TouristAttraction + BreadcrumbList | Asset autorità SEO, storia palazzo |
 | `/tessuti-genova/` | [tessuti-genova/index.html](tessuti-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1523 parole + 6 FAQ |
 | `/tendaggi-genova/` | [tendaggi-genova/index.html](tendaggi-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1557 parole + 6 FAQ |
+| `/carta-da-parati-genova/` | [carta-da-parati-genova/index.html](carta-da-parati-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1929 parole, brand wallpaper + tipologie + tendenze 2026, 6 FAQ |
+| `/rivestimenti-murali-genova/` | [rivestimenti-murali-genova/index.html](rivestimenti-murali-genova/index.html) | CollectionPage + BreadcrumbList | Pillar 1672 parole, boiserie + tessuto a parete + pannelli, 6 FAQ |
 | `/admin/` | [admin/index.html](admin/index.html) | (CMS) | Decap CMS, robots disallow |
 
-**Sitemap:** 7 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
+**Sitemap:** 9 URL indicizzabili (esclude `/grazie/` per noindex). Auto-generato da [tools/build-sitemap.js](tools/build-sitemap.js) con `lastmod` da `git log -1 --format=%cI`. NO priority/changefreq.
 
 ## Drop / Stripe
 
@@ -131,15 +135,15 @@ stradanuovagenova/
 ## Stato (2026-05-12)
 
 ✅ Sito live con SSL su stradanuovagenova.com
-✅ Migrazione SPA → multi-pagina **completata fino a Fase 8.1** (8 pagine fisiche)
+✅ Migrazione SPA → multi-pagina **completata fino a Fase 8.2** (10 pagine fisiche)
 ✅ CMS Decap configurato su `/admin` con Identity widget, Decap v3.3.3 pinned
 ✅ Foto reali in img/ (hero, palazzo-lomellino, famiglia, materie, drop)
 ✅ GBP migrato a stradanuovagenova.com, categorie secondarie aggiunte
 ✅ robots.txt, llms.txt, sitemap.xml, 404.html, JSON-LD su tutte le pagine
-✅ Pillar tessuti-genova + tendaggi-genova online (1500+ parole each)
-✅ Smoke test 17/17 verde contro localhost
+✅ 4 pillar online: tessuti-genova (1523) + tendaggi-genova (1557) + carta-da-parati-genova (1929) + rivestimenti-murali-genova (1672)
+✅ Smoke test 19/19 verde contro localhost
 
-🟡 **In corso:** Fasi 8.2 → 18 (carta da parati, rivestimenti, brand, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
+🟡 **In corso:** Fasi 9 → 18 (brand pages, servizi, verticali, magazine, performance, a11y) — vedi [PLAN.md](PLAN.md)
 
 ⚠️ **Workflow attuale:** commit locali sì, push solo a fine migrazione su autorizzazione esplicita (vedi memoria `feedback_push_locale`)
 

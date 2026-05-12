@@ -19,6 +19,8 @@ const URLS = [
   { path: '/palazzo-lomellino/', expected: 200, note: 'palazzo' },
   { path: '/tessuti-genova/',  expected: 200, note: 'pillar tessuti' },
   { path: '/tendaggi-genova/', expected: 200, note: 'pillar tendaggi' },
+  { path: '/carta-da-parati-genova/',     expected: 200, note: 'pillar carta da parati' },
+  { path: '/rivestimenti-murali-genova/', expected: 200, note: 'pillar rivestimenti murali' },
   { path: '/robots.txt',      expected: 200, note: 'robots' },
   { path: '/llms.txt',        expected: 200, note: 'llms' },
   { path: '/sitemap.xml',     expected: 200, note: 'sitemap' },

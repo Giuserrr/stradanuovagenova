@@ -58,7 +58,7 @@ Backlog operativo per il lavoro SEO/sito. Aggiornato man mano. Per il quadro di 
 - [x] **Fase 6** grazie + contatti + rimosso catch-all SPA (locale `21291bc`)
 - [x] **Fase 7** palazzo-lomellino asset autorità (locale `bd9fade`)
 - [x] **Fase 8.1** pillar tessuti-genova (1523 parole) + tendaggi-genova (1557 parole) (locale `be17e6d`)
-- [ ] Fase 8.2 carta da parati + rivestimenti murali
+- [x] **Fase 8.2** pillar carta-da-parati-genova (1929 parole) + rivestimenti-murali-genova (1672 parole) (locale)
 - [ ] Fase 9 brand pages (10 + hub)
 - [ ] Fase 10 servizi consulenza
 - [ ] Fase 11 verticali geo-luxe
