@@ -116,8 +116,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
+}
+.drop-card-img picture,
+.drop-card-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.drop-card-img img {
+  object-fit: cover;
 }
 .drop-card-img .placeholder-label {
   font-size: 48px;
@@ -268,7 +276,12 @@
     <div class="drop-grid" id="dropGrid">
       <!-- BUILD:DROP_GRID:START -->
       <article class="drop-card">
-        <div class="drop-card-img" role="img" aria-label="Pouf N.01"><span class="placeholder-label">01</span></div>
+        <div class="drop-card-img">
+          <picture>
+            <source srcset="/img/drop/01.avif" type="image/avif">
+            <img src="/img/drop/01.webp" alt="Pouf N.01 — Tessuto Dedar / Edizione di 12" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="drop-card-info">
           <div>
             <h3 class="drop-card-name">Pouf N.01</h3>
@@ -280,7 +293,12 @@
         <button type="button" class="drop-card-status available" data-product-id="pouf-01">Acquista</button>
       </article>
       <article class="drop-card">
-        <div class="drop-card-img" role="img" aria-label="Pouf N.02"><span class="placeholder-label">02</span></div>
+        <div class="drop-card-img">
+          <picture>
+            <source srcset="/img/drop/02.avif" type="image/avif">
+            <img src="/img/drop/02.webp" alt="Pouf N.02 — Tessuto Pierre Frey / Edizione di 8" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="drop-card-info">
           <div>
             <h3 class="drop-card-name">Pouf N.02</h3>
@@ -292,7 +310,12 @@
         <button type="button" class="drop-card-status available" data-product-id="pouf-02">Acquista</button>
       </article>
       <article class="drop-card">
-        <div class="drop-card-img" role="img" aria-label="Pouf N.03"><span class="placeholder-label">03</span></div>
+        <div class="drop-card-img">
+          <picture>
+            <source srcset="/img/drop/03.avif" type="image/avif">
+            <img src="/img/drop/03.webp" alt="Pouf N.03 — Velluto Designers Guild / Edizione di 6" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="drop-card-info">
           <div>
             <h3 class="drop-card-name">Pouf N.03</h3>
@@ -304,7 +327,12 @@
         <button type="button" class="drop-card-status available" data-product-id="pouf-03">Acquista</button>
       </article>
       <article class="drop-card">
-        <div class="drop-card-img" role="img" aria-label="Pouf N.04"><span class="placeholder-label">04</span></div>
+        <div class="drop-card-img">
+          <picture>
+            <source srcset="/img/drop/04.avif" type="image/avif">
+            <img src="/img/drop/04.webp" alt="Pouf N.04 — Lino naturale / Edizione di 10" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </div>
         <div class="drop-card-info">
           <div>
             <h3 class="drop-card-name">Pouf N.04</h3>

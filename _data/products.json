@@ -7,7 +7,7 @@
       "price": 380,
       "stock": 12,
       "available": true,
-      "image": "",
+      "image": "/img/drop/01.webp",
       "stripePrice": ""
     },
     {
@@ -17,7 +17,7 @@
       "price": 420,
       "stock": 8,
       "available": true,
-      "image": "",
+      "image": "/img/drop/02.webp",
       "stripePrice": ""
     },
     {
@@ -27,7 +27,7 @@
       "price": 450,
       "stock": 6,
       "available": true,
-      "image": "",
+      "image": "/img/drop/03.webp",
       "stripePrice": ""
     },
     {
@@ -37,7 +37,7 @@
       "price": 350,
       "stock": 10,
       "available": false,
-      "image": "",
+      "image": "/img/drop/04.webp",
       "stripePrice": ""
     },
     {

@@ -27,11 +27,25 @@ function escapeHtml(s) {
 
 function escapeAttr(s) { return escapeHtml(s); }
 
+function renderImgBlock(p, num) {
+  if (!p.image) {
+    return `<div class="drop-card-img" role="img" aria-label="${escapeAttr(p.name)}"><span class="placeholder-label">${num}</span></div>`;
+  }
+  const webp = p.image;
+  const avif = webp.replace(/\.webp$/i, '.avif');
+  const alt = `${p.name} — ${p.detail}`;
+  return `<div class="drop-card-img">
+          <picture>
+            <source srcset="${escapeAttr(avif)}" type="image/avif">
+            <img src="${escapeAttr(webp)}" alt="${escapeAttr(alt)}" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </div>`;
+}
+
 function renderCard(p, i) {
   const num = String(i + 1).padStart(2, '0');
   const available = p.available && p.stock > 0;
-  const imgStyle = p.image ? ` style="background-image:url('${escapeAttr(p.image)}')"` : '';
-  const placeholder = p.image ? '' : `<span class="placeholder-label">${num}</span>`;
+  const imgBlock = renderImgBlock(p, num);
   const stockLine = available
     ? `\n        <div class="drop-card-stock">${p.stock} disponibil${p.stock === 1 ? 'e' : 'i'}</div>`
     : '';
@@ -40,7 +54,7 @@ function renderCard(p, i) {
     : `<button type="button" class="drop-card-status soldout" disabled>Esaurito</button>`;
 
   return `      <article class="drop-card">
-        <div class="drop-card-img"${imgStyle} role="img" aria-label="${escapeAttr(p.name)}">${placeholder}</div>
+        ${imgBlock}
         <div class="drop-card-info">
           <div>
             <h3 class="drop-card-name">${escapeHtml(p.name)}</h3>
