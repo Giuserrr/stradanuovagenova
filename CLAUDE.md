@@ -1,6 +1,6 @@
 # Strada Nuova Genova — stato dell'arte
 
-Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/a, Palazzo Lomellino (Rolli/UNESCO), Genova. Gestione: **Giulia Orlandini** (terza generazione) + **Brunella**.
+Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/a, Palazzo Lomellino (Rolli/UNESCO), Genova. Gestione: **Giulia Organo** (terza generazione) + **Brunella**.
 
 - Dominio: stradanuovagenova.com (Namecheap → DNS Netlify)
 - Repo: github.com/Giuserrr/stradanuovagenova
