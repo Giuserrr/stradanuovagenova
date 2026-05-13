@@ -154,7 +154,7 @@ Push avvenuto il 2026-05-12: 18 commit `eb48fa9..c9ab104` ora live su stradanuov
 
 ## ⚠️ Aperti tecnici (dal CLAUDE.md)
 
-- `STRIPE_SECRET_KEY` configurata su Netlify?
-- `RESEND_API_KEY` configurata + dominio verificato su Resend?
-- Stock pouf non decresce dopo acquisto (no webhook Stripe)
-- `_data/info.json` non esiste ancora
+- [x] `STRIPE_SECRET_KEY` configurata 2026-05-13 (live `sk_live_...`, account "strada nuova srls" attivato, flusso testato end-to-end fino a /grazie/)
+- [ ] `RESEND_API_KEY` configurata + dominio `stradanuovagenova.com` verificato su Resend (form appuntamento non manda email finche' non risolto)
+- [ ] Stock pouf non decresce dopo acquisto (no webhook Stripe) — diventa critico ora che siamo LIVE: rischio doppia vendita stesso pezzo se 2 clienti comprano contemporaneamente. Webhook `checkout.session.completed` → decrementa `stock` in `products.json`
+- [ ] `_data/info.json` non esiste ancora

@@ -20,6 +20,8 @@ Sito del negozio di tessuti e interior design **Strada Nuova**, Via Garibaldi 7/
 - `3c11183` Fase 13.5: Maps embed in /contatti + `geo`+`hasMap` JSON-LD
 - `544c9c8` Entity unification: GBP URL in `sameAs` Store
 - `93fb6b8..5cdb45c` Fase 13.8: build-reviews.js + blocco Recensioni Google in home+contatti (5★ · 14 recensioni)
+- `560fbe5` pagina /grazie/ allineata a spedizione (no più "ritiro in negozio")
+- **Stripe LIVE attivato** (no commit, configurazione env vars Netlify): `STRIPE_SECRET_KEY=sk_live_...`. Flusso e-commerce funzionante in produzione su https://stradanuovagenova.com/
 
 **Stato Fasi 0-13 + 13.5 + 13.6 + 13.7 + 13.8 chiusi (vedi [PLAN.md](PLAN.md)). Nav 8 voci + footer 4 colonne propagati su 29 file. 6 drop card con foto reali scontornate via rembg. Maps embed in `/contatti/` + `geo` + `hasMap` JSON-LD su Store/Place. **Blocco "Recensioni Google" in home+contatti** via Places API (New) + [tools/build-reviews.js](tools/build-reviews.js) — 5★ · 14 recensioni renderizzate al build. GSC verificato + sitemap submittata + 10 URL forzate. Smoke 40/40 verde. Next: Fase 14 step 2 (Bing WMT + IndexNow + Lighthouse).**
 
@@ -239,8 +241,10 @@ stradanuovagenova/
 
 | Variabile | Stato | Uso |
 |-----------|-------|-----|
-| `STRIPE_SECRET_KEY` | ⚠️ da verificare se configurata | create-checkout.js |
+| `STRIPE_SECRET_KEY` | ✅ configurata LIVE (`sk_live_...`) 2026-05-13 | create-checkout.js. Flusso end-to-end testato in test mode con `sk_test_...` (4242 4242 4242 4242 → checkout → /grazie/), poi switch a live. Account Stripe attivato "strada nuova srls" |
 | `RESEND_API_KEY` | ⚠️ da verificare + dominio Resend da verificare | request-appointment.js |
+| `GOOGLE_PLACES_API_KEY` | ✅ configurata 2026-05-13 (chiave server-side, no referrer restriction, API restriction: Places API New) | build-reviews.js |
+| `GOOGLE_PLACE_ID` | ✅ configurata 2026-05-13 (`ChIJR-TtRF1D0xIReS_hRVSpVhI`) | build-reviews.js |
 | `NETLIFY_SITE_ID` | da config Identity | git-gateway |
 | `NETLIFY_BLOBS_TOKEN` | non in uso attivo nelle functions correnti | (riservato per Blobs futuri) |
 | `ADMIN_KEY` | non in uso attivo | (riservato) |
@@ -275,8 +279,8 @@ stradanuovagenova/
 ⚠️ **Workflow attuale:** dopo il push del 2026-05-12 si torna a "commit + push frequenti" — migrazione chiusa, le piccole modifiche vanno live subito. La memoria `feedback_push_locale` resta valida per future migrazioni grosse
 
 ⚠️ **Da verificare/finire:**
-- `STRIPE_SECRET_KEY` configurata sulle env vars Netlify? Senza, il checkout torna 500
-- `RESEND_API_KEY` configurata? Dominio `stradanuovagenova.com` verificato su Resend?
+- ~~`STRIPE_SECRET_KEY` configurata sulle env vars Netlify? Senza, il checkout torna 500~~ ✅ chiusa 2026-05-13: configurata `sk_live_...`, smoke test live OK con redirect a /grazie/
+- `RESEND_API_KEY` configurata? Dominio `stradanuovagenova.com` verificato su Resend? — ANCORA APERTA, il form appuntamento non manda email finché non risolta
 - Test end-to-end form appuntamento Fase 5 (rimandato a push live)
 - Stock pouf NON decrementato dopo acquisto (no webhook Stripe)
 - `_data/info.json` non esiste ancora — il CMS lo creerà al primo save
