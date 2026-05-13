@@ -47,7 +47,9 @@ function renderCard(p, i) {
   const available = p.available && p.stock > 0;
   const imgBlock = renderImgBlock(p, num);
   const stockLine = available
-    ? `\n        <div class="drop-card-stock">${p.stock} disponibil${p.stock === 1 ? 'e' : 'i'}</div>`
+    ? (p.lastPiece
+        ? `\n        <div class="drop-card-stock highlight">Ultimo pezzo disponibile</div>`
+        : `\n        <div class="drop-card-stock">${p.stock} disponibil${p.stock === 1 ? 'e' : 'i'}</div>`)
     : '';
   const cta = available
     ? `<button type="button" class="drop-card-status available" data-product-id="${escapeAttr(p.id)}">Acquista</button>`
